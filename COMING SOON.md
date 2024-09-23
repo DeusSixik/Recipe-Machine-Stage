@@ -1,9 +1,5 @@
 ## Create
-## Natures Aura
-## Evill Craft
 ## Embers
-## Ars Nouveau
-## Occultism
 ## Eidolon
 ## Thermal
 ## Applied Energistics

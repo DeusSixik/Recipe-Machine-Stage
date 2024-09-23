@@ -21,8 +21,24 @@
 - Cutting Board
 
 ## Mekanism
-
 - All Machines who have Recipe Type
+
+## Nature Aure
+- Nature Altar
+- Offering Table
+
+## EvilCraft
+- Blood Infuser
+- Sanguinary Environmental Accumulator
+
+## Ars Nouveau
+- Crushing
+- Imbuement Recipes
+- Scribes
+
+## Occultism
+- Miner (Dimensional Mineshaft)
+- Rituals (Golden Sacrificial Bowl)
 
 
 ### If you can't find any mod, please write to us and we will try to add it.

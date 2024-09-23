@@ -180,17 +180,25 @@ dependencies {
 //    implementation fg.deobf("curse.maven:create-328085:5689514")
 
     //Mekanism
-    implementation fg.deobf("curse.maven:mekanism-268560:5662583")
+    compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
 
     //Natures Aura
+    compileOnly fg.deobf("curse.maven:natures-aura-306626:4963590")
 
     //Evill Craft
+    compileOnly fg.deobf("curse.maven:cyclops-core-232758:5583765")
+    compileOnly fg.deobf("curse.maven:evilcraft-74610:5707140")
 
     //Embers
+    //implementation fg.deobf("curse.maven:embers-rekindled-300777:5571196")
 
     //Ars Nouveau
+    compileOnly fg.deobf("curse.maven:ars-nouveau-401955:5600384")
 
     //Occultism
+    implementation fg.deobf("curse.maven:occultism-361026:5718612")
+    implementation fg.deobf("curse.maven:modonomicon-538392:5709369")
+    implementation fg.deobf("curse.maven:smartbrainlib-661293:5654964")
 
     //Eidolon
 
@@ -216,7 +224,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:curios-309927:5680164")
     implementation fg.deobf("curse.maven:patchouli-306770:4966125")
-
+    implementation fg.deobf("curse.maven:geckolib-388172:5675221")
 
     annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
     annotationProcessor ctDep
@@ -263,5 +271,5 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 compileJava {
-    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
+    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file(mod_id.toLowerCase())}"
 }
