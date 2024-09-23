@@ -2,7 +2,6 @@ package net.sdm.recipemachinestage.mixin.integration.farmers_delight;
 
 
 import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.sdm.recipemachinestage.SupportBlockData;
@@ -12,7 +11,6 @@ import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;

@@ -39,7 +39,7 @@ public class RecipeCacheLookupMonitorMixin<RECIPE extends MekanismRecipe> {
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty()) return;
         this.cachedRecipe = thisCache.getUpdatedCache(this.cacheIndex);
 
-        if(handler instanceof BlockEntity thisEntity) {
+        if(cachedRecipe != null && handler instanceof BlockEntity thisEntity) {
             Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
                 IOwnerBlock ownerBlock = d1.get();

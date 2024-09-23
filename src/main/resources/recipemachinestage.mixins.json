@@ -6,10 +6,8 @@
   "refmap": "recipemachinestage.refmap.json",
   "mixins": [
     "AbstractFurnaceBlockEntityMixin",
-    "BlockBehaviourMixin",
     "BlockEntityMixin",
     "cap.CapabilityProviderMixi",
-    "forge.ForgeHooksMixin",
     "integration.botania.BreweryBlockEntityMixin",
     "integration.botania.ManaPoolBlockEntityMixin",
     "integration.botania.OrechidBlockEntityMixin",
