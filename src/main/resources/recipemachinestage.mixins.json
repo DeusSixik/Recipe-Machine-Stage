@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sdm.recipemachinestage.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "recipemachinestage.refmap.json",
+  "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "BlockBehaviourMixin",
+    "BlockEntityMixin",
+    "cap.CapabilityProviderMixi",
+    "forge.ForgeHooksMixin",
+    "integration.botania.BreweryBlockEntityMixin",
+    "integration.botania.ManaPoolBlockEntityMixin",
+    "integration.botania.OrechidBlockEntityMixin",
+    "integration.botania.PetalApothecaryBlockEntityMixin",
+    "integration.botania.PureDaisyBlockEntityMixin",
+    "integration.botania.RunicAltarBlockEntityMixin",
+    "integration.botania.TerrestrialAgglomerationPlateBlockEntityMixin",
+    "integration.farmers_delight.CookingPotBlockEntityMixin",
+    "integration.farmers_delight.CuttingBoardBlockEntityMixin",
+    "integration.malum.RepairPylonCoreBlockEntityMixin",
+    "integration.malum.RunicWorkbenchBlockEntityMixin",
+    "integration.malum.SpiritAltarBlockEntityMixin",
+    "integration.malum.VoidConduitBlockEntityMixin",
+    "integration.mekanism.RecipeCacheLookupMonitorMixin",
+    "jei.RecipeManagerAccessor",
+    "jei.RecipeManagerInternalAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
