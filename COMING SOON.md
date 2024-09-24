@@ -1,10 +1,5 @@
 ## Create
-## Embers
-## Eidolon
 ## Thermal
-## Applied Energistics
-## Industrial Foregoing
-## Powah
 ## Ender IO
 ## Pneunatic Craft
 ## Ad Astra

@@ -40,5 +40,36 @@
 - Miner (Dimensional Mineshaft)
 - Rituals (Golden Sacrificial Bowl)
 
+## Eidolon
+- Brazier
+- Crucible
+
+## Applied Energistics 2
+- Charger
+- Inscriber
+
+## Embers
+- Boring
+- Excavation
+- Ember Activation
+- Melting
+- Stamping
+- Mixing
+- Alchemy
+- Boiling
+- Dawnstone Anvil
+
+## Powah
+- Energizing
+
+## Industrial Foregoing
+- Dissolution Chamber
+- Fluid Extractor
+- Fluid Laser
+- Ore Laser
+
+## Draconic Evolution
+- Fusion Crafting
+
 
 ### If you can't find any mod, please write to us and we will try to add it.
