@@ -1,13 +1,10 @@
-package net.sdm.recipemachinestage.mixin.integration.malum;
+package net.sdm.recipemachinestage.mixin.integration.industrial_foregoing;
 
-import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlockEntity;
-import com.sammy.malum.common.recipe.FavorOfTheVoidRecipe;
-import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import com.buuz135.industrial.block.core.tile.FluidExtractorTile;
+import com.buuz135.industrial.module.ModuleCore;
+import com.buuz135.industrial.recipe.FluidExtractorRecipe;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -22,16 +19,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(value = VoidConduitBlockEntity.class, remap = false)
-public class VoidConduitBlockEntityMixin {
+@Mixin(value = FluidExtractorTile.class, remap = false)
+public class FluidExtractorTileMixin {
 
-    public VoidConduitBlockEntity thisEntity = RecipeStagesUtil.cast(this);
+    private FluidExtractorTile thisEntity = RecipeStagesUtil.cast(this);
 
-    @Inject(method = "spitOutItem", at = @At(value = "HEAD"), cancellable = true)
-    public void sdm$spitOutItem(ItemStack stack, CallbackInfoReturnable<Item> cir){
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(RecipeTypeRegistry.VOID_FAVOR.get())) return;
+    @Inject(method = "findRecipe", at = @At("RETURN"), cancellable = true)
+    private void sdm$findRecipe(Level world, BlockPos pos, CallbackInfoReturnable<FluidExtractorRecipe> cir){
+        if(!StageContainer.hasRecipes(ModuleCore.FLUID_EXTRACTOR_TYPE.get())) return;
 
-        FavorOfTheVoidRecipe recipe = FavorOfTheVoidRecipe.getRecipe(thisEntity.getLevel(), stack);
+        FluidExtractorRecipe recipe = cir.getReturnValue();
+        if(recipe == null) return;
         Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
@@ -40,7 +38,7 @@ public class VoidConduitBlockEntityMixin {
                 PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
                     if(!player.hasStage(recipeBlockType.stage)) {
-                        cir.setReturnValue(Items.AIR);
+                        cir.setReturnValue(null);
                     }
                 }
             }

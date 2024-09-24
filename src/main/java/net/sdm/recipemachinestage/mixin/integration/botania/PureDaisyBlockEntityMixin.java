@@ -42,9 +42,9 @@ public abstract class PureDaisyBlockEntityMixin {
             IOwnerBlock ownerBlock = d1.get();
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                ServerPlayer player = PlayerHelper.getPlayerByGameProfile(world.getServer(), ownerBlock.getOwner());
+                PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(world.getServer(), ownerBlock.getOwner());
                 if(player != null) {
-                    if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                    if(!player.hasStage(recipeBlockType.stage)) {
                         ci.cancel();
                     }
                 }

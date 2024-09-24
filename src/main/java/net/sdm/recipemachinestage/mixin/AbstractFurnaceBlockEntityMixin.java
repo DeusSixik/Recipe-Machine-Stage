@@ -13,6 +13,7 @@ import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,10 +32,10 @@ public class AbstractFurnaceBlockEntityMixin {
         Optional<IOwnerBlock> d1 = entity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
         if (d1.isPresent()) {
            IOwnerBlock ownerBlock = d1.get();
-           ServerPlayer player = PlayerHelper.getPlayerByGameProfile(level.getServer(), ownerBlock.getOwner());
+           PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(level.getServer(), ownerBlock.getOwner());
            if(player != null && recipe != null) {
                RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
-               if(recipeBlockType != null && !GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+               if(recipeBlockType != null && !player.hasStage(recipeBlockType.stage)) {
                    ci.cancel();
                }
            }

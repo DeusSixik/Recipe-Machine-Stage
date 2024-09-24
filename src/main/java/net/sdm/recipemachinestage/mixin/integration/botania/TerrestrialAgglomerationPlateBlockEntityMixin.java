@@ -12,6 +12,7 @@ import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,9 +36,9 @@ public class TerrestrialAgglomerationPlateBlockEntityMixin {
         if (d1.isPresent() && level.getServer() != null) {
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                ServerPlayer player = PlayerHelper.getPlayerByGameProfile(level.getServer(), d1.get().getOwner());
+                PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(level.getServer(), d1.get().getOwner());
                 if(player != null) {
-                    if (!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                    if (!player.hasStage(recipeBlockType.stage)) {
                         ci.cancel();
                     }
                 }

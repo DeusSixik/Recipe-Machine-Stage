@@ -24,6 +24,16 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
         return INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
     }
 
+    public static boolean hasRecipes(RecipeType<?> blockEntityClass) {
+        boolean flag = blockEntityClass != null;
+
+        if(flag) {
+            flag = INSTANCE.RECIPES_STAGES.containsKey(blockEntityClass);
+        }
+
+        return !INSTANCE.RECIPES_STAGES.isEmpty() && flag;
+    }
+
     @Nullable
     public static RecipeBlockType getRecipeData(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
         List<RecipeBlockType> TYPES = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());

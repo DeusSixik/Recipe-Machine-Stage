@@ -1,13 +1,7 @@
-package net.sdm.recipemachinestage.mixin.integration.malum;
+package net.sdm.recipemachinestage.mixin.integration.draconic_evolution;
 
-import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlockEntity;
-import com.sammy.malum.common.recipe.FavorOfTheVoidRecipe;
-import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import com.brandon3055.draconicevolution.api.crafting.IFusionRecipe;
+import com.brandon3055.draconicevolution.blocks.tileentity.TileFusionCraftingCore;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -18,20 +12,19 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
 
-@Mixin(value = VoidConduitBlockEntity.class, remap = false)
-public class VoidConduitBlockEntityMixin {
+@Mixin(value = TileFusionCraftingCore.class, remap = false)
+public class TileFusionCraftingCoreMixin {
 
-    public VoidConduitBlockEntity thisEntity = RecipeStagesUtil.cast(this);
+    private TileFusionCraftingCore thisEntity = RecipeStagesUtil.cast(this);
 
-    @Inject(method = "spitOutItem", at = @At(value = "HEAD"), cancellable = true)
-    public void sdm$spitOutItem(ItemStack stack, CallbackInfoReturnable<Item> cir){
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(RecipeTypeRegistry.VOID_FAVOR.get())) return;
+    @Inject(method = "setActiveRecipe", at = @At("HEAD"), cancellable = true)
+    private void sdm$setActiveRecipe(IFusionRecipe recipe, CallbackInfo ci) {
+        if(!StageContainer.hasRecipes(recipe.getType())) return;
 
-        FavorOfTheVoidRecipe recipe = FavorOfTheVoidRecipe.getRecipe(thisEntity.getLevel(), stack);
         Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
@@ -40,7 +33,7 @@ public class VoidConduitBlockEntityMixin {
                 PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
                     if(!player.hasStage(recipeBlockType.stage)) {
-                        cir.setReturnValue(Items.AIR);
+                        ci.cancel();
                     }
                 }
             }

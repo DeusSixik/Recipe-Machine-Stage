@@ -1,12 +1,12 @@
 package net.sdm.recipemachinestage.utils;
 
-import net.sdm.recipemachinestage.RecipeMachineStage;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Copy from SDM Core
+ */
 public class ReflectionHelper {
 
 

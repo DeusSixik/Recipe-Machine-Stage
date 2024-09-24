@@ -1,9 +1,10 @@
-package net.sdm.recipemachinestage.mixin.integration.ars_nouveau;
+package net.sdm.recipemachinestage.mixin.integration.applied;
 
-import com.hollingsworth.arsnouveau.api.imbuement_chamber.IImbuementRecipe;
-import com.hollingsworth.arsnouveau.common.block.tile.ImbuementTile;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
+import appeng.blockentity.misc.ChargerBlockEntity;
+import appeng.blockentity.misc.ChargerRecipes;
+import appeng.recipes.handlers.ChargerRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -13,22 +14,29 @@ import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.Optional;
 
-@Mixin(value = ImbuementTile.class,remap = false)
-public class ImbuementTileMixin {
+@Mixin(value = ChargerBlockEntity.class, remap = false)
+public class ChargerBlockEntityMixin {
 
-    public ImbuementTile thisEntity = RecipeStagesUtil.cast(this);
+    private ChargerBlockEntity thisEntity = RecipeStagesUtil.cast(this);
 
-    @Inject(method = "getRecipeNow", at = @At("RETURN"), cancellable = true)
-    public void sdm$getRecipeNow(CallbackInfoReturnable<IImbuementRecipe> cir){
-        IImbuementRecipe recipe = cir.getReturnValue();
+    @Redirect(method = "doWork", at = @At
+        (
+        value = "INVOKE",
+        ordinal = 0,
+        target = "Lappeng/blockentity/misc/ChargerRecipes;findRecipe(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)Lappeng/recipes/handlers/ChargerRecipe;"
+        )
+    )
+    public ChargerRecipe sdm$doWork(Level level, ItemStack myItem){
+        ChargerRecipe recipe = ChargerRecipes.findRecipe(level, myItem);
+
+        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ChargerRecipe.TYPE))
+            return recipe;
+
         if(recipe != null) {
-            if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return;
-
             Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
                 IOwnerBlock ownerBlock = d1.get();
@@ -37,11 +45,13 @@ public class ImbuementTileMixin {
                     PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                     if(player != null) {
                         if(!player.hasStage(recipeBlockType.stage)) {
-                            cir.setReturnValue(null);
+                            return null;
                         }
                     }
                 }
             }
         }
+
+        return recipe;
     }
 }

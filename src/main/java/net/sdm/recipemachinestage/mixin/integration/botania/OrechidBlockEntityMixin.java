@@ -12,6 +12,7 @@ import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,9 +44,9 @@ public abstract class OrechidBlockEntityMixin {
             IOwnerBlock ownerBlock = d1.get();
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                ServerPlayer player = PlayerHelper.getPlayerByGameProfile(recipe_machine_stage$thisBlockEntity.getLevel().getServer(), ownerBlock.getOwner());
+                PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(recipe_machine_stage$thisBlockEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
-                    if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                    if(!player.hasStage(recipeBlockType.stage)) {
                         cir.cancel();
                     }
                 }

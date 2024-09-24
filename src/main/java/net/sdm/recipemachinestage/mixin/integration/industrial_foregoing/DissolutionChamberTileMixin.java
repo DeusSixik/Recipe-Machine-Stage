@@ -1,11 +1,8 @@
-package net.sdm.recipemachinestage.mixin.integration.natures_aura;
+package net.sdm.recipemachinestage.mixin.integration.industrial_foregoing;
 
-import de.ellpeck.naturesaura.blocks.tiles.BlockEntityNatureAltar;
-import de.ellpeck.naturesaura.recipes.AltarRecipe;
-import de.ellpeck.naturesaura.recipes.ModRecipes;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
+import com.buuz135.industrial.block.core.tile.DissolutionChamberTile;
+import com.buuz135.industrial.module.ModuleCore;
+import com.buuz135.industrial.recipe.DissolutionChamberRecipe;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -14,32 +11,34 @@ import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
 
-@Mixin(value = BlockEntityNatureAltar.class, remap = false)
-public class BlockEntityNatureAltarMixin {
+@Mixin(value = DissolutionChamberTile.class, remap = false)
+public class DissolutionChamberTileMixin {
 
-    private BlockEntityNatureAltar thisEntity = RecipeStagesUtil.cast(this);
+    private DissolutionChamberTile thisEntity = RecipeStagesUtil.cast(this);
 
-    @Inject(method = "getRecipeForInput", at = @At(value = "RETURN"), cancellable = true)
-    public void sdm$getRecipeForInput(ItemStack input, CallbackInfoReturnable<AltarRecipe> cir){
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ModRecipes.ALTAR_TYPE)) return;
+    @Shadow private DissolutionChamberRecipe currentRecipe;
 
-        var recipe = cir.getReturnValue();
+    @Inject(method = "checkForRecipe" ,at = @At("RETURN"))
+    private void sdm$checkForRecipe(CallbackInfo ci){
+        if(!StageContainer.hasRecipes(ModuleCore.DISSOLUTION_TYPE.get())) return;
 
+        if(this.currentRecipe == null) return;
         Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
-            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
+            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(currentRecipe.getType(), currentRecipe.getId());
             if(recipeBlockType != null) {
                 PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
                     if(!player.hasStage(recipeBlockType.stage)) {
-                        cir.cancel();
+                        this.currentRecipe = null;
                     }
                 }
             }

@@ -16,6 +16,7 @@ import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,9 +51,9 @@ public class GoldenSacrificialBowlBlockEntityMixin {
                     IOwnerBlock ownerBlock = d1.get();
                     RecipeBlockType recipeBlockType = StageContainer.getRecipeData(recipe.getType(), recipe.getId());
                     if (recipeBlockType != null) {
-                        ServerPlayer player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
+                        PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                         if (player != null) {
-                            if (!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                            if (!player.hasStage(recipeBlockType.stage)) {
                                 iterator.remove();
                             }
                         }
