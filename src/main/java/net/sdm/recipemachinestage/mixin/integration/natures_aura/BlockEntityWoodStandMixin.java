@@ -1,9 +1,8 @@
 package net.sdm.recipemachinestage.mixin.integration.natures_aura;
 
-import de.ellpeck.naturesaura.blocks.tiles.BlockEntityNatureAltar;
-import de.ellpeck.naturesaura.recipes.AltarRecipe;
+import de.ellpeck.naturesaura.blocks.tiles.BlockEntityWoodStand;
 import de.ellpeck.naturesaura.recipes.ModRecipes;
-import net.minecraft.world.item.ItemStack;
+import de.ellpeck.naturesaura.recipes.TreeRitualRecipe;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -12,22 +11,25 @@ import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(value = BlockEntityNatureAltar.class, remap = false)
-public class BlockEntityNatureAltarMixin {
+@Mixin(value = BlockEntityWoodStand.class, remap = false)
+public class BlockEntityWoodStandMixin {
+    private BlockEntityWoodStand thisEntity = RecipeStagesUtil.cast(this);
 
-    private BlockEntityNatureAltar thisEntity = RecipeStagesUtil.cast(this);
+    @Shadow private TreeRitualRecipe recipe;
 
-    @Inject(method = "getRecipeForInput", at = @At(value = "RETURN"), cancellable = true)
-    public void sdm$getRecipeForInput(ItemStack input, CallbackInfoReturnable<AltarRecipe> cir){
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ModRecipes.ALTAR_TYPE)) return;
+    @Inject(method = "isRitualOkay", at = @At("HEAD"), cancellable = true)
+    public void sdm$isRitualOkay(CallbackInfoReturnable<Boolean> cir){
 
-        var recipe = cir.getReturnValue();
+        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ModRecipes.TREE_RITUAL_TYPE)) return;
+
+        if(recipe == null) return;
 
         Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
@@ -37,7 +39,7 @@ public class BlockEntityNatureAltarMixin {
                 PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
                     if(!player.hasStage(recipeBlockType.stage)) {
-                        cir.cancel();
+                        cir.setReturnValue(false);
                     }
                 }
             }

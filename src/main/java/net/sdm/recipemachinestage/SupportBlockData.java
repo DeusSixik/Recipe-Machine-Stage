@@ -1,6 +1,5 @@
 package net.sdm.recipemachinestage;
 
-import com.buuz135.industrial.block.core.tile.FluidExtractorTile;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;

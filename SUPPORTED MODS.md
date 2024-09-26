@@ -24,6 +24,7 @@
 - All Machines who have Recipe Type
 
 ## Nature Aure
+- Tree Ritual
 - Nature Altar
 - Offering Table
 
@@ -71,5 +72,22 @@
 ## Draconic Evolution
 - Fusion Crafting
 
+## Mystical Agriculture
+- Infusion
+
+## Alchemistry
+- Atomizer
+- Combiner
+- Compactor
+- Dissolver
+- Fission Reactor
+- Fusion Reactor
+- Liquifier
+
+## Railcraft
+- Coke Oven
+- Blast Furnace
+- Crusher
+- Manual
 
 ### If you can't find any mod, please write to us and we will try to add it.

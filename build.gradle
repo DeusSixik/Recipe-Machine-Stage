@@ -225,12 +225,16 @@ dependencies {
 //    implementation fg.deobf("curse.maven:ender-io-64578:5549669")
 
     //Pneunatic Craft
+    //implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:5680613")
 
     //Ad Astra
 
     //Integrated Dynamics
 
     //Alchemistry
+    compileOnly fg.deobf("curse.maven:alchemistry-293425:4770614")
+    compileOnly fg.deobf("curse.maven:alchemylib-293426:5037781")
+    compileOnly fg.deobf("curse.maven:chemlib-340666:5128632")
 
     //Extended Crafting
 
@@ -239,14 +243,29 @@ dependencies {
     compileOnly fg.deobf("curse.maven:brandons-core-231382:5422013")
     compileOnly fg.deobf("curse.maven:codechicken-lib-1-8-242818:5420418")
 
+    //ProjectE
+
+    //Forbidden and Arcanus
+
+    //Railcraft Reborn
+
+    //Hostile Neural Networks
+
+    //Whisperwoods
+
+    //Mystical Agriculture
+    compileOnly fg.deobf("curse.maven:mystical-agriculture-246640:5714744")
+
+    //Railcraft
+    compileOnly fg.deobf("curse.maven:railcraft-reborn-901491:5650737")
+
+    implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
     implementation fg.deobf("curse.maven:cloth-config-348521:5729105")
     implementation fg.deobf("curse.maven:curios-309927:5680164")
     implementation fg.deobf("curse.maven:patchouli-306770:4966125")
     implementation fg.deobf("curse.maven:geckolib-388172:5675221")
 
-    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
-    annotationProcessor ctDep
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
 }
