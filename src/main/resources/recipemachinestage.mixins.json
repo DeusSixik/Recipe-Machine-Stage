@@ -51,6 +51,7 @@
     "integration.malum.RunicWorkbenchBlockEntityMixin",
     "integration.malum.SpiritAltarBlockEntityMixin",
     "integration.malum.VoidConduitBlockEntityMixin",
+    "integration.mb2.RecipeLogicMixin",
     "integration.mekanism.RecipeCacheLookupMonitorMixin",
     "integration.mysticalagriculture.InfusionAltarTileEntityMixin",
     "integration.natures_aura.BlockEntityNatureAltarMixin",

@@ -90,4 +90,7 @@
 - Crusher
 - Manual
 
+## Multiblocked 2
+- Any custom Machines
+
 ### If you can't find any mod, please write to us and we will try to add it.
