@@ -97,6 +97,8 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
@@ -180,7 +182,7 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-//    implementation fg.deobf("curse.maven:create-328085:5689514")
+    implementation fg.deobf("curse.maven:create-328085:5689514")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -260,8 +262,8 @@ dependencies {
     compileOnly fg.deobf("curse.maven:railcraft-reborn-901491:5650737")
 
     //Multiblocked
-    implementation files('./libs/multiblocked2-1.20.1-1.0.7.d.jar')
-    implementation fg.deobf("curse.maven:ldlib-626676:5775541")
+    compileOnly files('./libs/multiblocked2-1.20.1-1.0.7.d.jar')
+    compileOnly fg.deobf("curse.maven:ldlib-626676:5775541")
 
     implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
@@ -270,6 +272,10 @@ dependencies {
     implementation fg.deobf("curse.maven:patchouli-306770:4966125")
     implementation fg.deobf("curse.maven:geckolib-388172:5675221")
 
+    //Kubejs
+    compileOnly fg.deobf("curse.maven:kubejs-238086:5454840")
+    compileOnly fg.deobf("curse.maven:rhino-416294:5655836")
+    compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
 
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

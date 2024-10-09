@@ -6,6 +6,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.sdm.recipemachinestage.RecipeMachineStage;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,14 +20,15 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     public static StageContainer INSTANCE = new StageContainer();
 
     public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES = new HashMap<>();
+    public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES_KUBEJS = new HashMap<>();
 
     public static List<RecipeBlockType> getRecipe(RecipeType<?> blockEntityClass) {
-        return INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
+        List<RecipeBlockType> type = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
+        return type;
     }
 
     public static boolean hasRecipes(RecipeType<?> blockEntityClass) {
         boolean flag = blockEntityClass != null;
-
         if(flag) {
             flag = INSTANCE.RECIPES_STAGES.containsKey(blockEntityClass);
         }
@@ -37,6 +39,7 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     @Nullable
     public static RecipeBlockType getRecipeData(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
         List<RecipeBlockType> TYPES = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
+//        TYPES.addAll(INSTANCE.RECIPES_STAGES_KUBEJS.getOrDefault(blockEntityClass, new ArrayList<>()));
         if(TYPES.isEmpty()) return null;
 
         for (RecipeBlockType type : TYPES) {
@@ -49,6 +52,7 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     @Nullable
     public static List<RecipeBlockType> getAllRecipeData(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
         List<RecipeBlockType> TYPES = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
+//        TYPES.addAll(INSTANCE.RECIPES_STAGES_KUBEJS.getOrDefault(blockEntityClass, new ArrayList<>()));
         if(TYPES.isEmpty()) return null;
 
         List<RecipeBlockType> d1 = new ArrayList<>();
@@ -68,21 +72,56 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     }
 
     public static void registerRecipe(RecipeType<?> recipeType, List<ResourceLocation> recipeID, String stage) {
-        RecipeBlockType recipeBlockType = new RecipeBlockType(stage);
-        recipeBlockType.recipesID.addAll(recipeID);
+        try {
+            RecipeBlockType recipeBlockType = new RecipeBlockType(stage);
+            recipeBlockType.recipesID.addAll(recipeID);
 
-        if(StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipeType)) {
-            boolean added = false;
-            for (RecipeBlockType value : StageContainer.INSTANCE.RECIPES_STAGES.get(recipeType)) {
-                if(value.addRecipeType(recipeBlockType)) return;
+            if (StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipeType)) {
+                boolean added = false;
+                for (RecipeBlockType value : StageContainer.INSTANCE.RECIPES_STAGES.get(recipeType)) {
+                    if (value.addRecipeType(recipeBlockType)) return;
+                }
+                if (!added) {
+                    StageContainer.INSTANCE.RECIPES_STAGES.get(recipeType).add(recipeBlockType);
+                    RecipeMachineStage.LOGGER.info("Added recipes " + recipeID + " to stage " + stage);
+                }
+            } else {
+                StageContainer.INSTANCE.RECIPES_STAGES.put(recipeType, new ArrayList<>(List.of(recipeBlockType)));
+                RecipeMachineStage.LOGGER.info("Added recipes " + recipeID + " to stage " + stage);
             }
-            if(!added) {
-                StageContainer.INSTANCE.RECIPES_STAGES.get(recipeType).add(recipeBlockType);
-            }
-        } else {
-            StageContainer.INSTANCE.RECIPES_STAGES.put(recipeType, new ArrayList<>(List.of(recipeBlockType)));
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
+
+    public static void registerRecipeJS(RecipeType<?> recipeType, ResourceLocation recipeID, String stage) {
+        registerRecipeJS(recipeType, new ArrayList<>(List.of(recipeID)), stage);
+    }
+
+    public static void registerRecipeJS(RecipeType<?> recipeType, List<ResourceLocation> recipeID, String stage) {
+        try {
+            RecipeBlockType recipeBlockType = new RecipeBlockType(stage);
+            recipeBlockType.recipesID.addAll(recipeID);
+
+            if (StageContainer.INSTANCE.RECIPES_STAGES_KUBEJS.containsKey(recipeType)) {
+                boolean added = false;
+                for (RecipeBlockType value : StageContainer.INSTANCE.RECIPES_STAGES_KUBEJS.get(recipeType)) {
+                    if (value.addRecipeType(recipeBlockType)) return;
+                }
+                if (!added) {
+                    StageContainer.INSTANCE.RECIPES_STAGES_KUBEJS.get(recipeType).add(recipeBlockType);
+                    RecipeMachineStage.LOGGER.info("Added recipes " + recipeID + " to stage " + stage);
+                }
+            } else {
+                StageContainer.INSTANCE.RECIPES_STAGES_KUBEJS.put(recipeType, new ArrayList<>(List.of(recipeBlockType)));
+                RecipeMachineStage.LOGGER.info("Added recipes " + recipeID + " to stage " + stage);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static Map<RecipeType<?>, List<RecipeBlockType>> getLockedRecipes(IStageData data, boolean isLocked) {
         Map<RecipeType<?>, List<RecipeBlockType>> map = new HashMap<>();
@@ -120,5 +159,6 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     @Override
     protected void apply(Void p_10793_, ResourceManager p_10794_, ProfilerFiller p_10795_) {
         RECIPES_STAGES.clear();
+        RECIPES_STAGES.putAll(RECIPES_STAGES_KUBEJS);
     }
 }

@@ -93,4 +93,11 @@
 ## Multiblocked 2
 - Any custom Machines
 
+## Create
+- Crushing
+- Pressing
+- Mixing
+- Mechanical Crafter
+- Milling
+
 ### If you can't find any mod, please write to us and we will try to add it.

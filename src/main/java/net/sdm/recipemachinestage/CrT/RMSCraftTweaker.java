@@ -3,7 +3,10 @@ package net.sdm.recipemachinestage.CrT;
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.bracket.BracketHandlers;
+import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Recipe;
 import net.sdm.recipemachinestage.CrT.action.RMSAction;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -41,5 +44,15 @@ public class RMSCraftTweaker {
     @ZenCodeType.Method
     public static void addRecipe(String recipeType, String[] recipeID, String stage) {
         CraftTweakerAPI.apply(new RMSAction(BracketHandlers.getRecipeManager(recipeType).getRecipeType(), new ArrayList<>(List.of(recipeID)), stage));
+    }
+
+    @ZenCodeType.Method
+    public static void addRecipe(IRecipeManager<Recipe<Container>> recipeType, String recipeID, String stage) {
+        CraftTweakerAPI.apply(new RMSAction(recipeType.getRecipeType(), new ArrayList<>(List.of(recipeID)), stage));
+    }
+
+    @ZenCodeType.Method
+    public static void addRecipe(IRecipeManager<Recipe<Container>> recipeType, String[] recipeID, String stage) {
+        CraftTweakerAPI.apply(new RMSAction(recipeType.getRecipeType(), new ArrayList<>(List.of(recipeID)), stage));
     }
 }

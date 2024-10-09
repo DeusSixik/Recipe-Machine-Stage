@@ -32,7 +32,6 @@ public class RecipeMachineStage {
         MinecraftForge.EVENT_BUS.register(this);
 
 
-
         SupportBlockData.init();
     }
 

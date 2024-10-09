@@ -1,12 +1,13 @@
 package net.sdm.recipemachinestage.utils;
 
+import dev.latvian.mods.kubejs.integration.forge.gamestages.GameStagesWrapper;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.nbt.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.ModList;
 import net.sdm.recipemachinestage.RecipeMachineStage;
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +25,13 @@ public class PlayerHelper {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if(Objects.equals(player.getGameProfile().getId(), id)) {
                 RMSStagePlayerData stagePlayerData = new RMSStagePlayerData();
-                stagePlayerData.addStage(GameStageHelper.getPlayerData(player).getStages());
+
+                if(ModList.get().isLoaded("gamestages")) {
+                    stagePlayerData.addStage(GameStageHelper.getPlayerData(player).getStages());
+                }
+                if(ModList.get().isLoaded("kubejs")) {
+                    stagePlayerData.addStage(GameStagesWrapper.get(player).getAll());
+                }
                 return stagePlayerData;
             }
         }
@@ -72,7 +79,13 @@ public class PlayerHelper {
 
     public static void addPlayer(ServerPlayer player) {
         RMSStagePlayerData data = new RMSStagePlayerData();
-        data.addStage(GameStageHelper.getPlayerData(player).getStages());
+
+        if(ModList.get().isLoaded("gamestages")) {
+            data.addStage(GameStageHelper.getPlayerData(player).getStages());
+        }
+        if(ModList.get().isLoaded("kubejs")) {
+            data.addStage(GameStagesWrapper.get(player).getAll());
+        }
         PLAYER_DATA.put(player.getGameProfile().getId(), data);
         savePlayer(player.getGameProfile().getId(), player.server);
     }
