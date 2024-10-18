@@ -25,4 +25,11 @@ public class RecipeBlockType {
         }
         return false;
     }
+
+    public boolean contains(ResourceLocation recipesID) {
+        if(this.recipesID.contains(recipesID)) return true;
+
+        var optional = this.recipesID.stream().filter(s -> Objects.equals(s, recipesID)).findFirst();
+        return optional.isPresent();
+    }
 }

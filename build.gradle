@@ -147,6 +147,14 @@ repositories {
 
     maven { url 'https://maven.covers1624.net/' }
     maven { url 'https://maven.theillusivec4.top/' }
+
+    maven {
+        name = 'GTCEu Maven'
+        url = 'https://maven.gtceu.com'
+        content {
+            includeGroup 'com.gregtechceu.gtceu'
+        }
+    }
 }
 
 dependencies {
@@ -165,9 +173,9 @@ dependencies {
     implementation fg.deobf("net.darkhax.gamestages:GameStages-Forge-1.20.1:15.0.1")
     implementation fg.deobf("net.darkhax.bookshelf:Bookshelf-Forge-1.20.1:20.0.2")
 
-    compileOnly(fg.deobf("mezz.jei:jei-1.20.1-common-api:15.2.0.23"))
-    compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.2.0.23"))
-    implementation(fg.deobf("mezz.jei:jei-1.20.1-forge:15.2.0.23"))
+    compileOnly(fg.deobf("mezz.jei:jei-1.20.1-common-api:15.20.0.104"))
+    compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.104"))
+    implementation(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.104"))
 
 
     //Botania
@@ -182,7 +190,7 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    implementation fg.deobf("curse.maven:create-328085:5689514")
+    compileOnly fg.deobf("curse.maven:create-328085:5689514")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -265,12 +273,17 @@ dependencies {
     compileOnly files('./libs/multiblocked2-1.20.1-1.0.7.d.jar')
     compileOnly fg.deobf("curse.maven:ldlib-626676:5775541")
 
-    implementation fg.deobf("curse.maven:cucumber-272335:5714571")
-    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
-    implementation fg.deobf("curse.maven:cloth-config-348521:5729105")
-    implementation fg.deobf("curse.maven:curios-309927:5680164")
-    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
-    implementation fg.deobf("curse.maven:geckolib-388172:5675221")
+    //GregTechCEu Modern
+   compileOnly fg.deobf("com.gregtechceu.gtceu:gtceu-1.20.1:1.4.6") { transitive = false }
+   compileOnly fg.deobf("curse.maven:configuration-444699:4710266")
+//    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:5812598")
+
+    compileOnly fg.deobf("curse.maven:cucumber-272335:5714571")
+    compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
+    compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
+    compileOnly fg.deobf("curse.maven:curios-309927:5680164")
+    compileOnly fg.deobf("curse.maven:patchouli-306770:4966125")
+    compileOnly fg.deobf("curse.maven:geckolib-388172:5675221")
 
     //Kubejs
     compileOnly fg.deobf("curse.maven:kubejs-238086:5454840")

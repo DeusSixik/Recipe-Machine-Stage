@@ -48,6 +48,7 @@
     "integration.evilcraft.BlockEntitySanguinaryEnvironmentalAccumulatorMixin",
     "integration.farmers_delight.CookingPotBlockEntityMixin",
     "integration.farmers_delight.CuttingBoardBlockEntityMixin",
+    "integration.gregtech.RecipeLogicMixin",
     "integration.industrial_foregoing.DissolutionChamberTileMixin",
     "integration.industrial_foregoing.FluidExtractorTileMixin",
     "integration.industrial_foregoing.FluidLaserBaseTileMixin",

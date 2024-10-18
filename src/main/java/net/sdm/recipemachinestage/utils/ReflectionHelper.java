@@ -12,7 +12,7 @@ public class ReflectionHelper {
 
     public static boolean canCast(Class<?> obj, Class<?> caster){
         try {
-            if(obj == caster) return true;
+            if(obj.equals(caster)) return true;
 
             List<Class<?>> d1 = getParent(obj);
             if(d1.contains(caster)) return true;

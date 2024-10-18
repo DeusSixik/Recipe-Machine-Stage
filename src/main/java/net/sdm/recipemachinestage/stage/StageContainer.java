@@ -43,7 +43,7 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
         if(TYPES.isEmpty()) return null;
 
         for (RecipeBlockType type : TYPES) {
-            if(type.recipesID.contains(recipeID)) return type;
+            if(type.contains(recipeID)) return type;
         }
 
         return null;
