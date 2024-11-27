@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Optional;
 
-@Mixin(value = CrushingWheelBlock.class, remap = false)
+@Mixin(value = CrushingWheelBlock.class, remap = true)
 public class CrushingWheelBlockMixin {
 
     private CrushingWheelBlock thisBlock = RecipeStagesUtil.cast(this);

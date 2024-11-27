@@ -190,7 +190,7 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    compileOnly fg.deobf("curse.maven:create-328085:5689514")
+    implementation fg.deobf("curse.maven:create-328085:5838779")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -289,6 +289,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:kubejs-238086:5454840")
     compileOnly fg.deobf("curse.maven:rhino-416294:5655836")
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
+
 
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

@@ -18,12 +18,12 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.Optional;
 
-@Mixin(value = MillstoneBlockEntity.class, remap = false)
+@Mixin(value = MillstoneBlockEntity.class)
 public class MillstoneBlockEntityMixin {
 
     private MillstoneBlockEntity thisEntity = RecipeStagesUtil.cast(this);
 
-    @Redirect(method = "tick",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"))
+    @Redirect(method = "tick",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"), remap = false)
     public <C extends Container, T extends Recipe<C>> Optional<T> sdm$tick(AllRecipeTypes instance, C inv, Level world){
         Optional<T> recipe = world.getRecipeManager().getRecipeFor(instance.getType(), inv, world);
         if(recipe.isPresent() && StageContainer.hasRecipes(instance.getType())) {
@@ -44,7 +44,7 @@ public class MillstoneBlockEntityMixin {
         return recipe;
     }
 
-    @Redirect(method = "process",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"))
+    @Redirect(method = "process",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"), remap = false)
     public <C extends Container, T extends Recipe<C>> Optional<T> sdm$process(AllRecipeTypes instance, C inv, Level world){
         Optional<T> recipe = world.getRecipeManager().getRecipeFor(instance.getType(), inv, world);
         if(recipe.isPresent() && StageContainer.hasRecipes(instance.getType())) {
@@ -65,7 +65,7 @@ public class MillstoneBlockEntityMixin {
         return recipe;
     }
 
-    @Redirect(method = "canProcess",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"))
+    @Redirect(method = "canProcess",at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;find(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;"),remap = false)
     public <C extends Container, T extends Recipe<C>> Optional<T> sdm$canProcess(AllRecipeTypes instance, C inv, Level world){
         Optional<T> recipe = world.getRecipeManager().getRecipeFor(instance.getType(), inv, world);
         if(recipe.isPresent() && StageContainer.hasRecipes(instance.getType())) {

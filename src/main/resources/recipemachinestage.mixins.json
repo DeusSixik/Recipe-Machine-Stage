@@ -31,6 +31,7 @@
     "integration.create.CrushingWheelBlockMixin",
     "integration.create.CrushingWheelControllerBlockEntityMixin",
     "integration.create.MechanicalCrafterBlockEntityMixin",
+    "integration.create.MechanicalPressBlockEntityMixin",
     "integration.create.MillstoneBlockEntityMixin",
     "integration.draconic_evolution.TileFusionCraftingCoreMixin",
     "integration.eidolon.BrazierTileEntityMixin",

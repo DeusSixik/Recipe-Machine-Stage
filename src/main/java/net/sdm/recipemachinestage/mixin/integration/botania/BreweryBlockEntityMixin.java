@@ -24,14 +24,14 @@ import vazkii.botania.common.crafting.BotaniaRecipeTypes;
 
 import java.util.Optional;
 
-@Mixin(value = BreweryBlockEntity.class, remap = false)
+@Mixin(value = BreweryBlockEntity.class)
 public class BreweryBlockEntityMixin {
 
     @Unique
     public BreweryBlockEntity recipe_machine_stage$thisEntity = (BreweryBlockEntity)(Object)this;
     @Shadow public BotanicalBreweryRecipe recipe;
 
-    @Inject(method = "findRecipe", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "findRecipe", at = @At("HEAD"), cancellable = true, remap = false)
     public void sdm$findRecipe(CallbackInfo ci){
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(BotaniaRecipeTypes.BREW_TYPE)) return;
         ci.cancel();

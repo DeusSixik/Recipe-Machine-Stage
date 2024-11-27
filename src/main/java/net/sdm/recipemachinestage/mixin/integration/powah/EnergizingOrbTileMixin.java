@@ -16,13 +16,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import owmii.powah.block.energizing.EnergizingOrbTile;
-import owmii.powah.block.energizing.EnergizingRecipe;
 import owmii.powah.lib.logistics.inventory.RecipeWrapper;
 import owmii.powah.recipe.Recipes;
 
 import java.util.Optional;
 
-@Mixin(value = EnergizingOrbTile.class, remap = false)
+@Mixin(value = EnergizingOrbTile.class)
 public class EnergizingOrbTileMixin {
 
     private EnergizingOrbTile thisEntity = RecipeStagesUtil.cast(this);

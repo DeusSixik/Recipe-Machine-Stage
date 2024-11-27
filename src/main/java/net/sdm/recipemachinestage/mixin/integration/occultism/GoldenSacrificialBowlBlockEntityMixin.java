@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-@Mixin(value = GoldenSacrificialBowlBlockEntity.class, remap = false)
+@Mixin(value = GoldenSacrificialBowlBlockEntity.class)
 public class GoldenSacrificialBowlBlockEntityMixin {
 
     private GoldenSacrificialBowlBlockEntity thisEntity = RecipeStagesUtil.cast(this);

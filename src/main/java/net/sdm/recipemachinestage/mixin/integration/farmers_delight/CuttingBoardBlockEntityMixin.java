@@ -25,7 +25,7 @@ public class CuttingBoardBlockEntityMixin {
 
     @Inject(method = "getMatchingRecipe", at = @At(value = "RETURN"), cancellable = true)
     private void sdm$getMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, Player player, CallbackInfoReturnable<Optional<CuttingBoardRecipe>> cir){
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ModRecipeTypes.COOKING.get())) return;
+        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ModRecipeTypes.CUTTING.get())) return;
 
         Optional<CuttingBoardRecipe> recipe = cir.getReturnValue();
         if(recipe.isPresent()) {
