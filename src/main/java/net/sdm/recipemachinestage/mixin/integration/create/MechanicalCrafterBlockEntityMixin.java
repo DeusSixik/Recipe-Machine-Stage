@@ -35,11 +35,10 @@ public class MechanicalCrafterBlockEntityMixin {
 
     @Unique
     private boolean recipe_machine_stage$isRecipe(CraftingRecipe craftingRecipe, CraftingContainer craftinginventory) {
-        Optional<Recipe<CraftingContainer>> recipe = AllRecipeTypes.MECHANICAL_CRAFTING.find(craftinginventory, world);
 
         if(StageContainer.hasRecipes(craftingRecipe.getType()) && d1.isPresent() && Objects.requireNonNull(thisEntity.getLevel()).getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
-            RecipeBlockType recipeBlockType = StageContainer.getRecipeData(recipe.get().getType(), recipe.get().getId());
+            RecipeBlockType recipeBlockType = StageContainer.getRecipeData(craftingRecipe.getType(), craftingRecipe.getId());
             if (recipeBlockType != null) {
                 PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if (player != null) {

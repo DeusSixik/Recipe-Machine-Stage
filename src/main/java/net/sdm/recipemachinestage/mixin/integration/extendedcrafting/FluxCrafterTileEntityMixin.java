@@ -1,7 +1,7 @@
-package net.sdm.recipemachinestage.mixin.integration.create;
+package net.sdm.recipemachinestage.mixin.integration.extendedcrafting;
 
-import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
-import net.minecraft.world.item.crafting.Recipe;
+import com.blakebr0.extendedcrafting.api.crafting.IFluxCrafterRecipe;
+import com.blakebr0.extendedcrafting.tileentity.FluxCrafterTileEntity;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -10,28 +10,27 @@ import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
-@Mixin(value = BasinOperatingBlockEntity.class, remap = false)
-public class BasinOperatingBlockEntityMixin {
+@Mixin(value = FluxCrafterTileEntity.class, remap = false)
+public class FluxCrafterTileEntityMixin {
 
-    private BasinOperatingBlockEntity thisEntity = RecipeStagesUtil.cast(this);
+    @Unique
+    private final FluxCrafterTileEntity thisEntity = RecipeStagesUtil.cast(this);
 
-    @Inject(method = "getMatchingRecipes", at = @At("RETURN"))
-    public void sdm$getMatchingRecipes(CallbackInfoReturnable<List<Recipe<?>>> cir){
-        List<Recipe<?>> recipes = cir.getReturnValue();
-        Iterator<Recipe<?>> it = recipes.iterator();
+    @Inject(method = "getActiveRecipe", at = @At("RETURN"), cancellable = true)
+    private void sdm$getActiveRecipe(CallbackInfoReturnable<IFluxCrafterRecipe> cir){
+        IFluxCrafterRecipe recipe = cir.getReturnValue();
+        if(recipe != null) {
 
-        while (it.hasNext()) {
-            Recipe<?> recipe = it.next();
-            if(!StageContainer.hasRecipes(recipe.getType())) continue;
-
+            if(!StageContainer.hasRecipes(recipe.getType())) {
+                return;
+            }
 
             Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
@@ -41,9 +40,9 @@ public class BasinOperatingBlockEntityMixin {
                     PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                     if(player != null) {
                         if(!player.hasStage(recipeBlockType.stage)) {
-                            it.remove();
+                            cir.setReturnValue(null);
                         }
-                    }
+                    } else cir.setReturnValue(null);
                 }
             }
         }

@@ -5,6 +5,7 @@ import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.nbt.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.ModList;
@@ -15,10 +16,12 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlayerHelper {
     public static final String folderName = "RecipeMachineStages";
-    public static final Map<UUID, RMSStagePlayerData> PLAYER_DATA = new HashMap<>();
+    public static final HashMap<UUID, RMSStagePlayerData> PLAYER_DATA = new HashMap<>();
 
     @Nullable
     public static RMSStagePlayerData getPlayerByGameProfile(MinecraftServer server, UUID id){
@@ -37,6 +40,17 @@ public class PlayerHelper {
         }
 
         return PLAYER_DATA.getOrDefault(id, null);
+    }
+
+    public static boolean hasStage(Player player, String stage) {
+        if(ModList.get().isLoaded("gamestages")) {
+            return GameStageHelper.hasStage(player, stage);
+        }
+        if(ModList.get().isLoaded("kubejs")) {
+            return GameStagesWrapper.get(player).has(stage);
+        }
+
+        return false;
     }
 
 

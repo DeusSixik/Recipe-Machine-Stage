@@ -35,6 +35,7 @@
 ## Ars Nouveau
 - Crushing
 - Imbuement Recipes
+- Enchantment Apparatus
 - Scribes
 
 ## Occultism
@@ -99,6 +100,48 @@
 - Mixing
 - Mechanical Crafter
 - Milling
+
+## Extended Crafting
+- Combination Recipes
+- Compression Recipes
+- Ender Recipes
+- Flux Recipes
+- Singularities
+- Table Recipes
+
+## Thermal Expansion
+- Hive Extractor
+- Tree Extractor
+- Tree Extractor Boost
+- Fisher Boost
+- Rock Gen
+- Potion Diffuser Boost
+- Stirling Fuel
+- Compression Fuel
+- Magmatic Fuel
+- Numismatic Fuel
+- Lapidary Fuel
+- Disenchantment Fuel
+- Gourmand Fuel
+- Furnace
+- Sawmill
+- Pulverizer
+- Pulverizer Recycle
+- Smelter
+- Smelter Recycle
+- Insolator
+- Centrifuge
+- Press
+- Crucible
+- Chiller
+- Refinery
+- Pyrolyzer
+- Bottler
+- Brewer
+- Crystallizer
+- Pulverizer Catalyst
+- Smelter Catalyst
+- Insolator Catalyst
 
 ## GregTech Modern (Without support JEI)
 

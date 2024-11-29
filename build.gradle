@@ -190,7 +190,7 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    implementation fg.deobf("curse.maven:create-328085:5838779")
+    compileOnly fg.deobf("curse.maven:create-328085:5838779")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -217,10 +217,10 @@ dependencies {
     compileOnly fg.deobf("curse.maven:eidolon-repraised-870250:5587041")
 
     //Thermal
-//    implementation fg.deobf("curse.maven:thermal-expansion-69163:5372749")
-//    implementation fg.deobf("curse.maven:thermal-foundation-222880:5443583")
-//    implementation fg.deobf("curse.maven:cofh-core-69162:5374122")
-//    implementation fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}.+")
+    implementation fg.deobf("curse.maven:thermal-expansion-69163:5372749")
+    implementation fg.deobf("curse.maven:thermal-foundation-222880:5443583")
+    implementation fg.deobf("curse.maven:cofh-core-69162:5374122")
+    implementation fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}.+")
     //Applied Enegistics
     compileOnly fg.deobf("curse.maven:applied-energistics-2-223794:5641282")
 
@@ -247,6 +247,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:chemlib-340666:5128632")
 
     //Extended Crafting
+    compileOnly fg.deobf("curse.maven:extended-crafting-268387:5228960")
 
     //Draconic Evolution
     compileOnly fg.deobf("curse.maven:draconic-evolution-223565:5657010")
@@ -278,7 +279,7 @@ dependencies {
    compileOnly fg.deobf("curse.maven:configuration-444699:4710266")
 //    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:5812598")
 
-    compileOnly fg.deobf("curse.maven:cucumber-272335:5714571")
+    implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
     compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
     compileOnly fg.deobf("curse.maven:curios-309927:5680164")
