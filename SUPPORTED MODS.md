@@ -148,11 +148,11 @@
 - Insolator Catalyst
 
 ## EnderIO
-Alloy Smelter
-Sag Mill
-Slice and Sprice
-Soul Binder
-Fire Craft
+- Alloy Smelter
+- Sag Mill
+- Slice and Sprice
+- Soul Binder
+- Fire Craft
 
 ## GregTech Modern (Without support JEI)
 
