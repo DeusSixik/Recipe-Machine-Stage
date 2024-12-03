@@ -53,3 +53,54 @@ RecipeMachineStage.addRecipe("mekanism:metallurgic_infusing", "mekanism:processi
 
 RecipeMachineStage.addRecipe("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one");
 ```
+    
+
+# For Developers
+
+## Container
+
+If you need to make support for a block that crafting cannot take place without a player, such as a crafting table, then you need to add a interface  **net.sdm.recipemachinestage.api.IRestrictedContainer** to the container class. [Example](https://github.com/SagaDeoMissTeam/Recipe-Machine-Stage/blob/HEAD/src/main/java/net/sdm/recipemachinestage/mixin/integration/extendedcrafting/container/AdvancedTableContainerMixin.java)
+
+The method will be added to your class. 
+```java
+List<Integer> recipe_machine_stage$getOutputSlots();
+```
+
+In it, you need to transfer the IDs of the slots that have an output item when crafting.
+
+
+## BlockEntity
+
+If you need to add support for recipes that occur without the player's participation, for example a crusher for now, you need to use capability **net.sdm.recipemachinestage.SupportBlockData.BLOCK_OWNER** It stores the owner of the block
+
+### Usage example
+
+```java
+Optional<IOwnerBlock> optionalOwnerBlock = thisBlockEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+if (optionalOwnerBlock.isPresent()) {
+    IOwnerBlock ownerBlock = optionalOwnerBlock.get();
+
+    PlayerHelper.RMSStagePlayerData playerData = PlayerHelper.getPlayerByGameProfile(thisBlockEntity.getLevel().getServer(), ownerBlock.getOwner());
+
+    if(playerData != null) {
+        if(player.hasStage("someStage")) {
+            //.. your code here
+        }
+    }
+
+}
+```
+
+To check if your craft recipe is limited, you need **net.sdm.recipemachinestage.stage.StageContainer** It will allow you to get the stage and some other information
+
+```java
+Recipe<?> myRecipe;
+
+RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(myRecipe.getType(), myRecipe.getId());
+
+if(recipeBlockType != null) {
+    //.. your code here
+}
+```
+
+### [FullExample](https://github.com/SagaDeoMissTeam/Recipe-Machine-Stage/blob/HEAD/src/main/java/net/sdm/recipemachinestage/mixin/integration/botania/BreweryBlockEntityMixin.java)
