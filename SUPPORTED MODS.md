@@ -101,6 +101,10 @@
 - Mechanical Crafter
 - Milling
 
+## Create Ore Excavation (Thank "MtcLeo05")
+- Drill
+- Extractor
+
 ## Extended Crafting
 - Combination Recipes
 - Compression Recipes
@@ -142,6 +146,13 @@
 - Pulverizer Catalyst
 - Smelter Catalyst
 - Insolator Catalyst
+
+## EnderIO
+Alloy Smelter
+Sag Mill
+Slice and Sprice
+Soul Binder
+Fire Craft
 
 ## GregTech Modern (Without support JEI)
 

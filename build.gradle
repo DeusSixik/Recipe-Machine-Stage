@@ -190,8 +190,8 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    implementation fg.deobf("curse.maven:create-328085:5838779")
-    implementation fg.deobf("curse.maven:create-ore-excavation-649832:5848320")
+    compileOnly fg.deobf("curse.maven:create-328085:5838779")
+    compileOnly fg.deobf("curse.maven:create-ore-excavation-649832:5848320")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -233,14 +233,21 @@ dependencies {
     compileOnly fg.deobf("curse.maven:powah-rearchitected-633483:5604170")
 
     //Ender IO
-//    implementation fg.deobf("curse.maven:ender-io-64578:5549669")
+    compileOnly fg.deobf("curse.maven:ender-io-64578:5858176")
 
     //Pneunatic Craft
     //implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:5680613")
 
     //Ad Astra
+    //implementation fg.deobf("curse.maven:ad-astra-635042:5914893")
+//    implementation fg.deobf("curse.maven:botarium-704113:5486070")
+//    implementation fg.deobf("curse.maven:resourceful-config-714059:5020441")
+//    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
 
     //Integrated Dynamics
+    //implementation fg.deobf("curse.maven:integrated-dynamics-236307:5919553")
+    //implementation fg.deobf("curse.maven:common-capabilities-247007:5650234")
+    //implementation fg.deobf("curse.maven:cyclops-core-232758:5583765")
 
     //Alchemistry
     compileOnly fg.deobf("curse.maven:alchemistry-293425:4770614")

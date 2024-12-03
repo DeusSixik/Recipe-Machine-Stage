@@ -1,5 +1,6 @@
 package net.sdm.recipemachinestage;
 
+import com.enderio.machines.common.blockentity.EnchanterBlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;

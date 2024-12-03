@@ -38,10 +38,7 @@ public abstract class AbstractContainerMenuMixin implements IContainerMenuSync {
         if (recipe_machine_stage$thisContainer instanceof IRestrictedContainer restrictedContainer && restrictedContainer.recipe_machine_stage$getOutputSlots().contains(i)) {
             if(sdm$getStage().isEmpty()) return;
 
-            RecipeStagesUtil.debugMessage(player, sdm$getStage());
-
             if(PlayerHelper.hasStage(player, sdm$getStage())) return;
-            RecipeStagesUtil.debugMessage(player, sdm$getStage());
             ci.cancel();
         }
     }
