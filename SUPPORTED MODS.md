@@ -1,4 +1,12 @@
 # Supported Mods
+
+## Blood Magic
+- Blood Altar
+- Alchemical Reaction Chamber
+- Alchemy Array
+- Alchemy Table
+- Soul Forge
+
 ## Botania 
 - Brewery
 - Mana Pool
@@ -104,6 +112,10 @@
 ## Create Ore Excavation (Thank "MtcLeo05")
 - Drill
 - Extractor
+
+## Create Crafts & Additions
+- Rolling Mill
+- Tesla Coil
 
 ## Extended Crafting
 - Combination Recipes

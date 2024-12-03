@@ -177,6 +177,8 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.104"))
     implementation(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.104"))
 
+    //Blood Magic
+    compileOnly fg.deobf("curse.maven:blood-magic-224791:5290993")
 
     //Botania
     compileOnly fg.deobf("curse.maven:botania-225643:5594997")
@@ -190,8 +192,9 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    compileOnly fg.deobf("curse.maven:create-328085:5838779")
+    implementation fg.deobf("curse.maven:create-328085:5838779")
     compileOnly fg.deobf("curse.maven:create-ore-excavation-649832:5848320")
+    implementation fg.deobf("curse.maven:createaddition-439890:5658602")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
@@ -291,7 +294,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
     compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
     compileOnly fg.deobf("curse.maven:curios-309927:5680164")
-    compileOnly fg.deobf("curse.maven:patchouli-306770:4966125")
+    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
     compileOnly fg.deobf("curse.maven:geckolib-388172:5675221")
 
     //Kubejs
