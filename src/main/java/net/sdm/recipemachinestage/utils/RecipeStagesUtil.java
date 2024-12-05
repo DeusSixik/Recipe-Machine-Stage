@@ -13,11 +13,17 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fml.ModList;
+import net.sdm.recipemachinestage.SupportBlockData;
+import net.sdm.recipemachinestage.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.stage.StageContainer;
+import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Source
@@ -29,6 +35,29 @@ public class RecipeStagesUtil {
     public static <T> T cast(Object o) {
 
         return (T) o;
+    }
+
+    public static boolean canRecipeOnBlockEntity(BlockEntity block, Recipe<?> recipe) {
+        if(recipe == null) return true;
+
+
+        Optional<IOwnerBlock> optionalOwnerBlock = block.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        if (optionalOwnerBlock.isPresent() && block.getLevel().getServer() != null) {
+            IOwnerBlock ownerBlock = optionalOwnerBlock.get();
+
+            PlayerHelper.RMSStagePlayerData playerData = PlayerHelper.getPlayerByGameProfile(block.getLevel().getServer(), ownerBlock.getOwner());
+            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
+
+            if(recipeBlockType == null) return true;
+            if(playerData == null) return true;
+
+            if (!playerData.hasStage(recipeBlockType.stage)) {
+                return false;
+            }
+
+        }
+
+        return true;
     }
 
 

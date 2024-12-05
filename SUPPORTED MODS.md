@@ -166,6 +166,12 @@
 - Soul Binder
 - Fire Craft
 
+## Enchanted Witchcraft
+- Witch Cauldron
+- Kettle
+- Spinning
+- Witch Oven
+
 ## GregTech Modern (Without support JEI)
 
 ### If you can't find any mod, please write to us and we will try to add it.
