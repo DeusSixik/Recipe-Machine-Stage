@@ -49,6 +49,11 @@ public class RecipeMachineStage {
     }
 
     @SubscribeEvent
+    public void onRecipeCraft(PlayerEvent.ItemCraftedEvent event){
+
+    }
+
+    @SubscribeEvent
     public void onAddReload(AddReloadListenerEvent event){
         event.addListener(StageContainer.INSTANCE);
     }

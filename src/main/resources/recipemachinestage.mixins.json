@@ -8,6 +8,7 @@
     "AbstractContainerMenuMixin",
     "AbstractFurnaceBlockEntityMixin",
     "BlockEntityMixin",
+    "CraftingMenuMixin",
     "cap.CapabilityProviderMixi",
     "integration.alchemistry.AtomizerBlockEntityMixin",
     "integration.alchemistry.CombinerBlockEntityMixin",
