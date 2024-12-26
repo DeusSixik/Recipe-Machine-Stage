@@ -15,12 +15,14 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.compat.astages.AStagesIntegration;
 import net.sdm.recipemachinestage.network.SyncStageForContainerC2S;
 import net.sdm.recipemachinestage.network.SyncStageForContainerS2C;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -37,6 +39,9 @@ public class RecipeMachineStage {
     public RecipeMachineStage() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
+
+//        if(ModList.get().isLoaded("astages"))
+//            MinecraftForge.EVENT_BUS.register(new AStagesIntegration());
 
         Network.register();
 
@@ -85,12 +90,13 @@ public class RecipeMachineStage {
                 support.recipe_machine_stage$setOwner(player.getGameProfile().getId());
             }
         }
+
     }
 
     public static class Network {
         private static final String PROTOCOL_VERSION = "1.0";
         public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation("yourmodid", "network"), // Замените "yourmodid" на ID вашего мода
+                new ResourceLocation(RecipeMachineStage.MODID, "network"),
                 () -> PROTOCOL_VERSION,
                 PROTOCOL_VERSION::equals,
                 PROTOCOL_VERSION::equals

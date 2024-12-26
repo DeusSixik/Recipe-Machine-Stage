@@ -5,13 +5,17 @@ import dev.latvian.mods.kubejs.script.BindingsEvent;
 import dev.latvian.mods.kubejs.script.ScriptManager;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sdm.recipemachinestage.stage.StageContainer;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class KJSPlugin extends KubeJSPlugin {
 
@@ -24,7 +28,6 @@ public class KJSPlugin extends KubeJSPlugin {
 
     @Override
     public void registerEvents() {
-
     }
 
     public interface RecipeMachineStageMethods {

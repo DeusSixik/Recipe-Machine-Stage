@@ -1,5 +1,7 @@
 package net.sdm.recipemachinestage.utils;
 
+import com.alessandro.astages.capability.PlayerStage;
+import com.alessandro.astages.capability.PlayerStageProvider;
 import dev.latvian.mods.kubejs.integration.forge.gamestages.GameStagesWrapper;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.nbt.*;
@@ -8,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
 import net.sdm.recipemachinestage.RecipeMachineStage;
 import org.apache.commons.io.FilenameUtils;
@@ -16,8 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PlayerHelper {
     public static final String folderName = "RecipeMachineStages";
@@ -35,6 +37,14 @@ public class PlayerHelper {
                 if(ModList.get().isLoaded("kubejs")) {
                     stagePlayerData.addStage(GameStagesWrapper.get(player).getAll());
                 }
+                if(ModList.get().isLoaded("astages")) {
+                    LazyOptional<PlayerStage> manager = player.getCapability(PlayerStageProvider.PLAYER_STAGE);
+                    if(manager.isPresent() && manager.resolve().isPresent()) {
+                        PlayerStage optional = manager.resolve().get();
+                        stagePlayerData.addStage(optional.getStages());
+                    }
+                }
+                PLAYER_DATA.put(id, stagePlayerData);
                 return stagePlayerData;
             }
         }
@@ -43,14 +53,23 @@ public class PlayerHelper {
     }
 
     public static boolean hasStage(Player player, String stage) {
+        boolean flag = false;
+
         if(ModList.get().isLoaded("gamestages")) {
-            return GameStageHelper.hasStage(player, stage);
+            flag = GameStageHelper.hasStage(player, stage);
         }
-        if(ModList.get().isLoaded("kubejs")) {
-            return GameStagesWrapper.get(player).has(stage);
+        if(ModList.get().isLoaded("kubejs") && !flag) {
+            flag = GameStagesWrapper.get(player).has(stage);
+        }
+        if(ModList.get().isLoaded("astages") && !flag) {
+            AtomicBoolean value = new AtomicBoolean(false);
+            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(playerStage -> {
+               value.set(playerStage.getStages().contains(stage));
+            });
+            flag = value.get();
         }
 
-        return false;
+        return flag;
     }
 
 
@@ -83,10 +102,12 @@ public class PlayerHelper {
 
         @Override
         public void deserializeNBT(CompoundTag nbt) {
-            ListTag player_stages = (ListTag) nbt.get("player_stages");
-            stages.clear();
-            for (Tag playerStage : player_stages) {
-                stages.add(playerStage.getAsString());
+            if(nbt.contains("player_stages")) {
+                ListTag player_stages = (ListTag) nbt.get("player_stages");
+                stages.clear();
+                for (Tag playerStage : player_stages) {
+                    stages.add(playerStage.getAsString());
+                }
             }
         }
     }
@@ -99,6 +120,11 @@ public class PlayerHelper {
         }
         if(ModList.get().isLoaded("kubejs")) {
             data.addStage(GameStagesWrapper.get(player).getAll());
+        }
+        if(ModList.get().isLoaded("astages")) {
+            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(playerStage -> {
+                data.addStage(playerStage.getStages());
+            });
         }
         PLAYER_DATA.put(player.getGameProfile().getId(), data);
         savePlayer(player.getGameProfile().getId(), player.server);

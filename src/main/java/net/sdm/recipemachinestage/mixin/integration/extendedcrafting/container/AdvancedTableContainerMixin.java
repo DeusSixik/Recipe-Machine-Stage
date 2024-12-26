@@ -42,7 +42,7 @@ public class AdvancedTableContainerMixin implements IRestrictedContainer {
     private Inventory recipe_machine_stage$playerInventory;
 
     @Unique
-    private EliteTableContainer recipe_machine_stage$thisContainer = RecipeStagesUtil.cast(this);
+    private AdvancedTableContainer recipe_machine_stage$thisContainer = RecipeStagesUtil.cast(this);
 
     private String sdm$thisStage = "";
 
