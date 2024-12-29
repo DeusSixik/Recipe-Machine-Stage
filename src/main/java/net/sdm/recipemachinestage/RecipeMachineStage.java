@@ -1,6 +1,9 @@
 package net.sdm.recipemachinestage;
 
 import com.mojang.logging.LogUtils;
+import dev.architectury.utils.Env;
+import dev.architectury.utils.EnvExecutor;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,12 +25,15 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.client.ClientEventHandler;
 import net.sdm.recipemachinestage.compat.astages.AStagesIntegration;
 import net.sdm.recipemachinestage.network.SyncStageForContainerC2S;
 import net.sdm.recipemachinestage.network.SyncStageForContainerS2C;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import org.slf4j.Logger;
+
+import java.util.function.Supplier;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(RecipeMachineStage.MODID)
@@ -40,12 +46,15 @@ public class RecipeMachineStage {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
-//        if(ModList.get().isLoaded("astages"))
-//            MinecraftForge.EVENT_BUS.register(new AStagesIntegration());
-
         Network.register();
 
         SupportBlockData.init();
+
+        EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
+            if(ModList.get().isLoaded("gamestages")) {
+                MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+            }
+        });
     }
 
     @SubscribeEvent

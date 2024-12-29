@@ -257,7 +257,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:chemlib-340666:5128632")
 
     //Extended Crafting
-    compileOnly fg.deobf("curse.maven:extended-crafting-268387:5228960")
+    implementation fg.deobf("curse.maven:extended-crafting-268387:5228960")
 
     //Draconic Evolution
     compileOnly fg.deobf("curse.maven:draconic-evolution-223565:5657010")
@@ -307,7 +307,7 @@ dependencies {
     implementation fg.deobf("curse.maven:rhino-416294:5655836")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
-
+    implementation fg.deobf("curse.maven:astages-1120180:6020562")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 

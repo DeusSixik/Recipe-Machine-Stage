@@ -13,11 +13,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.sdm.recipemachinestage.RecipeMachineStage;
 import net.sdm.recipemachinestage.compat.jei.JEIPlugin;
 
-@Mod.EventBusSubscriber(modid = RecipeMachineStage.MODID, value = Dist.CLIENT)
 public class ClientEventHandler {
 
     @SubscribeEvent
-    public static void onGamestageSync(StagesSyncedEvent event) {
+    public void onGamestageSync(StagesSyncedEvent event) {
         if(ModList.get().isLoaded("jei")) {
             Minecraft.getInstance().execute(() -> {
                 JEIPlugin.sync(event.getData());
@@ -26,8 +25,8 @@ public class ClientEventHandler {
 
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void recipes(RecipesUpdatedEvent event) {
+    @SubscribeEvent
+    public void recipes(RecipesUpdatedEvent event) {
         if(ModList.get().isLoaded("jei")) {
             Minecraft.getInstance().execute(() -> {
                 IStageData data = GameStageSaveHandler.getClientData();
