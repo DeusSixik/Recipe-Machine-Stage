@@ -257,7 +257,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:chemlib-340666:5128632")
 
     //Extended Crafting
-    implementation fg.deobf("curse.maven:extended-crafting-268387:5228960")
+    compileOnly fg.deobf("curse.maven:extended-crafting-268387:5228960")
 
     //Draconic Evolution
     compileOnly fg.deobf("curse.maven:draconic-evolution-223565:5657010")
@@ -285,7 +285,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ldlib-626676:5775541")
 
     //Enchanted Witchcraft
-    implementation fg.deobf("curse.maven:enchanted-witchcraft-560363:5873177")
+    compileOnly fg.deobf("curse.maven:enchanted-witchcraft-560363:5873177")
 
     //GregTechCEu Modern
    compileOnly fg.deobf("com.gregtechceu.gtceu:gtceu-1.20.1:1.4.6") { transitive = false }
@@ -301,6 +301,9 @@ dependencies {
     implementation fg.deobf("curse.maven:smartbrainlib-661293:5654964")
     implementation fg.deobf("curse.maven:stateobserver-701213:5390510")
 
+
+    implementation fg.deobf("curse.maven:mantle-74924:6041712")
+    implementation fg.deobf("curse.maven:tinkers-construct-74072:6041763")
 
     //Kubejs
     implementation fg.deobf("curse.maven:kubejs-238086:5454840")

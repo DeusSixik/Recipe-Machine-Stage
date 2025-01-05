@@ -7,16 +7,15 @@ import com.hollingsworth.arsnouveau.common.crafting.recipes.CrushRecipe;
 import com.hollingsworth.arsnouveau.common.spell.effect.EffectCrush;
 import com.hollingsworth.arsnouveau.setup.registry.RecipeRegistry;
 import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -51,8 +50,10 @@ public class EffectCrushMixin {
                 CrushRecipe recipe = (CrushRecipe) d1.next();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
                 if(recipeBlockType != null) {
-                    if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
-                        d1.remove();
+                    PlayerHelper.@Nullable RMSStagePlayerData _player = PlayerHelper.getPlayerByGameProfile(player.getServer(), player.getGameProfile().getId());
+                    if(_player != null) {
+                        if(!_player.hasStage(recipeBlockType.stage))
+                            d1.remove();
                     }
                 }
             }

@@ -1,10 +1,8 @@
 package net.sdm.recipemachinestage;
 
-import com.alessandro.astages.core.stage.AStage;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 
 public class SupportBlockData {

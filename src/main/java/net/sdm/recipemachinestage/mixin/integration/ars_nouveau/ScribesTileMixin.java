@@ -11,6 +11,7 @@ import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,8 +31,10 @@ public class ScribesTileMixin {
         if (thisEntity.getLevel().getServer() != null) {
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
-                   ci.cancel();
+                PlayerHelper.@Nullable RMSStagePlayerData _player = PlayerHelper.getPlayerByGameProfile(player.getServer(), player.getGameProfile().getId());
+                if(_player != null) {
+                    if(!_player.hasStage(recipeBlockType.stage))
+                        ci.cancel();
                 }
             }
         }
