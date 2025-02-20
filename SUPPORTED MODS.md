@@ -117,6 +117,16 @@
 - Rolling Mill
 - Tesla Coil
 
+## Create: New Age
+- Energising
+
+## Create: The Factory Must Grow
+- Blast Furnace
+- Casting Spout
+- Coke Oven
+- Distillation
+- Polarizer
+
 ## Extended Crafting
 - Combination Recipes
 - Compression Recipes
@@ -173,7 +183,19 @@
 - Witch Oven
 
 # Tinker Consturct
+- Melting
+- Modifier Worktable
+- Part Builder
+- Tinker Station
+- Entity Melting Module
+- Fuel Module
+- Melting Module
+- Multi Alloying Module
+- Single Alloying Module
 
 ## GregTech Modern (Without support JEI)
+
+## Summoning Rituals
+- Altar
 
 ### If you can't find any mod, please write to us and we will try to add it.

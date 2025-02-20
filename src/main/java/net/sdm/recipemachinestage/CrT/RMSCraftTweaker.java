@@ -55,4 +55,19 @@ public class RMSCraftTweaker {
     public static void addRecipe(IRecipeManager<Recipe<Container>> recipeType, String[] recipeID, String stage) {
         CraftTweakerAPI.apply(new RMSAction(recipeType.getRecipeType(), new ArrayList<>(List.of(recipeID)), stage));
     }
+
+    @ZenCodeType.Method
+    public static void addRecipeByMod(IRecipeManager<Recipe<Container>> recipeType, String modId,  String stage) {
+        CraftTweakerAPI.apply(new RMSAction(recipeType.getRecipeType(), new ArrayList<>(recipeType.getAllRecipes().stream().filter(s -> s.getId().getNamespace().equals(modId)).map(s -> s.getId().toString()).toList()), stage));
+    }
+
+    @ZenCodeType.Method
+    public static void addRecipeByMod(IRecipeManager<Recipe<Container>> recipeType, String[] modId,  String stage) {
+        CraftTweakerAPI.apply(new RMSAction(recipeType.getRecipeType(), new ArrayList<>(recipeType.getAllRecipes().stream().filter(s -> {
+            for (String string : modId) {
+                if(s.getId().getNamespace().equals(string)) return true;
+            }
+            return false;
+        }).map(s -> s.getId().toString()).toList()), stage));
+    }
 }

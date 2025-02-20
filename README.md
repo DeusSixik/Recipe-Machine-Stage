@@ -26,6 +26,15 @@ RecipeMachineStage.addRecipe("minecraft:smelting", "minecraft:stone", "one")
 
 RecipeMachineStage.addRecipe(String recipeType, String[] recipeIDs, String stage)
 RecipeMachineStage.addRecipe("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one")
+
+################################
+//ComigSoon
+//RecipeMachineStage.addRecipeByMod(String recipeType, String modID, String stage)
+//RecipeMachineStage.addRecipeByMod("minecraft:smelting", "minecraft", "one")
+//
+//RecipeMachineStage.addRecipeByMods(String recipeType, String[] modIDs, String stage)
+//RecipeMachineStage.addRecipeByMods("minecraft:smelting", ["minecraft", "create"], "one")
+################################
 ```
 
 # CraftTweaker
@@ -34,6 +43,13 @@ import mods.recipemachinestage.RecipeMachineStage;
 
 RecipeMachineStage.addRecipe(recipeType as string, recipeID as string, stage as string)
 RecipeMachineStage.addRecipe(recipeType as string, recipeID as string[], stage as string)
+RecipeMachineStage.addRecipeByMod(recipeType as string, modId as string, stage as string)
+RecipeMachineStage.addRecipeByMod(recipeType as string, modId as string[], stage as string)
+
+RecipeMachineStage.addRecipe(recipeType as RecypeType, recipeID as string, stage as string)
+RecipeMachineStage.addRecipe(recipeType as RecypeType, recipeID as string[], stage as string)
+RecipeMachineStage.addRecipeByMod(recipeType as RecypeType, modId as string, stage as string)
+RecipeMachineStage.addRecipeByMod(recipeType as RecypeType, modId as string[], stage as string)
 ```
 
 ### Description
@@ -46,12 +62,22 @@ RecipeMachineStage.addRecipe(recipeType as string, recipeID as string[], stage a
 import mods.recipemachinestage.RecipeMachineStage;
 
 RecipeMachineStage.addRecipe("minecraft:smelting", "minecraft:stone", "one");
+RecipeMachineStage.addRecipe(<recypetype:minecraft:smelting>, "minecraft:stone", "one");
 //Botania (Mana Infusion)
 RecipeMachineStage.addRecipe("botania:mana_infusion", "botania:mana_infusion/mana_diamond", "two");
+RecipeMachineStage.addRecipe(<recypetype:botania:mana_infusion>, "botania:mana_infusion/mana_diamond", "two");
 //Mekanism (Metallurgic Infusing)
 RecipeMachineStage.addRecipe("mekanism:metallurgic_infusing", "mekanism:processing/iron/enriched", "three");
+RecipeMachineStage.addRecipe(<recypetype:mekanism:metallurgic_infusing>, "mekanism:processing/iron/enriched", "three");
 
 RecipeMachineStage.addRecipe("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one");
+RecipeMachineStage.addRecipe(<recypetype:minecraft:smelting>, ["minecraft:stone", "minecraft:iron_ingot"], "one");
+
+RecipeMachineStage.addRecipeByMod("minecraft:smelting", "minecraft", "one");
+RecipeMachineStage.addRecipeByMod(<recypetype:minecraft:smelting>, "minecraft", "one");
+
+RecipeMachineStage.addRecipeByMod("minecraft:smelting", ["minecraft", "create"], "one");
+RecipeMachineStage.addRecipeByMod(<recypetype:minecraft:smelting>, ["minecraft", "create"], "one");
 ```
     
 

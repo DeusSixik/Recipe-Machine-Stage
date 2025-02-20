@@ -1,11 +1,6 @@
 package net.sdm.recipemachinestage.utils;
 
 
-import com.blakebr0.extendedcrafting.api.crafting.ITableRecipe;
-import com.blakebr0.extendedcrafting.compat.jei.category.table.AdvancedTableCategory;
-import com.blakebr0.extendedcrafting.compat.jei.category.table.BasicTableCategory;
-import com.blakebr0.extendedcrafting.compat.jei.category.table.EliteTableCategory;
-import com.blakebr0.extendedcrafting.compat.jei.category.table.UltimateTableCategory;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.integration.jei.recipe.GTRecipeTypeCategory;
 import com.gregtechceu.gtceu.integration.jei.recipe.GTRecipeWrapper;
@@ -19,17 +14,46 @@ import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Source
- * https://github.com/jaredlll08/RecipeStages/blob/1.20.1/src/main/java/com/blamejared/recipestages/RecipeStagesUtil.java#L14
- */
 public class RecipeStagesUtil {
+
+    public static <T extends Recipe<?>> Optional<T> checkRecipe(Optional<T> recipeOptional, BlockEntity entity) {
+        return recipeOptional.map(t -> checkRecipe(t, entity));
+    }
+
+    public static @Nullable <T extends Recipe<?>> T checkRecipe(T recipe, BlockEntity entity) {
+        if(recipe == null) return null;
+
+        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return recipe;
+
+        if (entity == null) {
+            return recipe;
+        }
+
+        Optional<IOwnerBlock> optionalOwnerBlock = entity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        if (optionalOwnerBlock.isPresent() && entity.getLevel().getServer() != null) {
+            IOwnerBlock ownerBlock = optionalOwnerBlock.get();
+
+            PlayerHelper.RMSStagePlayerData playerData = PlayerHelper.getPlayerByGameProfile(entity.getLevel().getServer(), ownerBlock.getOwner());
+            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
+
+            if(recipeBlockType == null) return recipe;
+            if(playerData == null) return recipe;
+
+            if (!playerData.hasStage(recipeBlockType.stage)) {
+                return null;
+            }
+
+        }
+
+        return recipe;
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> T cast(Object o) {
