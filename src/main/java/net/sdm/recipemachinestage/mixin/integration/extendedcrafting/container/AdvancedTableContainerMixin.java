@@ -4,7 +4,6 @@ package net.sdm.recipemachinestage.mixin.integration.extendedcrafting.container;
 import com.blakebr0.cucumber.inventory.BaseItemStackHandler;
 import com.blakebr0.extendedcrafting.api.crafting.ITableRecipe;
 import com.blakebr0.extendedcrafting.container.AdvancedTableContainer;
-import com.blakebr0.extendedcrafting.container.EliteTableContainer;
 import com.blakebr0.extendedcrafting.container.inventory.ExtendedCraftingInventory;
 import com.blakebr0.extendedcrafting.init.ModRecipeTypes;
 import net.minecraft.core.BlockPos;

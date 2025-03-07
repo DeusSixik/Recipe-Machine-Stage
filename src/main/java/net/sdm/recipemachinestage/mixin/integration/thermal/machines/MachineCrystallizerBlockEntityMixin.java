@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
-import cofh.thermal.core.util.managers.machine.CrucibleRecipeManager;
 import cofh.thermal.core.util.managers.machine.CrystallizerRecipeManager;
-import cofh.thermal.expansion.common.block.entity.machine.MachineCrucibleBlockEntity;
 import cofh.thermal.expansion.common.block.entity.machine.MachineCrystallizerBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;

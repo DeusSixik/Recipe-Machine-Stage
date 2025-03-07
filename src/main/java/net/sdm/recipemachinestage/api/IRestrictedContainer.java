@@ -1,7 +1,6 @@
 package net.sdm.recipemachinestage.api;
 
 import net.minecraft.world.entity.player.Player;
-import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 
 import java.util.List;
 

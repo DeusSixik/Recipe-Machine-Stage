@@ -2,7 +2,6 @@ package net.sdm.recipemachinestage.mixin.integration.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.enchanting_apparatus.IEnchantingRecipe;
 import com.hollingsworth.arsnouveau.common.block.tile.EnchantingApparatusTile;
-import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.sdm.recipemachinestage.stage.StageContainer;

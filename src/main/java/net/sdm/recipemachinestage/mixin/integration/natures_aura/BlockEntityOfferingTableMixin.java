@@ -3,8 +3,6 @@ package net.sdm.recipemachinestage.mixin.integration.natures_aura;
 import de.ellpeck.naturesaura.blocks.tiles.BlockEntityOfferingTable;
 import de.ellpeck.naturesaura.recipes.AltarRecipe;
 import de.ellpeck.naturesaura.recipes.ModRecipes;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;

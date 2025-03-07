@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.embers;
 
 import com.rekindled.embers.RegistryManager;
-import com.rekindled.embers.blockentity.MelterBottomBlockEntity;
-import com.rekindled.embers.blockentity.MelterTopBlockEntity;
 import com.rekindled.embers.blockentity.StampBaseBlockEntity;
 import com.rekindled.embers.blockentity.StamperBlockEntity;
 import com.rekindled.embers.recipe.StampingContext;
@@ -14,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;

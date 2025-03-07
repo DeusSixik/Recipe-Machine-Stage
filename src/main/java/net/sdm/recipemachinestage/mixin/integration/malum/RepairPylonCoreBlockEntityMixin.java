@@ -5,8 +5,6 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.RepairPylonCoreBloc
 import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
 import com.sammy.malum.common.recipe.SpiritRepairRecipe;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;

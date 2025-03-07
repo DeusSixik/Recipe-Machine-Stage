@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
-import cofh.thermal.core.util.managers.machine.PressRecipeManager;
 import cofh.thermal.core.util.managers.machine.PulverizerRecipeManager;
-import cofh.thermal.expansion.common.block.entity.machine.MachinePressBlockEntity;
 import cofh.thermal.expansion.common.block.entity.machine.MachinePulverizerBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;

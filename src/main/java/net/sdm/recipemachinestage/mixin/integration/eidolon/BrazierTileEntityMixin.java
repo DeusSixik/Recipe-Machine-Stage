@@ -4,7 +4,6 @@ import elucent.eidolon.api.ritual.Ritual;
 import elucent.eidolon.common.tile.BrazierTileEntity;
 import elucent.eidolon.recipe.RitualRecipe;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
@@ -16,14 +15,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Mixin(value = BrazierTileEntity.class, remap = false)
 public abstract class BrazierTileEntityMixin {

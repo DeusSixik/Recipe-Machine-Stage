@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
-import cofh.thermal.core.util.managers.machine.InsolatorRecipeManager;
 import cofh.thermal.core.util.managers.machine.PressRecipeManager;
-import cofh.thermal.expansion.common.block.entity.machine.MachineInsolatorBlockEntity;
 import cofh.thermal.expansion.common.block.entity.machine.MachinePressBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;

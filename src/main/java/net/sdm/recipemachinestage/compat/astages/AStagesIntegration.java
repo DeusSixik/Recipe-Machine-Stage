@@ -1,12 +1,5 @@
 package net.sdm.recipemachinestage.compat.astages;
 
-import com.alessandro.astages.event.custom.actions.AllStageRemovedPlayerEvent;
-import com.alessandro.astages.event.custom.actions.StageAddedPlayerEvent;
-import com.alessandro.astages.event.custom.actions.StageRemovedPlayerEvent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.sdm.recipemachinestage.utils.PlayerHelper;
-
 public class AStagesIntegration {
 
 //    @SubscribeEvent

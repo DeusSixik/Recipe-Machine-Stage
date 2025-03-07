@@ -1,9 +1,7 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
 import cofh.thermal.core.util.managers.machine.BottlerRecipeManager;
-import cofh.thermal.core.util.managers.machine.FurnaceRecipeManager;
 import cofh.thermal.expansion.common.block.entity.machine.MachineBottlerBlockEntity;
-import cofh.thermal.expansion.common.block.entity.machine.MachineFurnaceBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;
 import net.sdm.recipemachinestage.SupportBlockData;

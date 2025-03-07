@@ -1,10 +1,8 @@
 package net.sdm.recipemachinestage.mixin.integration.embers;
 
 import com.rekindled.embers.RegistryManager;
-import com.rekindled.embers.blockentity.IgnemReactorBlockEntity;
 import com.rekindled.embers.blockentity.MelterBottomBlockEntity;
 import com.rekindled.embers.blockentity.MelterTopBlockEntity;
-import com.rekindled.embers.recipe.IEmberActivationRecipe;
 import com.rekindled.embers.util.Misc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.Recipe;

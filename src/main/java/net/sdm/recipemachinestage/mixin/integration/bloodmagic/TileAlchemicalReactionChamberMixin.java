@@ -5,7 +5,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.sdm.recipemachinestage.SupportBlockData;
@@ -25,12 +24,12 @@ import wayoftime.bloodmagic.recipe.RecipeARC;
 
 import java.util.Optional;
 
-@Mixin(value = TileAlchemicalReactionChamber.class, remap = false)
+@Mixin(value = TileAlchemicalReactionChamber.class)
 public class TileAlchemicalReactionChamberMixin {
 
     private TileAlchemicalReactionChamber thisEntity = RecipeStagesUtil.cast(this);
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lwayoftime/bloodmagic/impl/BloodMagicRecipeRegistrar;getARC(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Lnet/minecraftforge/fluids/FluidStack;)Lwayoftime/bloodmagic/recipe/RecipeARC;"))
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lwayoftime/bloodmagic/impl/BloodMagicRecipeRegistrar;getARC(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Lnet/minecraftforge/fluids/FluidStack;)Lwayoftime/bloodmagic/recipe/RecipeARC;"), remap = false)
     private RecipeARC sdm$tick$getARC(BloodMagicRecipeRegistrar instance, Level level, ItemStack world, ItemStack input, FluidStack arcToolInput) {
         RecipeARC recipe = BloodMagicAPI.INSTANCE.getRecipeRegistrar().getARC(level, world, input, arcToolInput);
 

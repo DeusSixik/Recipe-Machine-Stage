@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
-import cofh.thermal.core.util.managers.machine.CentrifugeRecipeManager;
 import cofh.thermal.core.util.managers.machine.ChillerRecipeManager;
-import cofh.thermal.expansion.common.block.entity.machine.MachineCentrifugeBlockEntity;
 import cofh.thermal.expansion.common.block.entity.machine.MachineChillerBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;

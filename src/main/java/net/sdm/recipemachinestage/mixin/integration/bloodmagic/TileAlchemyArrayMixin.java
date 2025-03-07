@@ -22,13 +22,13 @@ import wayoftime.bloodmagic.recipe.RecipeAlchemyArray;
 
 import java.util.Optional;
 
-@Mixin(value = TileAlchemyArray.class, remap = false)
+@Mixin(value = TileAlchemyArray.class)
 public class TileAlchemyArrayMixin {
 
     private TileAlchemyArray thisEntity = RecipeStagesUtil.cast(this);
 
 
-    @Redirect(method = "attemptCraft", at = @At(value = "INVOKE", target = "Lwayoftime/bloodmagic/core/registry/AlchemyArrayRegistry;getEffect(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Lwayoftime/bloodmagic/common/alchemyarray/AlchemyArrayEffect;"))
+    @Redirect(method = "attemptCraft", at = @At(value = "INVOKE", target = "Lwayoftime/bloodmagic/core/registry/AlchemyArrayRegistry;getEffect(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Lwayoftime/bloodmagic/common/alchemyarray/AlchemyArrayEffect;"), remap = false)
     private AlchemyArrayEffect sdm$attemptCraft(Level world, ItemStack input, ItemStack catalyst) {
         return recipe_machine_stage$getEffect(world,input,catalyst);
     }

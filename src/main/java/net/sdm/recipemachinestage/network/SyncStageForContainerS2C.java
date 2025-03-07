@@ -3,7 +3,6 @@ package net.sdm.recipemachinestage.network;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.sdm.recipemachinestage.api.IContainerMenuSync;
 

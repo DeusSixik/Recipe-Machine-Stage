@@ -1,9 +1,7 @@
 package net.sdm.recipemachinestage.mixin.integration.botania;
 
 
-import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;

@@ -2,7 +2,6 @@ package net.sdm.recipemachinestage.mixin.integration.alchemistry;
 
 import com.smashingmods.alchemistry.common.block.compactor.CompactorBlockEntity;
 import com.smashingmods.alchemistry.common.recipe.compactor.CompactorRecipe;
-import com.smashingmods.alchemistry.common.recipe.dissolver.DissolverRecipe;
 import com.smashingmods.alchemistry.registry.RecipeRegistry;
 import com.smashingmods.alchemylib.api.recipe.AbstractProcessingRecipe;
 import net.sdm.recipemachinestage.SupportBlockData;

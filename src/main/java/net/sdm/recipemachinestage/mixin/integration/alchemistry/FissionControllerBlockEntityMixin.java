@@ -1,9 +1,7 @@
 package net.sdm.recipemachinestage.mixin.integration.alchemistry;
 
 import com.smashingmods.alchemistry.common.block.fission.FissionControllerBlockEntity;
-import com.smashingmods.alchemistry.common.block.fusion.FusionControllerBlockEntity;
 import com.smashingmods.alchemistry.common.recipe.fission.FissionRecipe;
-import com.smashingmods.alchemistry.common.recipe.fusion.FusionRecipe;
 import com.smashingmods.alchemistry.registry.RecipeRegistry;
 import com.smashingmods.alchemylib.api.recipe.AbstractProcessingRecipe;
 import net.sdm.recipemachinestage.SupportBlockData;

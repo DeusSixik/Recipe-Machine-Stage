@@ -2,7 +2,6 @@ package net.sdm.recipemachinestage.mixin.integration.enchanted_witch;
 
 
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import favouriteless.enchanted.common.recipes.ByproductRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.sdm.recipemachinestage.SupportBlockData;

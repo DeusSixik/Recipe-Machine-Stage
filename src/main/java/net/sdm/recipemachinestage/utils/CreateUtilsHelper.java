@@ -1,21 +1,5 @@
 package net.sdm.recipemachinestage.utils;
 
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.processing.recipe.ProcessingOutput;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
-import com.simibubi.create.content.processing.sequenced.SequencedRecipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemHandlerHelper;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-
 public class CreateUtilsHelper {
 
     public static class CustomSequenceAssembly {

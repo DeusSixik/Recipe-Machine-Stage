@@ -2,17 +2,10 @@ package net.sdm.recipemachinestage.mixin.integration.embers;
 
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.MiniBoilerBlockEntity;
-import com.rekindled.embers.blockentity.MixerCentrifugeBottomBlockEntity;
-import com.rekindled.embers.blockentity.MixerCentrifugeTopBlockEntity;
 import com.rekindled.embers.recipe.FluidHandlerContext;
-import com.rekindled.embers.recipe.MixingContext;
 import com.rekindled.embers.util.Misc;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;

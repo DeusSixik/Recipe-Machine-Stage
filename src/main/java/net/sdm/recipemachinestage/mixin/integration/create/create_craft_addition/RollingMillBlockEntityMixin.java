@@ -1,7 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.create.create_craft_addition;
 
 import com.mrh0.createaddition.blocks.rolling_mill.RollingMillBlockEntity;
-import com.mrh0.createaddition.recipe.charging.ChargingRecipe;
 import com.mrh0.createaddition.recipe.rolling.RollingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;

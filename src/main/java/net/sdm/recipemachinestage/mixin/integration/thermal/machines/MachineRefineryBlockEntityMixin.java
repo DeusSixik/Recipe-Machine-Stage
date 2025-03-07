@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.thermal.machines;
 
-import cofh.thermal.core.util.managers.machine.PyrolyzerRecipeManager;
 import cofh.thermal.core.util.managers.machine.RefineryRecipeManager;
-import cofh.thermal.expansion.common.block.entity.machine.MachinePyrolyzerBlockEntity;
 import cofh.thermal.expansion.common.block.entity.machine.MachineRefineryBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;

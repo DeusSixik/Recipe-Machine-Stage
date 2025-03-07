@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.farmers_delight;
 
 
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;

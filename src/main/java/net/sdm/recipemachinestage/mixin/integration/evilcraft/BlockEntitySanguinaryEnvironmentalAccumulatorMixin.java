@@ -1,7 +1,5 @@
 package net.sdm.recipemachinestage.mixin.integration.evilcraft;
 
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.sdm.recipemachinestage.SupportBlockData;

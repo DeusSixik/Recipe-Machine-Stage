@@ -3,8 +3,6 @@ package net.sdm.recipemachinestage.mixin.integration.malum;
 import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlockEntity;
 import com.sammy.malum.common.recipe.FavorOfTheVoidRecipe;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

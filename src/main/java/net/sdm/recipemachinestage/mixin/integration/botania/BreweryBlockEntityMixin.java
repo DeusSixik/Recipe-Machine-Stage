@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.botania;
 
 
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.sdm.recipemachinestage.SupportBlockData;

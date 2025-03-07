@@ -5,7 +5,6 @@ import com.blakebr0.cucumber.inventory.CachedRecipe;
 import com.blakebr0.extendedcrafting.api.crafting.ICompressorRecipe;
 import com.blakebr0.extendedcrafting.api.crafting.IEnderCrafterRecipe;
 import com.blakebr0.extendedcrafting.tileentity.CompressorTileEntity;
-import com.blakebr0.extendedcrafting.tileentity.EnderCrafterTileEntity;
 import net.sdm.recipemachinestage.SupportBlockData;
 import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;

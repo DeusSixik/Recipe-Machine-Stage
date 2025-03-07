@@ -12,11 +12,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import net.sdm.recipemachinestage.mixin.jei.RecipeManagerAccessor;
 import net.sdm.recipemachinestage.mixin.jei.RecipeManagerInternalAccessor;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 
 import java.util.List;
 import java.util.Map;

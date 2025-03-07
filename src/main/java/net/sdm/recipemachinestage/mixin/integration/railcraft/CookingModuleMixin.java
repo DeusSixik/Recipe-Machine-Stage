@@ -1,8 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.railcraft;
 
 import mods.railcraft.world.item.crafting.RailcraftRecipeTypes;
-import mods.railcraft.world.item.crafting.RollingRecipe;
-import mods.railcraft.world.level.block.entity.ManualRollingMachineBlockEntity;
 import mods.railcraft.world.module.BlastFurnaceModule;
 import mods.railcraft.world.module.CokeOvenModule;
 import mods.railcraft.world.module.CookingModule;

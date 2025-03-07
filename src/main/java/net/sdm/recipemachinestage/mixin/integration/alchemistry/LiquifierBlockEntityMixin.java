@@ -1,7 +1,6 @@
 package net.sdm.recipemachinestage.mixin.integration.alchemistry;
 
 import com.smashingmods.alchemistry.common.block.liquifier.LiquifierBlockEntity;
-import com.smashingmods.alchemistry.common.recipe.dissolver.DissolverRecipe;
 import com.smashingmods.alchemistry.common.recipe.liquifier.LiquifierRecipe;
 import com.smashingmods.alchemistry.registry.RecipeRegistry;
 import com.smashingmods.alchemylib.api.recipe.AbstractProcessingRecipe;

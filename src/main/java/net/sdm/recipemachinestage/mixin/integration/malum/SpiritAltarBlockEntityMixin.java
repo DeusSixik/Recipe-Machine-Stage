@@ -4,8 +4,6 @@ package net.sdm.recipemachinestage.mixin.integration.malum;
 import com.sammy.malum.common.block.curiosities.spirit_altar.SpiritAltarBlockEntity;
 import com.sammy.malum.common.recipe.SpiritInfusionRecipe;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.sdm.recipemachinestage.SupportBlockData;
