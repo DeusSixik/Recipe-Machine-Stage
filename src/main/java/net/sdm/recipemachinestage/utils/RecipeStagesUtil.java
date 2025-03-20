@@ -15,9 +15,11 @@ import net.sdm.recipemachinestage.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,14 @@ public class RecipeStagesUtil {
 
     public static <T extends Recipe<?>> Optional<T> checkRecipe(Optional<T> recipeOptional, BlockEntity entity) {
         return recipeOptional.map(t -> checkRecipe(t, entity));
+    }
+
+    public static <T extends Recipe<?>> Optional<T> checkRecipeOptional(T recipe, BlockEntity entity) {
+        return Optional.ofNullable(checkRecipe(recipe, entity));
+    }
+
+    public static <T extends Recipe<?>> void checkRecipe(T recipe, BlockEntity entity, CallbackInfo ci) {
+        if(checkRecipe(recipe, entity) == null) ci.cancel();
     }
 
     public static @Nullable <T extends Recipe<?>> T checkRecipe(T recipe, BlockEntity entity) {
@@ -184,6 +194,17 @@ public class RecipeStagesUtil {
                 }
             }
         }
-        return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
+        return outputStream.toString(StandardCharsets.UTF_8);
+    }
+
+    public static <T extends Recipe<?>> List<T> checkRecipe(List<T> returnValue, BlockEntity blockEntity) {
+        List<T> recipes = new ArrayList<>();
+        for (T recipe : returnValue) {
+            if(canRecipeOnBlockEntity(blockEntity, recipe)) {
+                recipes.add(recipe);
+            }
+        }
+
+        return recipes;
     }
 }

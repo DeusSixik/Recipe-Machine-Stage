@@ -31,6 +31,10 @@
 ## Mekanism
 - All Machines who have Recipe Type
 
+## Mekanism Science
+- Adsorption Separator
+- Radiation Irradiator
+
 ## Nature Aure
 - Tree Ritual
 - Nature Altar
@@ -82,7 +86,9 @@
 - Fusion Crafting
 
 ## Mystical Agriculture
+- Awakening Altar
 - Infusion
+- Reprocessor
 
 ## Alchemistry
 - Atomizer
@@ -169,6 +175,13 @@
 - Smelter Catalyst
 - Insolator Catalyst
 
+## Thermal Extras
+- Advanced Refinery
+- Component Assembly
+- Endothermic Dehydrator
+- Fluid Mixer
+- Nitratic Igniter
+
 ## EnderIO
 - Alloy Smelter
 - Sag Mill
@@ -197,5 +210,8 @@
 
 ## Summoning Rituals
 - Altar
+
+## Ice And Fire
+- Dragon Forge
 
 ### If you can't find any mod, please write to us and we will try to add it.

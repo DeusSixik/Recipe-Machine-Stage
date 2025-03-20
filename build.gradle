@@ -179,6 +179,9 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.104"))
     implementation(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.104"))
 
+    //Avaritia
+    implementation fg.deobf("curse.maven:re-avaritia-623969:5740694")
+
     //Blood Magic
     compileOnly fg.deobf("curse.maven:blood-magic-224791:5290993")
 
@@ -194,8 +197,8 @@ dependencies {
     //Farmers delight
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
     //Create
-    implementation fg.deobf("curse.maven:create-328085:6271934")
-    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.51"))
+    compileOnly fg.deobf("curse.maven:create-328085:6271934")
+    compileOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.51"))
     compileOnly fg.deobf("curse.maven:create-ore-excavation-649832:6272216")
 
     compileOnly fg.deobf("curse.maven:create-new-age-905861:6270284")
@@ -204,7 +207,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:create-industry-693815:6255138")
 
     //Mekanism
-    compileOnly fg.deobf("curse.maven:mekanism-268560:5662583")
+    compileOnly fg.deobf("curse.maven:mekanism-268560:6258796")
+    compileOnly fg.deobf("curse.maven:mekanism-science-1103224:6052916")
+    compileOnly fg.deobf("curse.maven:mekanism-generators-268566:6258799")
 
     //Natures Aura
     compileOnly fg.deobf("curse.maven:natures-aura-306626:4963590")
@@ -231,6 +236,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:thermal-foundation-222880:5443583")
     compileOnly fg.deobf("curse.maven:cofh-core-69162:5374122")
     compileOnly fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}.+")
+
+    compileOnly fg.deobf("curse.maven:thermal-extra-573674:6287356")
+
     //Applied Enegistics
     compileOnly fg.deobf("curse.maven:applied-energistics-2-223794:5641282")
 
@@ -249,7 +257,7 @@ dependencies {
 
     //Ad Astra
     //implementation fg.deobf("curse.maven:ad-astra-635042:5914893")
-    implementation fg.deobf("curse.maven:botarium-704113:5486070")
+    compileOnly fg.deobf("curse.maven:botarium-704113:5486070")
 //    implementation fg.deobf("curse.maven:resourceful-config-714059:5020441")
 //    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
 
@@ -303,6 +311,12 @@ dependencies {
    compileOnly fg.deobf("curse.maven:configuration-444699:4710266")
 //    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:5812598")
 
+    //Mob Grinding Utils
+    compileOnly fg.deobf("curse.maven:mob-grinding-utils-254241:5131447")
+
+    //Ice and Fire
+    compileOnly fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
+
     implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
     compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
@@ -311,7 +325,7 @@ dependencies {
     implementation fg.deobf("curse.maven:geckolib-388172:5675221")
     implementation fg.deobf("curse.maven:smartbrainlib-661293:5654964")
     implementation fg.deobf("curse.maven:stateobserver-701213:5390510")
-
+    implementation fg.deobf("curse.maven:citadel-331936:6002521")
 
     compileOnly fg.deobf("curse.maven:mantle-74924:6041712")
     compileOnly fg.deobf("curse.maven:tinkers-construct-74072:6041763")

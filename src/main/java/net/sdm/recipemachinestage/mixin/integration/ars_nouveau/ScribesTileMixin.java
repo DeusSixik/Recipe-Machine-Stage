@@ -20,6 +20,8 @@ public class ScribesTileMixin {
 
     @Inject(method = "setRecipe", at = @At("HEAD"), cancellable = true)
     public void sdm$setRecipe(GlyphRecipe recipe, Player player, CallbackInfo ci){
+
+
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return;
 
         if (thisEntity.getLevel().getServer() != null) {

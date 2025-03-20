@@ -25,6 +25,11 @@ public class PlayerHelper {
     public static final String folderName = "RecipeMachineStages";
     public static final HashMap<UUID, RMSStagePlayerData> PLAYER_DATA = new HashMap<>();
 
+
+    public static Optional<RMSStagePlayerData> getPlayerByGameProfileOptional(MinecraftServer server, UUID id) {
+        return Optional.ofNullable(getPlayerByGameProfile(server, id));
+    }
+
     @Nullable
     public static RMSStagePlayerData getPlayerByGameProfile(MinecraftServer server, UUID id){
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {

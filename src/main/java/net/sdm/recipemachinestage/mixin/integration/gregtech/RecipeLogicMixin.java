@@ -34,7 +34,6 @@ public abstract class RecipeLogicMixin {
 
     @Inject(method = "setupRecipe", at = @At("HEAD"), cancellable = true)
     public void sdm$setupRecip(GTRecipe recipe, CallbackInfo ci) {
-        System.out.println(recipe.getId());
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return;
 
         BlockEntity entity = machine.self().holder.self();

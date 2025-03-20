@@ -10,10 +10,7 @@ import net.sdm.recipemachinestage.RecipeMachineStage;
 import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StageContainer extends SimplePreparableReloadListener<Void> {
 
@@ -27,11 +24,6 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
         return type;
     }
 
-//    public static boolean hasRecipes(Recipe<?> recipe) {
-//        if(recipe == null) return false;
-//        return hasRecipes(recipe.getType());
-//    }
-//
     public static boolean hasRecipes(RecipeType<?> blockEntityClass) {
         boolean flag = blockEntityClass != null;
         if(flag) {
@@ -41,10 +33,13 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
         return !INSTANCE.RECIPES_STAGES.isEmpty() && flag;
     }
 
+    public static Optional<RecipeBlockType> getRecipeDataOptional(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
+        return Optional.ofNullable(getRecipeData(blockEntityClass, recipeID));
+    }
+
     @Nullable
     public static RecipeBlockType getRecipeData(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
         List<RecipeBlockType> TYPES = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
-//        TYPES.addAll(INSTANCE.RECIPES_STAGES_KUBEJS.getOrDefault(blockEntityClass, new ArrayList<>()));
         if(TYPES.isEmpty()) return null;
 
         for (RecipeBlockType type : TYPES) {
@@ -57,7 +52,6 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     @Nullable
     public static List<RecipeBlockType> getAllRecipeData(RecipeType<?> blockEntityClass, ResourceLocation recipeID) {
         List<RecipeBlockType> TYPES = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
-//        TYPES.addAll(INSTANCE.RECIPES_STAGES_KUBEJS.getOrDefault(blockEntityClass, new ArrayList<>()));
         if(TYPES.isEmpty()) return null;
 
         List<RecipeBlockType> d1 = new ArrayList<>();

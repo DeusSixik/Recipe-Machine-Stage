@@ -69,8 +69,6 @@ public abstract class PartBuilderBlockEntityMixin {
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
 
-            System.out.println(recipe.getType().toString() + " : " + recipe.getId().toString());
-
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
                 PlayerHelper.RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());

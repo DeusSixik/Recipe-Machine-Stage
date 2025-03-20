@@ -48,14 +48,15 @@ public class RecipeMachineStage {
 
         EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
             if(ModList.get().isLoaded("gamestages")) {
-                MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+                MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::onGamestageSync);
+
+                if(ModList.get().isLoaded("jei")) {
+                    MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::recipes);
+                }
+
+
             }
         });
-    }
-
-    @SubscribeEvent
-    public void onRecipeCraft(PlayerEvent.ItemCraftedEvent event){
-
     }
 
     @SubscribeEvent
