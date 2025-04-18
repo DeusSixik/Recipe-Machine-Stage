@@ -1,4 +1,4 @@
-package net.sdm.recipemachinestage.stage.type;
+package net.sdm.recipemachinestage.api.stage.type;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;

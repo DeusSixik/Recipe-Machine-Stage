@@ -180,16 +180,23 @@ dependencies {
     implementation(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.104"))
 
     //Avaritia
-    implementation fg.deobf("curse.maven:re-avaritia-623969:5740694")
+    compileOnly fg.deobf("curse.maven:re-avaritia-623969:5740694")
 
     //Blood Magic
     compileOnly fg.deobf("curse.maven:blood-magic-224791:5290993")
 
     //Botania
-    compileOnly fg.deobf("curse.maven:botania-225643:5594997")
+    compileOnly fg.deobf("curse.maven:botania-225643:6366547")
+
+    //Biomancy
+    compileOnly fg.deobf("curse.maven:biomancy-492939:5886758")
+
     //Malum
     compileOnly fg.deobf("curse.maven:malum-484064:5718038")
     compileOnly fg.deobf("curse.maven:lodestone-616457:5712854")
+
+    // Mana And Artifice
+    implementation fg.deobf("curse.maven:mana-and-artifice-406360:6376257")
 
     //Irons spellbook
 //    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:5736154")
@@ -320,7 +327,7 @@ dependencies {
     implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
     compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
-    compileOnly fg.deobf("curse.maven:curios-309927:5680164")
+    implementation fg.deobf("curse.maven:curios-309927:5680164")
     implementation fg.deobf("curse.maven:patchouli-306770:4966125")
     implementation fg.deobf("curse.maven:geckolib-388172:5675221")
     implementation fg.deobf("curse.maven:smartbrainlib-661293:5654964")

@@ -1,4 +1,4 @@
-package net.sdm.recipemachinestage.capability;
+package net.sdm.recipemachinestage.api.capability;
 
 
 import net.minecraft.nbt.CompoundTag;

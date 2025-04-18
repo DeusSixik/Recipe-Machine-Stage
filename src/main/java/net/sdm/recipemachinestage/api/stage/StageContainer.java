@@ -1,4 +1,4 @@
-package net.sdm.recipemachinestage.stage;
+package net.sdm.recipemachinestage.api.stage;
 
 import net.darkhax.gamestages.data.IStageData;
 import net.minecraft.resources.ResourceLocation;
@@ -7,7 +7,7 @@ import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.sdm.recipemachinestage.RecipeMachineStage;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
