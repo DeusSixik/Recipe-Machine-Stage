@@ -2,7 +2,7 @@ package net.sdm.recipemachinestage.mixin;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.api.capability.IOwnerableSupport;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

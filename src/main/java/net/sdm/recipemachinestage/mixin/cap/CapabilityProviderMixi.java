@@ -7,10 +7,10 @@ import net.minecraftforge.common.capabilities.CapabilityDispatcher;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilityProviderImpl;
 import net.minecraftforge.common.util.LazyOptional;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.BlockOwnerCapability;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.BlockOwnerCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.capability.IOwnerableSupport;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -38,7 +38,7 @@ public class CapabilityProviderMixi<B extends ICapabilityProviderImpl<B>> implem
     @Inject(method = "getCapability", at = @At("HEAD"), cancellable = true)
     public <T> void sdm$getCapability(@NotNull Capability<T> cap, @Nullable Direction side, CallbackInfoReturnable<LazyOptional<T>> cir){
         if(recipe_machine_stage$isSupported()) {
-            if(cap == SupportBlockData.BLOCK_OWNER) {
+            if(cap == RMSCapability.BLOCK_OWNER) {
                 cir.setReturnValue(OWNER_BLOCK.cast());
             }
         }

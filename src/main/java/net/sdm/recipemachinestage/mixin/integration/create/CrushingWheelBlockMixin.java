@@ -7,8 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,12 +30,12 @@ public class CrushingWheelBlockMixin {
 
         if(entity == null) return;
 
-        Optional<IOwnerBlock> f1 = entity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> f1 = entity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         CrushingWheelBlockEntity be = (CrushingWheelBlockEntity)world.getBlockEntity(pos);
 
         if(be == null) return;
 
-        Optional<IOwnerBlock> d1 = be.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> d1 = be.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if(d1.isPresent() && f1.isPresent()) {
             f1.get().setOwner(d1.get().getOwner());
         }
@@ -48,12 +48,12 @@ public class CrushingWheelBlockMixin {
 
         if(entity == null) return;
 
-        Optional<IOwnerBlock> f1 = entity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> f1 = entity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         CrushingWheelBlockEntity be = (CrushingWheelBlockEntity)world.getBlockEntity(pos);
 
         if(be == null) return;
 
-        Optional<IOwnerBlock> d1 = be.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> d1 = be.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if(d1.isPresent() && f1.isPresent()) {
             f1.get().setOwner(d1.get().getOwner());
         }

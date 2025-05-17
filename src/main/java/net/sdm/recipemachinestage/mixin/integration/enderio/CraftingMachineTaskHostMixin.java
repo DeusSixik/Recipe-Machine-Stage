@@ -6,10 +6,10 @@ import com.enderio.machines.common.blockentity.task.host.CraftingMachineTaskHost
 import com.enderio.machines.common.recipe.MachineRecipe;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,7 +40,7 @@ public class CraftingMachineTaskHostMixin {
 
         if(recipe == null) return;
 
-        Optional<IOwnerBlock> optionalOwnerBlock = sdm$blockEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> optionalOwnerBlock = sdm$blockEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (optionalOwnerBlock.isPresent() && sdm$blockEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 

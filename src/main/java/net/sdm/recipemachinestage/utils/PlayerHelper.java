@@ -1,7 +1,7 @@
 package net.sdm.recipemachinestage.utils;
 
-import com.alessandro.astages.capability.PlayerStage;
 import com.alessandro.astages.capability.PlayerStageProvider;
+import com.alessandro.astages.util.AStagesUtil;
 import dev.latvian.mods.kubejs.integration.forge.gamestages.GameStagesWrapper;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.nbt.*;
@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
 import net.sdm.recipemachinestage.RecipeMachineStage;
 import org.apache.commons.io.FilenameUtils;
@@ -19,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PlayerHelper {
     public static final String folderName = "RecipeMachineStages";
@@ -32,29 +30,25 @@ public class PlayerHelper {
 
     @Nullable
     public static RMSStagePlayerData getPlayerByGameProfile(MinecraftServer server, UUID id){
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if(Objects.equals(player.getGameProfile().getId(), id)) {
-                RMSStagePlayerData stagePlayerData = new RMSStagePlayerData();
+        var player = server.getPlayerList().getPlayer(id);
+        if(player == null) return PLAYER_DATA.getOrDefault(id, null);
 
-                if(ModList.get().isLoaded("gamestages")) {
-                    stagePlayerData.addStage(GameStageHelper.getPlayerData(player).getStages());
-                }
-                if(ModList.get().isLoaded("kubejs")) {
-                    stagePlayerData.addStage(GameStagesWrapper.get(player).getAll());
-                }
-                if(ModList.get().isLoaded("astages")) {
-                    LazyOptional<PlayerStage> manager = player.getCapability(PlayerStageProvider.PLAYER_STAGE);
-                    if(manager.isPresent() && manager.resolve().isPresent()) {
-                        PlayerStage optional = manager.resolve().get();
-                        stagePlayerData.addStage(optional.getStages());
-                    }
-                }
-                PLAYER_DATA.put(id, stagePlayerData);
-                return stagePlayerData;
-            }
+        RMSStagePlayerData stagePlayerData = new RMSStagePlayerData();
+
+        if(ModList.get().isLoaded("gamestages")) {
+            stagePlayerData.addStage(GameStageHelper.getPlayerData(player).getStages());
         }
+        if(ModList.get().isLoaded("kubejs")) {
+            stagePlayerData.addStage(GameStagesWrapper.get(player).getAll());
+        }
+        if(ModList.get().isLoaded("astages")) {
+            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(s -> {
+                stagePlayerData.addStage(s.getStages());
+            });
+        }
+        PLAYER_DATA.put(id, stagePlayerData);
 
-        return PLAYER_DATA.getOrDefault(id, null);
+        return stagePlayerData;
     }
 
     public static boolean hasStage(Player player, String stage) {
@@ -67,11 +61,7 @@ public class PlayerHelper {
             flag = GameStagesWrapper.get(player).has(stage);
         }
         if(ModList.get().isLoaded("astages") && !flag) {
-            AtomicBoolean value = new AtomicBoolean(false);
-            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(playerStage -> {
-               value.set(playerStage.getStages().contains(stage));
-            });
-            flag = value.get();
+            flag = AStagesUtil.hasStage(player, stage);
         }
 
         return flag;
@@ -193,6 +183,12 @@ public class PlayerHelper {
         } catch (Exception e) {
             RecipeMachineStage.LOGGER.error("net.sdm.recipemachinestage.utils.PlayerHelper$savePlayer(UUID player, Path path)");
             RecipeMachineStage.LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void UpdateData(Player player) {
+        if(player instanceof ServerPlayer serverPlayer) {
+            addPlayer(serverPlayer);
         }
     }
 }

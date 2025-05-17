@@ -1,9 +1,9 @@
-package net.sdm.recipemachinestage.CrT.action;
+package net.sdm.recipemachinestage.compat.crafttweaker.action;
 
 import com.blamejared.crafttweaker.api.action.base.IRuntimeAction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.sdm.recipemachinestage.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
 
 import java.util.List;
 

@@ -7,10 +7,10 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +34,7 @@ public class TileAlchemicalReactionChamberMixin {
         RecipeARC recipe = BloodMagicAPI.INSTANCE.getRecipeRegistrar().getARC(level, world, input, arcToolInput);
 
         if(recipe != null && StageContainer.hasRecipes(recipe.getType())) {
-            Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer()!= null) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
@@ -58,7 +58,7 @@ public class TileAlchemicalReactionChamberMixin {
 
         if(recipeOptional.isPresent()) {
             T recipe = recipeOptional.get();
-            Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer()!= null) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());

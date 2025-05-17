@@ -12,10 +12,10 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +57,7 @@ public class MechanicalCrafterBlockEntityMixin {
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;"), remap = false)
     public ItemStack sdm$tick(Level world, RecipeGridHandler.GroupedItems items) {
-        this.d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        this.d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
 
         items.calcStats();
         CraftingContainer craftinginventory = new MechanicalCraftingInventory(items);

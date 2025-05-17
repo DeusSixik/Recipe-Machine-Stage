@@ -10,10 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fml.ModList;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -46,7 +46,7 @@ public class RecipeStagesUtil {
             return recipe;
         }
 
-        Optional<IOwnerBlock> optionalOwnerBlock = entity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> optionalOwnerBlock = entity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (optionalOwnerBlock.isPresent() && entity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 
@@ -75,7 +75,7 @@ public class RecipeStagesUtil {
         if(recipe == null) return true;
 
 
-        Optional<IOwnerBlock> optionalOwnerBlock = block.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> optionalOwnerBlock = block.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (optionalOwnerBlock.isPresent() && block.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 

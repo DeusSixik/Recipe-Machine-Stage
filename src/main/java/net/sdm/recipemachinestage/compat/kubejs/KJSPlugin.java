@@ -1,4 +1,4 @@
-package net.sdm.recipemachinestage.kubejs;
+package net.sdm.recipemachinestage.compat.kubejs;
 
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
@@ -7,7 +7,7 @@ import dev.latvian.mods.kubejs.util.ConsoleJS;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sdm.recipemachinestage.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
 
 import java.util.List;
 
@@ -18,10 +18,6 @@ public class KJSPlugin extends KubeJSPlugin {
         if(event.getType().isServer()) {
             event.add("RecipeMachineStage", RecipeMachineStageMethods.class);
         }
-    }
-
-    @Override
-    public void registerEvents() {
     }
 
     public interface RecipeMachineStageMethods {
@@ -48,21 +44,7 @@ public class KJSPlugin extends KubeJSPlugin {
         }
 
 //        static void addRecipeByMod(String recipeType, String modID, String stage) {
-//            RecipeType<?> d1 = ForgeRegistries.RECIPE_TYPES.getValue(new ResourceLocation(recipeType));
-//            if(d1 == null) {
-//                ConsoleJS.getCurrent(ScriptManager.getCurrentContext()).error("Not found a recipe serializer for mod \"" + modID + "\"");
-//                return;
-//            }
-//
-//            if(ServerLifecycleHooks.getCurrentServer() == null) return;
-//
-//            List<ResourceLocation> list = new ArrayList<>();
-//            for (Recipe<?> recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().get(d1)) {
-//                if(recipe.getId().getNamespace().equals(modID)) list.add(recipe.getId());
-//            }
-//
-//            StageContainer.registerRecipeJS(d1,list, stage);
-//            ConsoleJS.getCurrent(ScriptManager.getCurrentContext()).info("Recipes " + list + " for " + d1 + " add to " + stage + ".stage");
+//            addRecipeByMods(recipeType, List.of(modID), stage);
 //        }
 //
 //        static void addRecipeByMods(String recipeType, List<String> modID, String stage) {

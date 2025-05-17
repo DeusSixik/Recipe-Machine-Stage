@@ -1,9 +1,9 @@
 package net.sdm.recipemachinestage.mixin.integration.tinkers_construct.modules;
 
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +31,7 @@ public class MultiAlloyingModuleMixin {
         while (list.hasNext()) {
             AlloyRecipe recipe = list.next();
 
-            Optional<IOwnerBlock> d1 = parent.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = parent.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && parent.getLevel().getServer() != null) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());

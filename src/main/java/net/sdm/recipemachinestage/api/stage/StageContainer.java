@@ -1,5 +1,7 @@
 package net.sdm.recipemachinestage.api.stage;
 
+import dev.architectury.utils.Env;
+import dev.architectury.utils.EnvExecutor;
 import net.darkhax.gamestages.data.IStageData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -11,17 +13,35 @@ import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class StageContainer extends SimplePreparableReloadListener<Void> {
 
     public static StageContainer INSTANCE = new StageContainer();
+    private static final List<IStage> REGISTER_STAGE_MODS = new ArrayList<>();
 
     public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES = new HashMap<>();
     public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES_KUBEJS = new HashMap<>();
 
+    public static List<IStage> getStageMods() {
+        return REGISTER_STAGE_MODS.stream().toList();
+    }
+
+    public static void registerStageContainer(Supplier<IStage> stageSupplier) {
+        IStage stages = stageSupplier.get();
+
+        if(!stages.isModLoaded()) return;
+
+        REGISTER_STAGE_MODS.add(stages);
+
+        stages.registerEventsServer();
+        EnvExecutor.runInEnv(Env.CLIENT, () -> stages::registerEventsClient);
+
+        RecipeMachineStage.LOGGER.info("Registered {} stages container", stages.getClass().getName());
+    }
+
     public static List<RecipeBlockType> getRecipe(RecipeType<?> blockEntityClass) {
-        List<RecipeBlockType> type = INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
-        return type;
+        return INSTANCE.RECIPES_STAGES.getOrDefault(blockEntityClass, new ArrayList<>());
     }
 
     public static boolean hasRecipes(RecipeType<?> blockEntityClass) {

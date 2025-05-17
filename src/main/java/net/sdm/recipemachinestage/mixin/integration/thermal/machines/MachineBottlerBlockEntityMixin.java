@@ -4,11 +4,11 @@ import cofh.thermal.core.util.managers.machine.BottlerRecipeManager;
 import cofh.thermal.expansion.common.block.entity.machine.MachineBottlerBlockEntity;
 import cofh.thermal.lib.util.recipes.IThermalInventory;
 import cofh.thermal.lib.util.recipes.internal.IMachineRecipe;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.compat.thermal.IThermalRecipeAddition;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +31,7 @@ public class MachineBottlerBlockEntityMixin {
         IMachineRecipe recipe = BottlerRecipeManager.instance().getRecipe(thisEntity);
 
         if(thisEntity instanceof MachineBlockEntityAccessor accessor) {
-            Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisEntity.getLevel().getServer() != null && recipe instanceof IThermalRecipeAddition recipeAddition) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipeAddition.getRecipeType(), recipeAddition.getRecipeID());

@@ -6,16 +6,15 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.library.recipes.RecipeManagerInternal;
-import net.darkhax.gamestages.data.IStageData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.mixin.jei.RecipeManagerAccessor;
 import net.sdm.recipemachinestage.mixin.jei.RecipeManagerInternalAccessor;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 
 import java.util.List;
@@ -41,8 +40,7 @@ public class JEIPlugin implements IModPlugin {
         runTime = jeiRuntime;
     }
 
-    public static<C extends Container, T extends Recipe<C>> void sync(IStageData data) {
-
+    public static<C extends Container, T extends Recipe<C>> void sync() {
 
 
         if(Minecraft.getInstance().level == null) {
@@ -63,8 +61,9 @@ public class JEIPlugin implements IModPlugin {
 
                             if(RecipeStagesUtil.isCorrectRecipeClass(category, recipe)) {
                                 var d2 = List.of(RecipeStagesUtil.getRecipe(recipe));
+                                boolean value = StageContainer.getStageMods().stream().anyMatch(s -> s.hasStage(recipeBlockType.stage));
 
-                                if (data.hasStage(recipeBlockType.stage)) {
+                                if (value) {
                                     JEIPlugin.runTime.getRecipeManager().unhideRecipes(category.getRecipeType(), RecipeStagesUtil.cast(d2));
                                 } else {
                                     JEIPlugin.runTime.getRecipeManager().hideRecipes(category.getRecipeType(), RecipeStagesUtil.cast(d2));
@@ -75,6 +74,7 @@ public class JEIPlugin implements IModPlugin {
                 }
             }
         }
+
     }
 
     private static boolean hasRecipe(RecipeBlockType recipeBlockType, Recipe<?> recipe, IRecipeCategory<?> category) {

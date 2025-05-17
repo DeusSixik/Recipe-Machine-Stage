@@ -1,4 +1,4 @@
-package net.sdm.recipemachinestage.CrT;
+package net.sdm.recipemachinestage.compat.crafttweaker;
 
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
@@ -7,7 +7,7 @@ import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
-import net.sdm.recipemachinestage.CrT.action.RMSAction;
+import net.sdm.recipemachinestage.compat.crafttweaker.action.RMSAction;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.ArrayList;

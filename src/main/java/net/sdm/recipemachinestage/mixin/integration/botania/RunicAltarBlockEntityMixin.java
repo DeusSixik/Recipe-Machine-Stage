@@ -3,10 +3,10 @@ package net.sdm.recipemachinestage.mixin.integration.botania;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +32,7 @@ public class RunicAltarBlockEntityMixin {
     public void sdm$onUsedByWand(Player player, ItemStack wand, Direction side, CallbackInfoReturnable<Boolean> cir, RunicAltarRecipe recipe, Optional maybeRecipe){
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(BotaniaRecipeTypes.RUNE_TYPE)) return;
 
-        Optional<IOwnerBlock> d1 = recipe_machine_stage$thisBlockEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> d1 = recipe_machine_stage$thisBlockEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (d1.isPresent() && recipe_machine_stage$thisBlockEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());

@@ -7,10 +7,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ public class ExtractorBlockEntityMixin extends ExcavatingBlockEntityImpl<Extract
             return;
         }
 
-        Optional<IOwnerBlock> owner = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> owner = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
 
         owner.ifPresent(o -> {
             if(thisEntity.getLevel() == null || thisEntity.getLevel().getServer() == null) return;

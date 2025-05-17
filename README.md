@@ -97,7 +97,7 @@ In it, you need to transfer the IDs of the slots that have an output item when c
 
 ## BlockEntity
 
-If you need to add support for recipes that occur without the player's participation, for example a crusher for now, you need to use capability **net.sdm.recipemachinestage.SupportBlockData.BLOCK_OWNER** It stores the owner of the block
+If you need to add support for recipes that occur without the player's participation, for example a crusher for now, you need to use capability **net.sdm.recipemachinestage.RMSCapability.BLOCK_OWNER** It stores the owner of the block
 
 ### Usage example
 
@@ -117,7 +117,7 @@ if (optionalOwnerBlock.isPresent()) {
 }
 ```
 
-To check if your craft recipe is limited, you need **net.sdm.recipemachinestage.stage.StageContainer** It will allow you to get the stage and some other information
+To check if your craft recipe is limited, you need **net.sdm.recipemachinestage.api.stage.StageContainer** It will allow you to get the stage and some other information
 
 ```java
 Recipe<?> myRecipe;

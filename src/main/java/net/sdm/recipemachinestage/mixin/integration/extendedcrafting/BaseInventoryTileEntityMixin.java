@@ -2,7 +2,7 @@ package net.sdm.recipemachinestage.mixin.integration.extendedcrafting;
 
 import com.blakebr0.cucumber.tileentity.BaseInventoryTileEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.api.capability.IOwnerableSupport;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

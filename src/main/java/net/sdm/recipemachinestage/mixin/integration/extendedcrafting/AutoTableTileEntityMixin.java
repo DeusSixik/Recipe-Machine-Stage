@@ -2,11 +2,11 @@ package net.sdm.recipemachinestage.mixin.integration.extendedcrafting;
 
 import com.blakebr0.extendedcrafting.tileentity.AutoTableTileEntity;
 import net.minecraft.world.item.crafting.Recipe;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.compat.extendercrafting.IWrappedRecipeAddition;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +35,7 @@ public class AutoTableTileEntityMixin {
                 return;
             }
 
-            Optional<IOwnerBlock> d1 = recipe_machine_stage$thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = recipe_machine_stage$thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && recipe_machine_stage$thisEntity.getLevel().getServer() != null) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());

@@ -4,10 +4,10 @@ package net.sdm.recipemachinestage.mixin.integration.enchanted_witch;
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
 import favouriteless.enchanted.common.recipes.ByproductRecipe;
 import net.minecraft.world.item.crafting.Recipe;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +29,7 @@ public class WitchOvenBlockEntityMixin {
 
         if(recipe == null) return;
 
-        Optional<IOwnerBlock> optionalOwnerBlock = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> optionalOwnerBlock = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (optionalOwnerBlock.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 
@@ -51,7 +51,7 @@ public class WitchOvenBlockEntityMixin {
 
         if(recipe == null) return;
 
-        Optional<IOwnerBlock> optionalOwnerBlock = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> optionalOwnerBlock = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (optionalOwnerBlock.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 

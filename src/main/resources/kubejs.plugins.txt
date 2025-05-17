@@ -1,1 +1,1 @@
-net.sdm.recipemachinestage.kubejs.KJSPlugin
+net.sdm.recipemachinestage.compat.kubejs.KJSPlugin

@@ -15,19 +15,20 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.sdm.recipemachinestage.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.api.capability.IOwnerableSupport;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.compat.AStagesStage;
+import net.sdm.recipemachinestage.api.stage.compat.GameStagesStage;
+import net.sdm.recipemachinestage.api.stage.compat.KubeJSStage;
 import net.sdm.recipemachinestage.client.ClientEventHandler;
 import net.sdm.recipemachinestage.network.SyncStageForContainerC2S;
 import net.sdm.recipemachinestage.network.SyncStageForContainerS2C;
-import net.sdm.recipemachinestage.stage.StageContainer;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import org.slf4j.Logger;
 
@@ -39,24 +40,22 @@ public class RecipeMachineStage {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public RecipeMachineStage() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
         Network.register();
 
-        SupportBlockData.init();
+        StageContainer.registerStageContainer(KubeJSStage::new);
+        StageContainer.registerStageContainer(GameStagesStage::new);
+        StageContainer.registerStageContainer(AStagesStage::new);
 
         EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
-            if(ModList.get().isLoaded("gamestages")) {
-                MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::onGamestageSync);
-
-                if(ModList.get().isLoaded("jei")) {
-                    MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::recipes);
-                }
-
-
+            if(ModList.get().isLoaded("jei")) {
+                MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::recipes);
             }
         });
+
+
+
     }
 
     @SubscribeEvent

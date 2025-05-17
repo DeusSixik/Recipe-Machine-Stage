@@ -342,7 +342,7 @@ dependencies {
     implementation fg.deobf("curse.maven:rhino-416294:5655836")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
-    implementation fg.deobf("curse.maven:astages-1120180:6020562")
+    implementation fg.deobf("curse.maven:astages-1120180:6440354")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
