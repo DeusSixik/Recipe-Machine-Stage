@@ -1,5 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.crafttweaker;
 
+import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
@@ -7,6 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
+import org.apache.logging.log4j.Level;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.ArrayList;
@@ -63,5 +65,10 @@ public class RMSCraftTweaker {
     @ZenCodeType.Method
     public static void addRecipeByMod(IRecipeManager<Recipe<RecipeInput>> recipeType, String[] modIds, String stage) {
         RMSApi.addRecipeByMod(recipeType.getRecipeType(), modIds, stage);
+    }
+
+    @ZenCodeType.Method
+    public static void printAllRecipes(IRecipeManager<Recipe<RecipeInput>> recipeType) {
+        RMSApi.printAllRecipes(recipeType.getRecipeType(), s -> CraftTweakerAPI.getLogger("RMS").printf(Level.INFO, s));
     }
 }

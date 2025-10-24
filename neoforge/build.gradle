@@ -42,12 +42,11 @@ dependencies {
     modImplementation "curse.maven:sdm-stages-1082036:7142645"
     modImplementation "curse.maven:crafttweaker-239197:6929483"
 
-    modCompileOnly("mezz.jei:jei-1.21.1-neoforge:19.25.0.323")
+    modRuntimeOnly("mezz.jei:jei-1.21.1-neoforge:19.25.0.323")
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:16.0.799"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:16.0.799"
-
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.799"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.799"
     implementsMods(delegate)
 }
 
@@ -69,6 +68,15 @@ remapJar {
 }
 
 def implementsMods(DependencyHandler deps) {
-    deps.modImplementation "curse.maven:applied-energistics-2-223794:7027323"
-    deps.modImplementation "curse.maven:guideme-1173950:7127444"
+
+    //Applied Energistics 2
+    deps.modCompileOnly "curse.maven:applied-energistics-2-223794:7027323"
+    deps.modCompileOnly "curse.maven:guideme-1173950:7127444"
+
+    //Apotheosis
+    deps.modCompileOnly "curse.maven:apotheosis-313970:6926309"
+    deps.modCompileOnly "curse.maven:apothic-attributes-898963:6751650"
+    deps.modCompileOnly "curse.maven:apothic-enchanting-1063926:6926290"
+    deps.modCompileOnly "curse.maven:apothic-spawners-986583:6751589"
+    deps.modCompileOnly "curse.maven:placebo-283644:6926281"
 }

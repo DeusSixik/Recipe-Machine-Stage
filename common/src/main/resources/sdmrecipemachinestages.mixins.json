@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "accessor.EnchantmentMenuAccessor",
     "custom_data.BlockEntity$AddCustomData",
     "init.MinecraftServerMixin",
     "init.ReloadableServerResourcesMixin",

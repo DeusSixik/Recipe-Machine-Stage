@@ -3,10 +3,7 @@ package dev.behindthescenery.sdmrecipemachinestages.compat;
 import dev.architectury.event.EventResult;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
-import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.display.visibility.DisplayVisibilityPredicate;
-import me.shedaniel.rei.api.common.display.Display;
 
 
 public class RMSCommonReiPlugin implements REIClientPlugin, IRecipeUpdateListener {
@@ -17,14 +14,7 @@ public class RMSCommonReiPlugin implements REIClientPlugin, IRecipeUpdateListene
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerVisibilityPredicate(new DisplayVisibilityPredicate() {
-            @Override
-            public EventResult handleDisplay(DisplayCategory<?> category, Display display) {
-
-
-                return EventResult.interruptTrue();
-            }
-        });
+        registry.registerVisibilityPredicate((category, display) -> EventResult.interruptTrue());
     }
 
     @Override

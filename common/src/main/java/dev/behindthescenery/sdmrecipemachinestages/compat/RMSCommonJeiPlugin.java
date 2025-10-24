@@ -3,6 +3,7 @@ package dev.behindthescenery.sdmrecipemachinestages.compat;
 import dev.architectury.platform.Platform;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
+import dev.behindthescenery.sdmrecipemachinestages.compat.jei.JeiRecipeType;
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSStageUtilsClient;
@@ -53,8 +54,10 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
             final ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(recipeType);
 
             recipeManager.getRecipeType(recipeTypeId).ifPresent(jeiRecipeType -> {
-                final Collection<RecipeHolder<?>> lockedRecipes = new ArrayList<>();
-                final Collection<RecipeHolder<?>> unlockedRecipes = new ArrayList<>();
+                final JeiRecipeType recipeType_enum = JeiRecipeType.getRecipeTypeEnum(jeiRecipeType.getRecipeClass());
+
+                final Collection<Element<?>> lockedRecipes = new ArrayList<>();
+                final Collection<Element<?>> unlockedRecipes = new ArrayList<>();
 
                 assert Minecraft.getInstance().level != null;
 
@@ -70,22 +73,37 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
                         if (!recipeBlockType.contains(recipeId)) continue;
 
                         if (RMSStageUtilsClient.isUnlocked(recipeBlockType)) {
-                            unlockedRecipes.add(recipeHolder);
+                            switch (recipeType_enum) {
+                                case Holder -> unlockedRecipes.add(new RecipeHolderElement(recipeHolder));
+                                case Recipe -> unlockedRecipes.add(new RecipeElement(recipeHolder.value()));
+                            }
                         } else {
-                            lockedRecipes.add(recipeHolder);
+                            switch (recipeType_enum) {
+                                case Holder -> lockedRecipes.add(new RecipeHolderElement(recipeHolder));
+                                case Recipe -> lockedRecipes.add(new RecipeElement(recipeHolder.value()));
+                            }
                         }
                     }
                 }
 
                 if (!lockedRecipes.isEmpty()) {
-                    recipeManager.hideRecipes(jeiRecipeType, RMSUtils.cast(lockedRecipes));
-                    if(isDebus) System.out.println("Hide:" + lockedRecipes.size());
+                    recipeManager.hideRecipes(jeiRecipeType, RMSUtils.cast(lockedRecipes.stream().map(Element::value).toList()));
+                    if(isDebus) System.out.println(recipeTypeId + " Hide:" + lockedRecipes.size());
                 }
                 if (!unlockedRecipes.isEmpty()) {
-                    recipeManager.unhideRecipes(jeiRecipeType, RMSUtils.cast(unlockedRecipes));
-                    if(isDebus) System.out.println("UnHide:" + lockedRecipes.size());
+                    recipeManager.unhideRecipes(jeiRecipeType, RMSUtils.cast(unlockedRecipes.stream().map(Element::value).toList()));
+                    if(isDebus) System.out.println(recipeTypeId + " UnHide:" + lockedRecipes.size());
                 }
             });
         }
+    }
+
+    protected record RecipeHolderElement(RecipeHolder<?> value) implements Element<RecipeHolder<?>> { }
+
+    protected record RecipeElement(Recipe<?> value) implements Element<Recipe<?>> { }
+
+    protected interface Element<T> {
+
+        T value();
     }
 }

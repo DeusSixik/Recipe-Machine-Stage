@@ -7,10 +7,15 @@
   ],
   "mixins": [
     "NeoForgeAbstractFurnaceBlockEntityMixin",
+    "recipes.apotheosis.ApothEnchantmentMenuMixin",
+    "recipes.apotheosis.GemCuttingMenuMixin",
+    "recipes.apotheosis.SalvagingMenuMixin",
     "recipes.applied.ChargerBlockEntityMixin",
     "recipes.applied.ChargerRecipesMixin",
+    "recipes.applied.EntropyManipulatorItemMixin",
     "recipes.applied.InscriberBlockEntityMixin",
-    "recipes.applied.InscriberRecipesMixin"
+    "recipes.applied.InscriberRecipesMixin",
+    "recipes.applied.TransformLogicMixin"
   ],
   "injectors": {
     "defaultRequire": 1

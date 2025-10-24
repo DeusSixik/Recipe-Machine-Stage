@@ -1,6 +1,7 @@
 package dev.behindthescenery.sdmrecipemachinestages.utils;
 
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
+import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockEntityCustomData;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockOwnerData;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.CustomData;
@@ -8,6 +9,7 @@ import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
 import dev.behindthescenery.sdmstages.StageApi;
 import dev.behindthescenery.sdmstages.data.containers.Stage;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -15,11 +17,13 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class RMSUtils {
 
@@ -37,25 +41,51 @@ public class RMSUtils {
         return (List<RecipeHolder<?>>) (List<?>) RMSMain.getRecipeManager().getAllRecipesFor((RecipeType) recipeType);
     }
 
+    public static boolean hasRestrictionsForType(RecipeType<?> type) {
+        return !RMSContainer.Instance.getRecipesBlock(type).isEmpty();
+    }
+
     public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
             Collection<RecipeHolder<T>> original, Player player
     ) {
-        return filterRecipes(original, getPlayerId(player));
+        return filterRecipes(original, getPlayerId(player), null);
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
             Collection<RecipeHolder<T>> original, UUID player
+    ) {
+        return filterRecipes(original, player, null);
+    }
+
+    public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
+            Collection<RecipeHolder<T>> original, Player player, Predicate<RecipeHolder<T>> predicate
+    ) {
+        return filterRecipes(original, getPlayerId(player), predicate);
+    }
+
+    public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
+            Collection<RecipeHolder<T>> original, UUID player, @Nullable Predicate<RecipeHolder<T>> predicate
     ) {
         final int size = original.size();
         if (size == 0) return new ArrayList<>(0);
 
         //TODO: May be use cache ?
         final List<RecipeHolder<T>> result = new ArrayList<>(size);
-        for (final RecipeHolder<T> holder : original) {
-            if (canProcess(player, holder)) {
-                result.add(holder);
+        if(predicate == null) {
+            for (final RecipeHolder<T> holder : original) {
+                if (canProcess(player, holder)) {
+                    result.add(holder);
+                }
+            }
+        } else {
+            for (final RecipeHolder<T> holder : original) {
+                if (canProcess(player, holder) && predicate.test(holder)) {
+                    result.add(holder);
+                }
             }
         }
+
+
         return result;
     }
 
@@ -159,5 +189,22 @@ public class RMSUtils {
     public static boolean checkIfBockEntityCurrentType(BlockEntity block) {
         if(block instanceof RandomizableContainerBlockEntity) return false;
         return true;
+    }
+
+    public static Player getNearestPlayer(LevelAccessor level, BlockPos pos) {
+        List<? extends Player> players = level.players();
+        if(players.isEmpty()) return null;
+        if(players.size() == 1) return players.getFirst();
+
+        Player nearestPlayer = null;
+        double minDistance = Double.MAX_VALUE;
+        for (Player player : players) {
+            final double distance = player.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPlayer = player;
+            }
+        }
+        return nearestPlayer;
     }
 }

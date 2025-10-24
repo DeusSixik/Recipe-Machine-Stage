@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class RMSApi {
 
@@ -58,5 +59,18 @@ public class RMSApi {
 
     public static void register(RecipeType<?> recipeType, List<ResourceLocation> recipeName, String stage) {
         RMSContainer.Instance.register(new RecipeBlockType(stage, recipeType, recipeName));
+    }
+
+    public static void printAllRecipes(ResourceLocation recipeTypeId, Consumer<String> onGet) {
+        printAllRecipes(BuiltInRegistries.RECIPE_TYPE.get(recipeTypeId), onGet);
+    }
+
+    public static void printAllRecipes(RecipeType<?> recipeType, Consumer<String> onGet) {
+        if(RMSMain.getServer() == null || recipeType == null) return;
+
+        onGet.accept("Start dump recipes: ");
+        for (RecipeHolder<?> recipeHolder : RMSUtils.getAllRecipesUnsafe(recipeType)) {
+            onGet.accept(recipeHolder.id().toString());
+        }
     }
 }

@@ -23,7 +23,12 @@ public class RMSSupportedTypes {
                 "minecraft:blasting",
                 "minecraft:smithing",
                 "ae2:inscriber",
-                "ae2:charger"
+                "ae2:charger",
+                "ae2:entropy",
+                "ae2:transform",
+                "apothic_enchanting:infusion",
+                "apotheosis:gem_cutting",
+                "apotheosis:salvaging"
         });
     }
 
