@@ -86,12 +86,18 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:geckolib-388172:7023453"
 
     //Create
-    deps.modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
-    deps.modImplementation("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false }
-    deps.modImplementation("net.createmod.ponder:Ponder-NeoForge-$minecraft_version:$ponder_version")
-    deps.modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version")
-    deps.modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-$minecraft_version:$flywheel_version")
+    deps.modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
+    deps.modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false }
+    deps.modCompileOnly("net.createmod.ponder:Ponder-NeoForge-$minecraft_version:$ponder_version")
+
+    deps.modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version") //NOT CHANGE FROM modCompileOnly
+//    deps.modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-$minecraft_version:$flywheel_version") //NOT CHANGE FROM modRuntimeOnly
 
     //Create: The Factory Must Grow
-    deps.modImplementation "curse.maven:create-industry-693815:7046723"
+    deps.modCompileOnly "curse.maven:create-industry-693815:7046723"
+
+    //Ender Io
+    deps.modCompileOnly files("./libs/com.enderio.enderio-machines-7.1.8-alpha.jar")
+    deps.modCompileOnly files("./libs/com.enderio.endercore-7.1.8-alpha.jar")
+    deps.modCompileOnly files("./libs/com.enderio.enderio-base-7.1.8-alpha.jar")
 }
