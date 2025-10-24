@@ -92,4 +92,6 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version")
     deps.modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-$minecraft_version:$flywheel_version")
 
+    //Create: The Factory Must Grow
+    deps.modImplementation "curse.maven:create-industry-693815:7046723"
 }

@@ -43,7 +43,15 @@ public class RMSSupportedTypes {
                 "create:sequenced_assembly",
                 "create:haunting",
                 "create:sandpaper_polishing",
-                "create:pressing"
+                "create:pressing",
+                "tfmg:winding",
+                "tfmg:casting",
+                "tfmg:distillation",
+                "tfmg:polarizing",
+                "tfmg:vat_machine_recipe",
+                "tfmg:coking",
+                "tfmg:hot_blast",
+                "tfmg:industrial_blasting"
         });
     }
 
