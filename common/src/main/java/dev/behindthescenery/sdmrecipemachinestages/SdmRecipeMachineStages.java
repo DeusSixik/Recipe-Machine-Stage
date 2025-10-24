@@ -10,7 +10,6 @@ public final class SdmRecipeMachineStages {
 
     public static void init() {
         RMSSupportedTypes.init();
-
         LifecycleEvent.SERVER_STARTED.register(RMSMain::onServerStarted);
         StagesEvents.ON_STAGE_SYNC.register(RMSMain::onStageSync);
         BlockEvent.PLACE.register(RMSMain::onPlaceBlock);

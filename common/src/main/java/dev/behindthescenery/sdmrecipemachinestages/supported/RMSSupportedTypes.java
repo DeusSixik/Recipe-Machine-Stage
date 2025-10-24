@@ -28,7 +28,8 @@ public class RMSSupportedTypes {
                 "ae2:transform",
                 "apothic_enchanting:infusion",
                 "apotheosis:gem_cutting",
-                "apotheosis:salvaging"
+                "apotheosis:salvaging",
+                "apothic_spawners:spawner_modifier"
         });
     }
 

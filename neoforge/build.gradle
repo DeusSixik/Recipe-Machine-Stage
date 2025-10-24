@@ -79,4 +79,9 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:apothic-enchanting-1063926:6926290"
     deps.modCompileOnly "curse.maven:apothic-spawners-986583:6751589"
     deps.modCompileOnly "curse.maven:placebo-283644:6926281"
+
+    //Born in Chaos
+    deps.modImplementation "curse.maven:born-in-chaos-686437:6833966"
+    deps.modImplementation "curse.maven:geckolib-388172:7023453"
+
 }
