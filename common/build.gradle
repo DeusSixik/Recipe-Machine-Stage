@@ -18,4 +18,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:16.0.799"
 
     modCompileOnlyApi("mezz.jei:jei-1.21.1-common-api:19.25.0.323")
+
+    //Ice and Fire
+    modCompileOnly "curse.maven:iceandfire-ce-1040076:7037559"
 }

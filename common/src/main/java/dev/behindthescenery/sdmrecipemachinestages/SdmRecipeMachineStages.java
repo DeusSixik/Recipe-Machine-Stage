@@ -13,5 +13,6 @@ public final class SdmRecipeMachineStages {
         LifecycleEvent.SERVER_STARTED.register(RMSMain::onServerStarted);
         StagesEvents.ON_STAGE_SYNC.register(RMSMain::onStageSync);
         BlockEvent.PLACE.register(RMSMain::onPlaceBlock);
+
     }
 }

@@ -10,6 +10,7 @@
     "custom_data.BlockEntity$AddCustomData",
     "init.MinecraftServerMixin",
     "init.ReloadableServerResourcesMixin",
+    "recipes.ice_and_fire.DragonForgeBlockEntityMixin",
     "recipes.minecraft.AbstractFurnaceBlockEntityMixin",
     "recipes.minecraft.CraftingMenuMixin",
     "recipes.minecraft.StonecutterMenuMixin"
