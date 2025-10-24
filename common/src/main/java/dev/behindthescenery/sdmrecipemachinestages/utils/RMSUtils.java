@@ -13,17 +13,22 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public class RMSUtils {
+
+    public static UUID getPlayerId(Player player) {
+        return player.getGameProfile().getId();
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> T cast(Object o) {
@@ -33,6 +38,28 @@ public class RMSUtils {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static List<RecipeHolder<?>> getAllRecipesUnsafe(RecipeType<?> recipeType) {
         return (List<RecipeHolder<?>>) (List<?>) RMSMain.getRecipeManager().getAllRecipesFor((RecipeType) recipeType);
+    }
+
+    public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
+            List<RecipeHolder<T>> original, Player player
+    ) {
+        return filterRecipes(original, getPlayerId(player));
+    }
+
+    public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
+            List<RecipeHolder<T>> original, UUID player
+    ) {
+        final int size = original.size();
+        if (size == 0) return new ArrayList<>(0);
+
+        //TODO: May be use cache ?
+        final List<RecipeHolder<T>> result = new ArrayList<>(size);
+        for (final RecipeHolder<T> holder : original) {
+            if (canProcess(player, holder)) {
+                result.add(holder);
+            }
+        }
+        return result;
     }
 
     @Nullable
@@ -50,8 +77,23 @@ public class RMSUtils {
         return hasPlayerStage(customData, blockType.stage_id());
     }
 
+    public static boolean canProcess(Player player, RecipeHolder<? extends Recipe<?>> recipe) {
+        return canProcess(getPlayerId(player), recipe);
+    }
+
+    public static boolean canProcess(UUID player, RecipeHolder<? extends Recipe<?>> recipe) {
+        if(recipe == null || player == null) return false;
+        final RecipeBlockType blockType = getRecipeBlockData(recipe);
+        if(blockType == null) return true;
+        return hasPlayerStage(player, blockType.stage_id());
+    }
+
     public static boolean hasPlayerStage(CustomData customData, String stage_id) {
         return hasPlayerStage((UUID) customData.getData(BlockOwnerData.OWNER_KEY), stage_id);
+    }
+
+    public static boolean hasPlayerStage(Player player, String stage_id) {
+        return hasPlayerStage(getPlayerId(player), stage_id);
     }
 
     public static boolean hasPlayerStage(UUID playerId, String stage_id) {
@@ -60,12 +102,13 @@ public class RMSUtils {
         return stageData.contains(stage_id);
     }
 
+
     @Nullable
     public static ServerPlayer getPlayerFromData(CustomData customData) {
         final UUID ownerId = customData.getData(BlockOwnerData.OWNER_KEY);
 
         for (ServerPlayer player : RMSMain.getServer().getPlayerList().getPlayers()) {
-            if(player.getGameProfile().getId().equals(ownerId))
+            if(getPlayerId(player).equals(ownerId))
                 return player;
         }
 
@@ -104,7 +147,7 @@ public class RMSUtils {
     }
 
     public static void setBlockEntityOwner(BlockEntity entity, Player player) {
-        setBlockEntityOwner(entity, player.getGameProfile().getId());
+        setBlockEntityOwner(entity, getPlayerId(player));
     }
 
     public static void setBlockEntityOwner(BlockEntity entity, UUID owner_id) {

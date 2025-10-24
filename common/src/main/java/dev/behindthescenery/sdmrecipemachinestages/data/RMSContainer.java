@@ -1,5 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.data;
 
+import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ public class RMSContainer extends SimplePreparableReloadListener<Void> {
     protected Object2ObjectMap<RecipeType<?>, List<RecipeBlockType>> RecipeStagesData = new Object2ObjectArrayMap<>();
 
     public void register(RecipeBlockType type) {
+        RMSSupportedTypes.isSupported(type.recipeType());
         RecipeStagesData.computeIfAbsent(type.recipeType(), s -> new ArrayList<>()).add(type);
     }
 

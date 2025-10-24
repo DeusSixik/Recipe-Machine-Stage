@@ -36,3 +36,6 @@ side = "BOTH"
 
 [[mixins]]
 config = "sdmrecipemachinestages.mixins.json"
+
+[[mixins]]
+config = "neoforge-sdmrecipemachinestages.mixins.json"

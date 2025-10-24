@@ -1,6 +1,8 @@
 package dev.behindthescenery.sdmrecipemachinestages;
 
+import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
+import dev.architectury.event.events.common.PlayerEvent;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import dev.behindthescenery.sdmstages.events.StagesEvents;
 
@@ -12,5 +14,6 @@ public final class SdmRecipeMachineStages {
 
         LifecycleEvent.SERVER_STARTED.register(RMSMain::onServerStarted);
         StagesEvents.ON_STAGE_SYNC.register(RMSMain::onStageSync);
+        BlockEvent.PLACE.register(RMSMain::onPlaceBlock);
     }
 }

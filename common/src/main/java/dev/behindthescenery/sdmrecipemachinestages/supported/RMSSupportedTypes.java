@@ -1,5 +1,7 @@
 package dev.behindthescenery.sdmrecipemachinestages.supported;
 
+import dev.architectury.platform.Platform;
+import dev.behindthescenery.sdmrecipemachinestages.exceptions.RecipeTypeNotSupported;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -14,7 +16,12 @@ public class RMSSupportedTypes {
 
     public static void init() {
         register(new String[] {
-           ""
+                "minecraft:smelting",
+                "minecraft:stonecutting",
+                "minecraft:crafting",
+                "minecraft:smoking",
+                "minecraft:blasting",
+                "minecraft:smithing"
         });
     }
 
@@ -22,16 +29,17 @@ public class RMSSupportedTypes {
         SupportedTypes.addAll(List.of(srg));
     }
 
-    public static boolean isSupported(RecipeType<?> recipeType) {
-        return isSupported(BuiltInRegistries.RECIPE_TYPE.getKey(recipeType));
+    public static void isSupported(RecipeType<?> recipeType) {
+        isSupported(BuiltInRegistries.RECIPE_TYPE.getKey(recipeType));
     }
 
-    public static boolean isSupported(@Nullable ResourceLocation recipeType) {
-        if(recipeType == null) return true;
-        return isSupported(recipeType.toString());
+    public static void isSupported(@Nullable ResourceLocation recipeType) {
+        if(recipeType == null) return;
+        isSupported(recipeType.toString());
     }
 
-    public static boolean isSupported(String recipeType) {
-        return SupportedTypes.contains(recipeType);
+    public static void isSupported(String recipeType) {
+        if(Platform.isDevelopmentEnvironment() || SupportedTypes.contains(recipeType)) return;
+        throw new RecipeTypeNotSupported(recipeType);
     }
 }

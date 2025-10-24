@@ -1,0 +1,32 @@
+package dev.behindthescenery.sdmrecipemachinestages.exceptions;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeType;
+
+public class RecipeTypeNotSupported extends RuntimeException {
+
+    public RecipeTypeNotSupported(String message) {
+        super(getMessage(message));
+    }
+
+    public RecipeTypeNotSupported(ResourceLocation location) {
+        super(getMessage(location));
+    }
+
+    public RecipeTypeNotSupported(RecipeType<?> recipeType) {
+        super(getMessage(recipeType));
+    }
+
+    protected static String getMessage(RecipeType<?> recipeType) {
+        return getMessage(BuiltInRegistries.RECIPE_TYPE.getKey(recipeType));
+    }
+
+    protected static String getMessage(ResourceLocation location) {
+        return getMessage(location.toString());
+    }
+
+    protected static String getMessage(String str) {
+        return "RecipeType: " + str + " not supported!";
+    }
+}

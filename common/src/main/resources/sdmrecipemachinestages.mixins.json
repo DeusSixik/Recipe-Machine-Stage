@@ -8,7 +8,10 @@
   "mixins": [
     "custom_data.BlockEntity$AddCustomData",
     "init.MinecraftServerMixin",
-    "init.ReloadableServerResourcesMixin"
+    "init.ReloadableServerResourcesMixin",
+    "recipes.minecraft.AbstractFurnaceBlockEntityMixin",
+    "recipes.minecraft.CraftingMenuMixin",
+    "recipes.minecraft.StonecutterMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1

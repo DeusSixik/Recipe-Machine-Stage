@@ -22,7 +22,8 @@
     ]
   },
   "mixins": [
-    "sdmrecipemachinestages.mixins.json"
+    "sdmrecipemachinestages.mixins.json",
+    "fabric-sdmrecipemachinestages.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.17.3",

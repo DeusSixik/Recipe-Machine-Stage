@@ -1,14 +1,23 @@
 package dev.behindthescenery.sdmrecipemachinestages;
 
 import com.mojang.logging.LogUtils;
+import dev.architectury.event.EventResult;
 import dev.behindthescenery.sdmrecipemachinestages.compat.IRecipeUpdateListener;
+import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import dev.behindthescenery.sdmstages.StageApi;
 import dev.behindthescenery.sdmstages.data.StageContainer;
 import dev.behindthescenery.sdmstages.data.StageContainerType;
 import dev.behindthescenery.sdmstages.data.containers.Stage;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -70,5 +79,16 @@ public class RMSMain {
 
     public static void onStageSync(Stage stage, StageContainer stageContainer) {
         getListeners().forEach(IRecipeUpdateListener::updateRecipe);
+    }
+
+    public static EventResult onPlaceBlock(Level level, BlockPos blockPos, BlockState blockState, @Nullable Entity entity) {
+        if(entity instanceof final ServerPlayer serverPlayer) {
+            final BlockEntity blockEntity = serverPlayer.serverLevel().getBlockEntity(blockPos);
+            if(blockEntity != null) {
+                RMSUtils.setBlockEntityOwner(blockEntity, serverPlayer);
+            }
+        }
+
+        return EventResult.interruptDefault();
     }
 }

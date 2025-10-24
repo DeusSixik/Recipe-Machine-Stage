@@ -2,6 +2,7 @@ package dev.behindthescenery.sdmrecipemachinestages;
 
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
+import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

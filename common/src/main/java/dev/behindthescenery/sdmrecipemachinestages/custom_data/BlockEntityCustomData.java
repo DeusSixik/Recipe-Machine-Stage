@@ -1,6 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.custom_data;
 
-import dev.behindthescenery.sdmrecipemachinestages.exceptions.BlockEntityNotSupport;
+import dev.behindthescenery.sdmrecipemachinestages.exceptions.BlockEntityNotSupportException;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public interface BlockEntityCustomData {
@@ -17,6 +17,6 @@ public interface BlockEntityCustomData {
         if(entity instanceof BlockEntityCustomData customData)
             return customData.sdm$getCustomData();
 
-        throw new BlockEntityNotSupport("Block entity don't have a BlockEntityCustomData!");
+        throw new BlockEntityNotSupportException("Block entity don't have a BlockEntityCustomData!");
     }
 }

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.behindthescenery.sdmrecipemachinestages.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "NeoForgeAbstractFurnaceBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
