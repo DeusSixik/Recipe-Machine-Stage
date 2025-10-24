@@ -19,10 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class RMSUtils {
 
@@ -41,13 +38,13 @@ public class RMSUtils {
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
-            List<RecipeHolder<T>> original, Player player
+            Collection<RecipeHolder<T>> original, Player player
     ) {
         return filterRecipes(original, getPlayerId(player));
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
-            List<RecipeHolder<T>> original, UUID player
+            Collection<RecipeHolder<T>> original, UUID player
     ) {
         final int size = original.size();
         if (size == 0) return new ArrayList<>(0);

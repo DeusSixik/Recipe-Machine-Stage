@@ -2,6 +2,7 @@ package dev.behindthescenery.sdmrecipemachinestages.custom_data;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.UUID;
 
@@ -53,5 +54,9 @@ public class BlockOwnerData implements CustomData{
 
     public boolean isEmpty() {
         return this.ownerId.equals(EMPTY);
+    }
+
+    public static UUID getOrThrow(BlockEntity entity) {
+       return BlockEntityCustomData.getDataOrThrow(entity).getData(OWNER_KEY);
     }
 }

@@ -1,5 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat;
 
+import dev.architectury.platform.Platform;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
@@ -41,6 +42,7 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void updateRecipe() {
+        final boolean isDebus = Platform.isDevelopmentEnvironment();
         final IRecipeManager recipeManager = runtime.getRecipeManager();
 
         for (final Map.Entry<RecipeType<? extends Recipe<?>>, List<RecipeBlockType>> entry :
@@ -56,7 +58,7 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
 
                 assert Minecraft.getInstance().level != null;
 
-                List<RecipeHolder<?>> recipes =
+                final List<RecipeHolder<?>> recipes =
                         (List<RecipeHolder<?>>) (List<?>) Minecraft.getInstance().level
                                 .getRecipeManager()
                                 .getAllRecipesFor(recipeType);
@@ -77,11 +79,11 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
 
                 if (!lockedRecipes.isEmpty()) {
                     recipeManager.hideRecipes(jeiRecipeType, RMSUtils.cast(lockedRecipes));
-                    System.out.println("Hide:" + lockedRecipes.size());
+                    if(isDebus) System.out.println("Hide:" + lockedRecipes.size());
                 }
                 if (!unlockedRecipes.isEmpty()) {
                     recipeManager.unhideRecipes(jeiRecipeType, RMSUtils.cast(unlockedRecipes));
-                    System.out.println("UnHide:" + lockedRecipes.size());
+                    if(isDebus) System.out.println("UnHide:" + lockedRecipes.size());
                 }
             });
         }

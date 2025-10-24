@@ -1,7 +1,5 @@
 package dev.behindthescenery.sdmrecipemachinestages.fabric.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -12,21 +10,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = AbstractFurnaceBlockEntity.class)
 public abstract class FabricAbstractFurnaceBlockEntityMixin extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
@@ -39,22 +31,6 @@ public abstract class FabricAbstractFurnaceBlockEntityMixin extends BaseContaine
     protected FabricAbstractFurnaceBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
-
-//    @Unique
-//    private static final ThreadLocal<AbstractFurnaceBlockEntity> BTS_CURRENT_BLOCK = new ThreadLocal<>();
-//
-//    @Inject(method = "serverTick", at = @At(
-//            value = "INVOKE",
-//            target = "Lnet/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity;burn(Lnet/minecraft/core/RegistryAccess;Lnet/minecraft/world/item/crafting/RecipeHolder;Lnet/minecraft/core/NonNullList;I)Z"
-//    ))
-//    private static void pre$burn(Level level, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
-//        BTS_CURRENT_BLOCK.set(blockEntity);
-//    }
-//
-//    @WrapOperation(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity;burn(Lnet/minecraft/core/RegistryAccess;Lnet/minecraft/world/item/crafting/RecipeHolder;Lnet/minecraft/core/NonNullList;I)Z"))
-//    private static boolean on$burn(RegistryAccess registryAccess, @Nullable RecipeHolder<?> recipe, NonNullList<ItemStack> inventory, int maxStackSize, com.llamalad7.mixinextras.injector.wrapoperation.Operation<Boolean> original) {
-//        return RMSUtils.canProcess(BTS_CURRENT_BLOCK.get(), recipe) && burn(registryAccess, recipe, inventory, maxStackSize);
-//    }
 
     /**
      * @author Sixik

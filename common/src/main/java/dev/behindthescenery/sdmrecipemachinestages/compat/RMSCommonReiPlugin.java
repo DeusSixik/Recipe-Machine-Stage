@@ -22,7 +22,7 @@ public class RMSCommonReiPlugin implements REIClientPlugin, IRecipeUpdateListene
             public EventResult handleDisplay(DisplayCategory<?> category, Display display) {
 
 
-                return EventResult.interruptFalse();
+                return EventResult.interruptTrue();
             }
         });
     }

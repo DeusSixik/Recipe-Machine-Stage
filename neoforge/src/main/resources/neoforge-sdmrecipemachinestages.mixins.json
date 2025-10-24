@@ -6,7 +6,11 @@
   "client": [
   ],
   "mixins": [
-    "NeoForgeAbstractFurnaceBlockEntityMixin"
+    "NeoForgeAbstractFurnaceBlockEntityMixin",
+    "recipes.applied.ChargerBlockEntityMixin",
+    "recipes.applied.ChargerRecipesMixin",
+    "recipes.applied.InscriberBlockEntityMixin",
+    "recipes.applied.InscriberRecipesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

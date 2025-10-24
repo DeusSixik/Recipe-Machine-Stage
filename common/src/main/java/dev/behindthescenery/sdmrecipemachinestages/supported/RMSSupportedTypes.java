@@ -21,7 +21,9 @@ public class RMSSupportedTypes {
                 "minecraft:crafting",
                 "minecraft:smoking",
                 "minecraft:blasting",
-                "minecraft:smithing"
+                "minecraft:smithing",
+                "ae2:inscriber",
+                "ae2:charger"
         });
     }
 

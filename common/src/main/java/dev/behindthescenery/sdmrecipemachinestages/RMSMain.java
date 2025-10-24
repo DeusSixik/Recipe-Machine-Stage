@@ -22,10 +22,12 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RMSMain {
-    public static final Logger LOGGER = LogUtils.getLogger();
+    private static final ThreadLocal<UUID> BlockOwner = new ThreadLocal<>();
 
+    public static final Logger LOGGER = LogUtils.getLogger();
     private static List<IRecipeUpdateListener> listeners = new ArrayList<>();
 
     private static MinecraftServer currentServer;
@@ -90,5 +92,13 @@ public class RMSMain {
         }
 
         return EventResult.interruptDefault();
+    }
+
+    public static void setBlockOwner(UUID blockOwner) {
+        BlockOwner.set(blockOwner);
+    }
+
+    public static UUID getBlockOwner() {
+        return BlockOwner.get();
     }
 }
