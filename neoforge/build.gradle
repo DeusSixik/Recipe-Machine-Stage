@@ -47,6 +47,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:16.0.799"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:16.0.799"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.799"
+
     implementsMods(delegate)
 }
 
@@ -81,7 +82,14 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:placebo-283644:6926281"
 
     //Born in Chaos
-    deps.modImplementation "curse.maven:born-in-chaos-686437:6833966"
-    deps.modImplementation "curse.maven:geckolib-388172:7023453"
+    deps.modCompileOnly "curse.maven:born-in-chaos-686437:6833966"
+    deps.modCompileOnly "curse.maven:geckolib-388172:7023453"
+
+    //Create
+    deps.modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    deps.modImplementation("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false }
+    deps.modImplementation("net.createmod.ponder:Ponder-NeoForge-$minecraft_version:$ponder_version")
+    deps.modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version")
+    deps.modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-$minecraft_version:$flywheel_version")
 
 }

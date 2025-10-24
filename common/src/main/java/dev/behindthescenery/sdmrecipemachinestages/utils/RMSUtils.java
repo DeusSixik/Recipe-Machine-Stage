@@ -1,7 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.utils;
 
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
-import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockEntityCustomData;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockOwnerData;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.CustomData;
@@ -43,6 +42,35 @@ public class RMSUtils {
 
     public static boolean hasRestrictionsForType(RecipeType<?> type) {
         return !RMSContainer.Instance.getRecipesBlock(type).isEmpty();
+    }
+
+    public static List<RecipeHolder<? extends Recipe<?>>> filterRecipes(List<RecipeHolder<? extends Recipe<?>>> original, UUID player) {
+        return filterRecipes(original, player, null);
+    }
+
+    public static List<RecipeHolder<? extends Recipe<?>>> filterRecipes(List<RecipeHolder<? extends Recipe<?>>> original, UUID player,
+                                                                       @Nullable Predicate<RecipeHolder<? extends Recipe<?>>> predicate) {
+        final int size = original.size();
+        if (size == 0) return new ArrayList<>(0);
+
+        //TODO: May be use cache ?
+        final List<RecipeHolder<? extends Recipe<?>>> result = new ArrayList<>(size);
+        if(predicate == null) {
+            for (final RecipeHolder<? extends Recipe<?>> holder : original) {
+                if (canProcess(player, holder)) {
+                    result.add(holder);
+                }
+            }
+        } else {
+            for (final RecipeHolder<? extends Recipe<?>> holder : original) {
+                if (canProcess(player, holder) && predicate.test(holder)) {
+                    result.add(holder);
+                }
+            }
+        }
+
+
+        return result;
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> filterRecipes(
@@ -88,6 +116,7 @@ public class RMSUtils {
 
         return result;
     }
+
 
     @Nullable
     public static <T extends RecipeHolder<? extends Recipe<?>>> T ifCanProcessReturnRecipeOrNull(BlockEntity blockEntity, T recipe) {
@@ -179,7 +208,7 @@ public class RMSUtils {
 
     public static void setBlockEntityOwner(BlockEntity entity, UUID owner_id) {
         if(!checkIfBockEntityCurrentType(entity)) return;
-        BlockEntityCustomData.getDataOrThrow(entity).putData(BlockOwnerData.OWNER_KEY, owner_id);
+        BlockEntityCustomData.getBlockData(entity).sdm$setOwner(owner_id);
     }
 
     public static boolean hasClientStage(String stage_id) {
@@ -207,4 +236,9 @@ public class RMSUtils {
         }
         return nearestPlayer;
     }
+
+    public static UUID getBlockOwner(BlockEntity entity) {
+        return BlockOwnerData.getOrThrow(entity);
+    }
+
 }

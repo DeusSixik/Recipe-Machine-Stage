@@ -56,6 +56,10 @@ public class BlockOwnerData implements CustomData{
         return this.ownerId.equals(EMPTY);
     }
 
+    public static BlockOwnerData getDataOrThrow(BlockEntity entity) {
+        return (BlockOwnerData) BlockEntityCustomData.getDataOrThrow(entity);
+    }
+
     public static UUID getOrThrow(BlockEntity entity) {
        return BlockEntityCustomData.getDataOrThrow(entity).getData(OWNER_KEY);
     }

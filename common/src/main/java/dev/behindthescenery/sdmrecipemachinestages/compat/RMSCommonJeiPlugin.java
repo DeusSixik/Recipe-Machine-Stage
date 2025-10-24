@@ -7,6 +7,7 @@ import dev.behindthescenery.sdmrecipemachinestages.compat.jei.JeiRecipeType;
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSStageUtilsClient;
+import dev.behindthescenery.sdmrecipemachinestages.utils.RMSTextConverter;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.recipe.IRecipeManager;
@@ -53,7 +54,7 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
             final List<RecipeBlockType> recipeBlockTypes = entry.getValue();
             final ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(recipeType);
 
-            recipeManager.getRecipeType(recipeTypeId).ifPresent(jeiRecipeType -> {
+            recipeManager.getRecipeType(RMSTextConverter.tryConvert(recipeTypeId)).ifPresent(jeiRecipeType -> {
                 final JeiRecipeType recipeType_enum = JeiRecipeType.getRecipeTypeEnum(jeiRecipeType.getRecipeClass());
 
                 final Collection<Element<?>> lockedRecipes = new ArrayList<>();

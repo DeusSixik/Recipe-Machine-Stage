@@ -16,7 +16,23 @@
     "recipes.applied.EntropyManipulatorItemMixin",
     "recipes.applied.InscriberBlockEntityMixin",
     "recipes.applied.InscriberRecipesMixin",
-    "recipes.applied.TransformLogicMixin"
+    "recipes.applied.TransformLogicMixin",
+    "recipes.create.AirCurrentMixin",
+    "recipes.create.BasinOperatingBlockEntityMixin",
+    "recipes.create.CrushingWheelBlockMixin",
+    "recipes.create.CrushingWheelControllerBlockEntityMixin",
+    "recipes.create.DeployerBlockEntityMixin",
+    "recipes.create.EncasedFanBlockEntityMixin",
+    "recipes.create.MechanicalCrafterBlockEntityMixin",
+    "recipes.create.MechanicalPressBlockEntityMixin",
+    "recipes.create.MillstoneBlockEntityMixin",
+    "recipes.create.SandPaperItemMixin",
+    "recipes.create.SawBlockEntityMixin",
+    "recipes.create.SpoutBlockEntityMixin",
+    "recipes.create.fan_process.FanBlastingTypeMixin",
+    "recipes.create.fan_process.FanHauntingTypeMixin",
+    "recipes.create.fan_process.FanSmokingTypeMixin",
+    "recipes.create.fan_process.FanSplashingType"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -29,7 +29,21 @@ public class RMSSupportedTypes {
                 "apothic_enchanting:infusion",
                 "apotheosis:gem_cutting",
                 "apotheosis:salvaging",
-                "apothic_spawners:spawner_modifier"
+                "apothic_spawners:spawner_modifier",
+                "create:mixing",
+                "create:compacting",
+                "create:filling",
+                "create:basin",
+                "create:crushing",
+                "create:cutting",
+                "create:splashing",
+                "create:deploying",
+                "create:milling",
+                "create:mechanical_crafting",
+                "create:sequenced_assembly",
+                "create:haunting",
+                "create:sandpaper_polishing",
+                "create:pressing"
         });
     }
 

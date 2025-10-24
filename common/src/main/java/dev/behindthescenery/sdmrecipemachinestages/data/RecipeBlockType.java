@@ -5,6 +5,7 @@ import dev.behindthescenery.sdmstages.data.containers.Stage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -18,5 +19,14 @@ public record RecipeBlockType(String stage_id, RecipeType<?> recipeType, List<Re
 
     public boolean contains(ResourceLocation recipe_id) {
         return recipes_id.contains(recipe_id);
+    }
+
+    @Override
+    public @NotNull String toString() {
+        return "RecipeBlockType{" +
+                "stage_id='" + stage_id + '\'' +
+                ", recipeType=" + recipeType +
+                ", recipes_id=" + recipes_id +
+                '}';
     }
 }

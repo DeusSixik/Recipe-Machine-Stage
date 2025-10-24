@@ -24,6 +24,8 @@ subprojects {
     }
 
     repositories {
+        mavenLocal()
+        mavenCentral()
         maven {
             url "https://cursemaven.com"
         }
@@ -38,6 +40,79 @@ subprojects {
             // location of a maven mirror for JEI files, as a fallback
             name = "ModMaven"
             url = "https://modmaven.dev"
+        }
+
+        maven {
+            url "https://maven.neoforged.net/releases"
+        }
+
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+            content {
+                includeGroup "org.parchmentmc.data"
+            }
+        }
+
+        maven {
+            url "https://maven.latvian.dev/releases"
+            content {
+                includeGroup "dev.latvian.mods"
+                includeGroup "dev.latvian.apps"
+            }
+        }
+
+        maven {
+            url "https://maven.blamejared.com"
+            content {
+                includeGroup "mezz.jei"
+            }
+        }
+
+        maven {
+            name 'JitPack'
+            url 'https://jitpack.io'
+            content {
+                includeGroupByRegex '(io|com)\\.github\\..*'
+            }
+        }
+
+        maven {
+            url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+
+            content {
+                includeGroup "fuzs.forgeconfigapiport"
+            }
+        }
+
+        maven {
+            url = "https://maven.createmod.net"
+            content {
+                includeGroup "com.simibubi.create"
+                includeGroup "net.createmod.ponder"
+                includeGroup "dev.engine-room.flywheel"
+            }
+        }
+
+        maven {
+            url "https://mvn.devos.one/snapshots"
+            content {
+                includeGroup "com.tterrag.registrate"
+            }
+        }
+
+        maven {
+            url "https://maven.theillusivec4.top/"
+            content {
+                includeGroup "top.theillusivec4.curios"
+            }
+        }
+
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
         }
     }
 

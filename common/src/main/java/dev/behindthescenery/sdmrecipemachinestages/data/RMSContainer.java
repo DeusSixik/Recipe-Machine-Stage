@@ -1,5 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.data;
 
+import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
@@ -23,6 +24,7 @@ public class RMSContainer extends SimplePreparableReloadListener<Void> {
     public void register(RecipeBlockType type) {
         RMSSupportedTypes.isSupported(type.recipeType());
         RecipeStagesData.computeIfAbsent(type.recipeType(), s -> new ArrayList<>()).add(type);
+        RMSMain.LOGGER.info("Register new restriction " + type.toString());
     }
 
     public Optional<RecipeBlockType> getRecipeBlock(RecipeType<?> recipeType, ResourceLocation recipeId) {
