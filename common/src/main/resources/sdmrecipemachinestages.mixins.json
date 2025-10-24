@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "dev.behindthescenery.sdmrecipemachinestages.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "custom_data.BlockEntity$AddCustomData",
+    "init.MinecraftServerMixin",
+    "init.ReloadableServerResourcesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
