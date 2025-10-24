@@ -5,14 +5,13 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.RepairPylonCoreBloc
 import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
 import com.sammy.malum.common.recipe.SpiritRepairRecipe;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.server.level.ServerPlayer;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,14 +34,14 @@ public class RepairPylonCoreBlockEntityMixin {
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(RecipeTypeRegistry.SPIRIT_REPAIR.get())) return;
 
         SpiritRepairRecipe recipe = SpiritRepairRecipe.getRecipe(this.thisEntity.getLevel(), inventoryForAltar.getStackInSlot(0), this.inventory.getStackInSlot(0), this.spiritInventory.nonEmptyItemStacks);
-        Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                ServerPlayer player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
+                PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
                 if(player != null) {
-                    if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                    if(!player.hasStage(recipeBlockType.stage)) {
                         cir.setReturnValue(false);
                     }
                 }

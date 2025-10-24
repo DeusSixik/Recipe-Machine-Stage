@@ -1,15 +1,13 @@
 package net.sdm.recipemachinestage.mixin.integration.botania;
 
 
-import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,14 +35,14 @@ public abstract class PureDaisyBlockEntityMixin {
         if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(BotaniaRecipeTypes.PURE_DAISY_TYPE)) return;
 
         PureDaisyRecipe recipe = this.findRecipe(coords);
-        Optional<IOwnerBlock> d1 = recipe_machine_stage$thisDaisy.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+        Optional<IOwnerBlock> d1 = recipe_machine_stage$thisDaisy.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (d1.isPresent() && world.getServer() != null) {
             IOwnerBlock ownerBlock = d1.get();
             RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
             if(recipeBlockType != null) {
-                ServerPlayer player = PlayerHelper.getPlayerByGameProfile(world.getServer(), ownerBlock.getOwner());
+                PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(world.getServer(), ownerBlock.getOwner());
                 if(player != null) {
-                    if(!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                    if(!player.hasStage(recipeBlockType.stage)) {
                         ci.cancel();
                     }
                 }

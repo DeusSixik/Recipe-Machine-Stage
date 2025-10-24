@@ -1,18 +1,15 @@
 package net.sdm.recipemachinestage.mixin.integration.farmers_delight;
 
 
-import net.darkhax.gamestages.GameStageHelper;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.sdm.recipemachinestage.SupportBlockData;
-import net.sdm.recipemachinestage.capability.IOwnerBlock;
-import net.sdm.recipemachinestage.stage.StageContainer;
-import net.sdm.recipemachinestage.stage.type.RecipeBlockType;
+import net.sdm.recipemachinestage.RMSCapability;
+import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
+import net.sdm.recipemachinestage.api.stage.StageContainer;
+import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -35,14 +32,14 @@ public class CookingPotBlockEntityMixin {
         if(recipe.isPresent()) {
 
 
-            Optional<IOwnerBlock> d1 = thisBlockEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
+            Optional<IOwnerBlock> d1 = thisBlockEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
             if (d1.isPresent() && thisBlockEntity.getLevel().getServer() != null) {
                 IOwnerBlock ownerBlock = d1.get();
                 RecipeBlockType recipeBlockType = StageContainer.getRecipeData(recipe.get().getType(), recipe.get().getId());
                 if (recipeBlockType != null) {
-                    ServerPlayer player = PlayerHelper.getPlayerByGameProfile(thisBlockEntity.getLevel().getServer(), ownerBlock.getOwner());
+                    PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisBlockEntity.getLevel().getServer(), ownerBlock.getOwner());
                     if (player != null) {
-                        if (!GameStageHelper.hasStage(player, recipeBlockType.stage)) {
+                        if (!player.hasStage(recipeBlockType.stage)) {
                             cir.setReturnValue(Optional.empty());
                         }
                     }
