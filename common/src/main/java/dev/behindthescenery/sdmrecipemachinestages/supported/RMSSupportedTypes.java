@@ -51,7 +51,11 @@ public class RMSSupportedTypes {
                 "tfmg:vat_machine_recipe",
                 "tfmg:coking",
                 "tfmg:hot_blast",
-                "tfmg:industrial_blasting"
+                "tfmg:industrial_blasting",
+                "irons_spellbooks:alchemist_cauldron_fill",
+                "irons_spellbooks:alchemist_cauldron_empty",
+                "irons_spellbooks:alchemist_cauldron_brew",
+                "jumbofurnace:jumbo_smelting"
         });
     }
 

@@ -6,6 +6,7 @@ import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockOwnerData;
 import dev.behindthescenery.sdmrecipemachinestages.custom_data.CustomData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,30 +23,43 @@ public class BlockEntity$AddCustomData implements BlockEntityCustomData {
 
     @Inject(method = "saveWithoutMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BlockEntity;saveAdditional(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V"))
     protected void bts$saveAdditional(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir, @Local CompoundTag compoundTag) {
-        compoundTag.put(BlockEntityCustomData.CUSTOM_KEY, sdm$getCustomData().save());
+        compoundTag.put(BlockEntityCustomData.CUSTOM_KEY, bts$save());
     }
 
     @Inject(method = "saveCustomOnly", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BlockEntity;saveAdditional(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V"))
     protected void bts$saveCustomOnly(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir, @Local CompoundTag compoundTag) {
-        compoundTag.put(BlockEntityCustomData.CUSTOM_KEY, sdm$getCustomData().save());
+        compoundTag.put(BlockEntityCustomData.CUSTOM_KEY, bts$save());
     }
 
     @Inject(method = "loadWithComponents", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BlockEntity;loadAdditional(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V"))
     protected void bts$loadWithComponents(CompoundTag compoundTag, HolderLookup.Provider provider, CallbackInfo ci) {
         if(compoundTag.contains(BlockEntityCustomData.CUSTOM_KEY)) {
-            sdm$getCustomData().load(compoundTag.get(BlockEntityCustomData.CUSTOM_KEY));
+            bts$load(compoundTag.get(BlockEntityCustomData.CUSTOM_KEY));
         }
     }
 
     @Inject(method = "loadCustomOnly", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BlockEntity;loadAdditional(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V"))
     protected void bts$loadCustomOnly(CompoundTag compoundTag, HolderLookup.Provider provider, CallbackInfo ci) {
         if(compoundTag.contains(BlockEntityCustomData.CUSTOM_KEY)) {
-            sdm$getCustomData().load(compoundTag.get(BlockEntityCustomData.CUSTOM_KEY));
+            bts$load(compoundTag.get(BlockEntityCustomData.CUSTOM_KEY));
         }
     }
 
     @Override
     public CustomData sdm$getCustomData() {
         return bts$blockOwnerData;
+    }
+
+    @Override
+    public Tag bts$save() {
+        final Tag tag = sdm$getCustomData().save();
+        bts$onSave(tag);
+        return tag;
+    }
+
+    @Override
+    public void bts$load(Tag tag) {
+        sdm$getCustomData().load(tag);
+        bts$onLoad(tag);
     }
 }

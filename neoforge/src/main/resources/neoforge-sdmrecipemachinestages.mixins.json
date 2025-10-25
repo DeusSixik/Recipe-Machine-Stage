@@ -39,7 +39,11 @@
     "recipes.create.fan_process.FanBlastingTypeMixin",
     "recipes.create.fan_process.FanHauntingTypeMixin",
     "recipes.create.fan_process.FanSmokingTypeMixin",
-    "recipes.create.fan_process.FanSplashingType"
+    "recipes.create.fan_process.FanSplashingType",
+    "recipes.irons_spell_books.AlchemistCauldronTileMixin",
+    "recipes.irons_spell_books.ArcaneAnvilMenuMixin",
+    "recipes.jumbo_furnace.JumboFurnaceCoreBlockEntityMixin",
+    "recipes.jumbo_furnace.JumboFurnaceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
