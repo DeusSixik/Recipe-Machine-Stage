@@ -17,7 +17,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.SortedSet;
 
 @Mixin(JumboFurnaceCoreBlockEntity.class)
 public abstract class JumboFurnaceCoreBlockEntityMixin extends BlockEntity {

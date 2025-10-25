@@ -12,10 +12,15 @@ import java.util.List;
 
 public class RMSSupportedTypes {
 
-    private static final List<String> SupportedTypes = new ArrayList<>();
+    private static final List<String> SupportedByTypes = new ArrayList<>();
+    private static final List<String> SupportedByMods = new ArrayList<>();
 
     public static void init() {
-        register(new String[] {
+        registerMods(new String[] {
+                "mekanism"
+        });
+
+        registerType(new String[] {
                 "minecraft:smelting",
                 "minecraft:stonecutting",
                 "minecraft:crafting",
@@ -55,12 +60,22 @@ public class RMSSupportedTypes {
                 "irons_spellbooks:alchemist_cauldron_fill",
                 "irons_spellbooks:alchemist_cauldron_empty",
                 "irons_spellbooks:alchemist_cauldron_brew",
-                "jumbofurnace:jumbo_smelting"
+                "jumbofurnace:jumbo_smelting",
+                "malum:favor_of_the_void",
+                "malum:soul_binding",
+                "malum:spirit_infusion",
+                "malum:spirit_repair",
+                "malum:runeworking",
+                "malum:spirit_focusing"
         });
     }
 
-    public static void register(String[] srg) {
-        SupportedTypes.addAll(List.of(srg));
+    public static void registerType(String[] srg) {
+        SupportedByTypes.addAll(List.of(srg));
+    }
+
+    public static void registerMods(String[] srg) {
+        SupportedByMods.addAll(List.of(srg));
     }
 
     public static void isSupported(RecipeType<?> recipeType) {
@@ -69,11 +84,11 @@ public class RMSSupportedTypes {
 
     public static void isSupported(@Nullable ResourceLocation recipeType) {
         if(recipeType == null) return;
-        isSupported(recipeType.toString());
+        isSupported(recipeType.toString(), recipeType.getNamespace());
     }
 
-    public static void isSupported(String recipeType) {
-        if(Platform.isDevelopmentEnvironment() || SupportedTypes.contains(recipeType)) return;
-        throw new RecipeTypeNotSupported(recipeType);
+    public static void isSupported(String full, String namespace) {
+        if(Platform.isDevelopmentEnvironment() || SupportedByMods.contains(namespace) || SupportedByTypes.contains(full)) return;
+        throw new RecipeTypeNotSupported(full);
     }
 }

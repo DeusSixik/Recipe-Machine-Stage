@@ -48,6 +48,5 @@ public class RMSContainer extends SimplePreparableReloadListener<Void> {
 
     @Override
     protected void apply(Void object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-
     }
 }

@@ -109,10 +109,21 @@ def implementsMods(DependencyHandler deps) {
 
     //Iron's Spells 'n Spellbooks
     deps.modCompileOnly "curse.maven:irons-spells-n-spellbooks-855414:7114204"
-    deps.modCompileOnly "curse.maven:curios-309927:6529130"
     deps.modCompileOnly "curse.maven:geckolib-388172:7023453"
     deps.modCompileOnly "curse.maven:playeranimator-658587:6024462"
 
     //Jumbo Furnace
-    deps.modImplementation "curse.maven:jumbo-furnace-390880:6659406"
+    deps.modCompileOnly "curse.maven:jumbo-furnace-390880:6659406"
+
+    //Malum
+    deps.modCompileOnly "curse.maven:malum-484064:6655805"
+
+    //Mekanism
+    deps.modCompileOnly "mekanism:Mekanism:1.21.1-10.7.17.83"
+
+    //More Red
+    deps.modImplementation "curse.maven:more-red-387638:5763286"
+
+    deps.modImplementation "curse.maven:curios-309927:6529130"
+    deps.modImplementation "curse.maven:lodestone-616457:6630047"
 }

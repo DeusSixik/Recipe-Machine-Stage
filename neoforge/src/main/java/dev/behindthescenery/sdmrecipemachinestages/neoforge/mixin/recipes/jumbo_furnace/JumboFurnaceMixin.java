@@ -1,7 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.neoforge.mixin.recipes.jumbo_furnace;
 
 import com.mojang.datafixers.util.Pair;
-import dev.behindthescenery.sdmrecipemachinestages.custom_data.BlockOwnerData;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import net.commoble.jumbofurnace.JumboFurnace;
 import net.commoble.jumbofurnace.advancements.AssembleJumboFurnaceTrigger;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.level.BlockEvent;

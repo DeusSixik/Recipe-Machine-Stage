@@ -43,7 +43,14 @@
     "recipes.irons_spell_books.AlchemistCauldronTileMixin",
     "recipes.irons_spell_books.ArcaneAnvilMenuMixin",
     "recipes.jumbo_furnace.JumboFurnaceCoreBlockEntityMixin",
-    "recipes.jumbo_furnace.JumboFurnaceMixin"
+    "recipes.jumbo_furnace.JumboFurnaceMixin",
+    "recipes.malum.RepairPylonCoreBlockEntityMixin",
+    "recipes.malum.RunicWorkbenchBlockEntityMixin",
+    "recipes.malum.SpiritAltarBlockEntityMixin",
+    "recipes.malum.VoidConduitBlockEntityMixin",
+    "recipes.mekanism.MekanismRecipeMixin",
+    "recipes.mekanism.MekanismRecipeTypeMixin",
+    "recipes.mekanism.RecipeCacheLookupMonitorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

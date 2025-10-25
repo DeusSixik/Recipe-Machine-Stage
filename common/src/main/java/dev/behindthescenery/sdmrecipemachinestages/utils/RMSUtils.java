@@ -241,4 +241,8 @@ public class RMSUtils {
         return BlockOwnerData.getOrThrow(entity);
     }
 
+    @Nullable
+    public static ResourceLocation getRecipeId(Recipe<?> recipe) {
+        return RMSRecipeUtils.getRecipeId(recipe);
+    }
 }

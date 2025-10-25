@@ -4,11 +4,7 @@ import appeng.recipes.transform.TransformCircumstance;
 import appeng.recipes.transform.TransformLogic;
 import appeng.recipes.transform.TransformRecipe;
 import appeng.recipes.transform.TransformRecipeInput;
-import com.google.common.collect.Lists;
-import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
-import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -23,12 +19,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
