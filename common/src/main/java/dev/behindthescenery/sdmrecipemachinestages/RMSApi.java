@@ -37,7 +37,7 @@ public class RMSApi {
         addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
     }
 
-    public static void addRecipeByMod(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, String modId, String stage) {
+    public static void addRecipeByMod(RecipeType<?> recipeType, String modId, String stage) {
         List<ResourceLocation> recipeIds = RMSUtils.getAllRecipesUnsafe(recipeType)
                 .stream()
                 .map(RecipeHolder::id)
@@ -51,7 +51,7 @@ public class RMSApi {
         addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
     }
 
-    public static void addRecipeByMod(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, String[] modIds, String stage) {
+    public static void addRecipeByMod(RecipeType<?> recipeType, String[] modIds, String stage) {
         List<ResourceLocation> recipeIds = RMSUtils.getAllRecipesUnsafe(recipeType)
                 .stream()
                 .map(RecipeHolder::id)
