@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -32,6 +33,10 @@ public class RMSApi {
         RMSApi.register(recipeType, new ArrayList<>(List.of(recipeID)), stage);
     }
 
+    public static void addRecipeByMod(String recipeType, String modId, String stage) {
+        addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
+    }
+
     public static void addRecipeByMod(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, String modId, String stage) {
         List<ResourceLocation> recipeIds = RMSUtils.getAllRecipesUnsafe(recipeType)
                 .stream()
@@ -40,6 +45,10 @@ public class RMSApi {
                 .toList();
 
         RMSApi.register(recipeType, new ArrayList<>(recipeIds), stage);
+    }
+
+    public static void addRecipeByMod(String recipeType, String[] modId, String stage) {
+        addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
     }
 
     public static void addRecipeByMod(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, String[] modIds, String stage) {

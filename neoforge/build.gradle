@@ -140,9 +140,9 @@ def implementsMods(DependencyHandler deps) {
     //Woot Revived
     deps.modCompileOnly "curse.maven:woot-revived-1337238:7136341"
 
-    //Agritech
-    deps.modImplementation files("./libs/agritech-1.1.10.jar")
-    deps.modImplementation files("./libs/agritechtrees-1.1.8.jar")
+//    //Agritech (NO)
+//    deps.modImplementation files("./libs/agritech-1.1.10.jar")
+//    deps.modImplementation files("./libs/agritechtrees-1.1.8.jar")
 
     deps.modImplementation "curse.maven:curios-309927:6529130"
     deps.modImplementation "curse.maven:lodestone-616457:6630047"
