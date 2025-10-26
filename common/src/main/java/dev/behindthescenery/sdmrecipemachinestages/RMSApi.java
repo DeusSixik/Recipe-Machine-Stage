@@ -1,10 +1,10 @@
 package dev.behindthescenery.sdmrecipemachinestages;
 
-import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
-import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
+import dev.behindthescenery.sdmrecipemachinestages.data.*;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -61,6 +61,13 @@ public class RMSApi {
         RMSContainer.Instance.register(new RecipeBlockType(stage, recipeType, recipeName));
     }
 
+    public static void register(Class<?> blockClass, List<ItemStack> inputs, String stage, RecipeBlockClass type) {
+        switch (type) {
+            case Input -> RMSContainer.Instance.register(new RecipeBlockInput(blockClass, stage, inputs));
+            case Out -> RMSContainer.Instance.register(new RecipeBlockOutput(blockClass, stage, inputs));
+        }
+    }
+
     public static void printAllRecipes(ResourceLocation recipeTypeId, Consumer<String> onGet) {
         printAllRecipes(BuiltInRegistries.RECIPE_TYPE.get(recipeTypeId), onGet);
     }
@@ -72,5 +79,10 @@ public class RMSApi {
         for (RecipeHolder<?> recipeHolder : RMSUtils.getAllRecipesUnsafe(recipeType)) {
             onGet.accept(recipeHolder.id().toString());
         }
+    }
+
+    public static enum RecipeBlockClass {
+        Input,
+        Out
     }
 }

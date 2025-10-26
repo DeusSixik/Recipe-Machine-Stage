@@ -72,7 +72,6 @@ def implementsMods(DependencyHandler deps) {
 
     //Applied Energistics 2
     deps.modCompileOnly "curse.maven:applied-energistics-2-223794:7027323"
-    deps.modCompileOnly "curse.maven:guideme-1173950:7127444"
 
     //Apotheosis
     deps.modCompileOnly "curse.maven:apotheosis-313970:6926309"
@@ -131,9 +130,24 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:oreberries-replanted-454062:6123417"
 
     //Roots 4
-    deps.modImplementation "curse.maven:roots-246183:7135743"
+    deps.modCompileOnly "curse.maven:roots-246183:7135743"
+
+//    //Thavma (KOTLIN SHIT)
+//    deps.modImplementation "curse.maven:thavma-1271073:6803477"
+//    deps.modImplementation "curse.maven:kotlin-for-forge-351264:6994056"
+//    deps.modImplementation "curse.maven:geckolib-388172:7023453"
+
+    //Woot Revived
+    deps.modCompileOnly "curse.maven:woot-revived-1337238:7136341"
+
+    //Agritech
+    deps.modImplementation files("./libs/agritech-1.1.10.jar")
+    deps.modImplementation files("./libs/agritechtrees-1.1.8.jar")
 
     deps.modImplementation "curse.maven:curios-309927:6529130"
     deps.modImplementation "curse.maven:lodestone-616457:6630047"
     deps.modImplementation "curse.maven:patchouli-306770:6842247"
+    deps.modImplementation "curse.maven:guideme-1173950:7127444"
+
+
 }

@@ -14,6 +14,7 @@ public class RMSSupportedTypes {
 
     private static final List<String> SupportedByTypes = new ArrayList<>();
     private static final List<String> SupportedByMods = new ArrayList<>();
+    private static final List<String> SupportedBlockClasses = new ArrayList<>();
 
     public static void init() {
         registerMods(new String[] {
@@ -70,16 +71,24 @@ public class RMSSupportedTypes {
                 "malum:spirit_infusion",
                 "malum:spirit_repair",
                 "malum:runeworking",
-                "malum:spirit_focusing"
+                "malum:spirit_focusing",
+                "woot_revived:fluid_infuser",
+                "woot_revived:dye_liquifier",
+                "woot_revived:item_infuser",
+                "woot_revived:stygian_anvil"
         });
     }
 
-    public static void registerType(String[] srg) {
-        SupportedByTypes.addAll(List.of(srg));
+    public static void registerType(String[] arg) {
+        SupportedByTypes.addAll(List.of(arg));
     }
 
-    public static void registerMods(String[] srg) {
-        SupportedByMods.addAll(List.of(srg));
+    public static void registerMods(String[] arg) {
+        SupportedByMods.addAll(List.of(arg));
+    }
+
+    public static void registerBlock(String[] arg) {
+        SupportedBlockClasses.addAll(List.of(arg));
     }
 
     public static void isSupported(RecipeType<?> recipeType) {
@@ -93,6 +102,16 @@ public class RMSSupportedTypes {
 
     public static void isSupported(String full, String namespace) {
         if(Platform.isDevelopmentEnvironment() || SupportedByMods.contains(namespace) || SupportedByTypes.contains(full)) return;
-        throw new RecipeTypeNotSupported(full);
+        throw new RecipeTypeNotSupported(full, false);
+    }
+
+    public static void isSupported(Class<?> classes) {
+        if(classes == null) return;
+        isSupported(classes.getName());
+    }
+
+    public static void isSupported(String classId) {
+        if(Platform.isDevelopmentEnvironment() || SupportedBlockClasses.contains(classId)) return;
+        throw new RecipeTypeNotSupported(classId, true);
     }
 }

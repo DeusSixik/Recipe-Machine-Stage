@@ -41,7 +41,7 @@ public class RMSUtils {
     }
 
     public static boolean hasRestrictionsForType(RecipeType<?> type) {
-        return !RMSContainer.Instance.getRecipesBlock(type).isEmpty();
+        return !RMSContainer.Instance.getRecipesBlockByType(type).isEmpty();
     }
 
     public static List<RecipeHolder<? extends Recipe<?>>> filterRecipes(List<RecipeHolder<? extends Recipe<?>>> original, UUID player) {
@@ -130,7 +130,7 @@ public class RMSUtils {
         if(blockType == null) return true;
 
         final CustomData customData = BlockEntityCustomData.getDataOrThrow(blockEntity);
-        return hasPlayerStage(customData, blockType.stage_id());
+        return hasPlayerStage(customData, blockType.stageId());
     }
 
     public static boolean canProcess(Player player, RecipeHolder<? extends Recipe<?>> recipe) {
@@ -141,7 +141,7 @@ public class RMSUtils {
         if(recipe == null || player == null) return false;
         final RecipeBlockType blockType = getRecipeBlockData(recipe);
         if(blockType == null) return true;
-        return hasPlayerStage(player, blockType.stage_id());
+        return hasPlayerStage(player, blockType.stageId());
     }
 
     public static boolean hasPlayerStage(CustomData customData, String stage_id) {
@@ -180,7 +180,7 @@ public class RMSUtils {
     }
 
     public static List<RecipeBlockType> getAllRecipesBlockData(RecipeType<?> recipeType) {
-        return RMSContainer.Instance.getRecipesBlock(recipeType);
+        return RMSContainer.Instance.getRecipesBlockByType(recipeType);
     }
 
     @Nullable
@@ -190,7 +190,7 @@ public class RMSUtils {
 
     @Nullable
     public static RecipeBlockType getRecipeBlockData(RecipeType<?> recipeType, ResourceLocation recipeId) {
-       return RMSContainer.Instance.getRecipeBlock(recipeType, recipeId).orElse(null);
+       return RMSContainer.Instance.getRecipeBlockByType(recipeType, recipeId).orElse(null);
     }
 
 
@@ -199,7 +199,7 @@ public class RMSUtils {
     }
 
     public static Optional<RecipeBlockType> getRecipeBlockDataOptional(RecipeType<?> recipeType, ResourceLocation recipeId) {
-       return RMSContainer.Instance.getRecipeBlock(recipeType, recipeId);
+       return RMSContainer.Instance.getRecipeBlockByType(recipeType, recipeId);
     }
 
     public static void setBlockEntityOwner(BlockEntity entity, Player player) {

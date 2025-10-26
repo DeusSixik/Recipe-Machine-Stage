@@ -6,8 +6,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 public class RecipeTypeNotSupported extends RuntimeException {
 
-    public RecipeTypeNotSupported(String message) {
-        super(getMessage(message));
+    public RecipeTypeNotSupported(String message, boolean isClass) {
+        super(getMessage(message, isClass));
     }
 
     public RecipeTypeNotSupported(ResourceLocation location) {
@@ -23,10 +23,14 @@ public class RecipeTypeNotSupported extends RuntimeException {
     }
 
     protected static String getMessage(ResourceLocation location) {
-        return getMessage(location.toString());
+        return getMessage(location.toString(), false);
     }
 
-    protected static String getMessage(String str) {
+    protected static String getMessage(String str, boolean isClass) {
+        if(isClass) {
+            return "Class: " + str + " not supported!";
+        }
+
         return "RecipeType: " + str + " not supported!";
     }
 }

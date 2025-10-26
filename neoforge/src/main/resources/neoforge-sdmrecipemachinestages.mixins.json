@@ -64,7 +64,11 @@
     "recipes.roots.PyreBlockEntityMixin",
     "recipes.roots.RunicShearsDispenseBehaviourMixin",
     "recipes.roots.RunicShearsItemMixin",
-    "recipes.roots.SummonCreaturesRitualMixin"
+    "recipes.roots.SummonCreaturesRitualMixin",
+    "recipes.woot_revived.DyeLiquifierBlockEntityMixin",
+    "recipes.woot_revived.FluidInfuserBlockEntityMixin",
+    "recipes.woot_revived.ItemInfuserBlockEntityMixin",
+    "recipes.woot_revived.StygianAnvilBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

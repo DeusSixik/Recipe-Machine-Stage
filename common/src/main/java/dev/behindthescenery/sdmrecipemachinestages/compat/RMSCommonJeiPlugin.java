@@ -4,6 +4,7 @@ import dev.architectury.platform.Platform;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import dev.behindthescenery.sdmrecipemachinestages.SdmRecipeMachineStages;
 import dev.behindthescenery.sdmrecipemachinestages.compat.jei.JeiRecipeType;
+import dev.behindthescenery.sdmrecipemachinestages.data.AbstractRecipeBlock;
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.data.RecipeBlockType;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSStageUtilsClient;
@@ -48,7 +49,7 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
         final IRecipeManager recipeManager = runtime.getRecipeManager();
 
         for (final Map.Entry<RecipeType<? extends Recipe<?>>, List<RecipeBlockType>> entry :
-                RMSContainer.Instance.getRecipesData().entrySet()) {
+                RMSContainer.Instance.getRecipesByTypeData().entrySet()) {
 
             final RecipeType recipeType = entry.getKey();
             final List<RecipeBlockType> recipeBlockTypes = entry.getValue();
