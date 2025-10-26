@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.behindthescenery.sdmrecipemachinestages.fabric.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "FabricAbstractFurnaceBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,24 @@
+architectury {
+    common rootProject.enabled_platforms.split(',')
+}
+
+dependencies {
+    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
+    // which get remapped to the correct annotations on each platform.
+    // Do NOT use other classes from Fabric Loader.
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
+
+    modCompileOnly "curse.maven:sdm-stages-1082036:7142644"
+    compileOnly "curse.maven:crafttweaker-239197:6929483"
+    compileOnly "curse.maven:kubejs-238086:7136630"
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:16.0.799"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:16.0.799"
+
+    modCompileOnlyApi("mezz.jei:jei-1.21.1-common-api:19.25.0.323")
+
+    //Ice and Fire
+    modCompileOnly "curse.maven:iceandfire-ce-1040076:7037559"
+}
