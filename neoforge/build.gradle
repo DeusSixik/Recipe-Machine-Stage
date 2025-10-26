@@ -122,8 +122,18 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "mekanism:Mekanism:1.21.1-10.7.17.83"
 
     //More Red
-    deps.modImplementation "curse.maven:more-red-387638:5763286"
+    deps.modCompileOnly "curse.maven:more-red-387638:5763286"
+
+    //Natures Aura
+    deps.modCompileOnly "curse.maven:natures-aura-306626:6948833"
+
+    //Oreberries Replanted
+    deps.modCompileOnly "curse.maven:oreberries-replanted-454062:6123417"
+
+    //Roots 4
+    deps.modImplementation "curse.maven:roots-246183:7135743"
 
     deps.modImplementation "curse.maven:curios-309927:6529130"
     deps.modImplementation "curse.maven:lodestone-616457:6630047"
+    deps.modImplementation "curse.maven:patchouli-306770:6842247"
 }

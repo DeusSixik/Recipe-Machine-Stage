@@ -50,7 +50,21 @@
     "recipes.malum.VoidConduitBlockEntityMixin",
     "recipes.mekanism.MekanismRecipeMixin",
     "recipes.mekanism.MekanismRecipeTypeMixin",
-    "recipes.mekanism.RecipeCacheLookupMonitorMixin"
+    "recipes.mekanism.RecipeCacheLookupMonitorMixin",
+    "recipes.more_red.SolderingMenuMixin",
+    "recipes.natures_aura.BlockEntityAnimalSpawnerMixin",
+    "recipes.natures_aura.BlockEntityNatureAltarMixin",
+    "recipes.natures_aura.BlockEntityOfferingTableMixin",
+    "recipes.natures_aura.BlockEntityWoodStandMixin",
+    "recipes.oreberries_replanted.VatBlockEntityMixin",
+    "recipes.roots.FungalTransmuterBlockEntityMixin",
+    "recipes.roots.GroveCrafterBlockEntityMixin",
+    "recipes.roots.KnifeItemMixin",
+    "recipes.roots.MortarBlockEntityMixin",
+    "recipes.roots.PyreBlockEntityMixin",
+    "recipes.roots.RunicShearsDispenseBehaviourMixin",
+    "recipes.roots.RunicShearsItemMixin",
+    "recipes.roots.SummonCreaturesRitualMixin"
   ],
   "injectors": {
     "defaultRequire": 1

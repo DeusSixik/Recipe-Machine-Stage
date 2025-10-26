@@ -17,7 +17,11 @@ public class RMSSupportedTypes {
 
     public static void init() {
         registerMods(new String[] {
-                "mekanism"
+                "mekanism",
+                "morered",
+                "naturesaura",
+                "oreberriesreplanted",
+                "roots"
         });
 
         registerType(new String[] {
