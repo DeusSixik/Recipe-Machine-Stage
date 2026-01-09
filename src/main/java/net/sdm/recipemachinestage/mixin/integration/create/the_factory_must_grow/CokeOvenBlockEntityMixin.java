@@ -1,7 +1,7 @@
 package net.sdm.recipemachinestage.mixin.integration.create.the_factory_must_grow;
 
-import com.drmangotea.tfmg.blocks.machines.metal_processing.coke_oven.CokeOvenBlockEntity;
-import com.drmangotea.tfmg.recipes.coking.CokingRecipe;
+import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenBlockEntity;
+import com.drmangotea.tfmg.recipes.CokingRecipe;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +14,7 @@ public class CokeOvenBlockEntityMixin {
 
     private final CokeOvenBlockEntity thisBlockEntity = RecipeStagesUtil.cast(this);
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Ljava/util/Optional;get()Ljava/lang/Object;"))
+    @Redirect(method = "tickRecipe", at = @At(value = "INVOKE", target = "Ljava/util/Optional;get()Ljava/lang/Object;"))
     public <T> T sdm$tick(Optional<T> instance) {
         T value = instance.get();
 

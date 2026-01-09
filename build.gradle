@@ -211,7 +211,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:create-new-age-905861:6270284")
 
     compileOnly fg.deobf("curse.maven:createaddition-439890:6256349")
-    compileOnly fg.deobf("curse.maven:create-industry-693815:6255138")
+    compileOnly fg.deobf("curse.maven:create-industry-693815:7344584")
 
     //Mekanism
     compileOnly fg.deobf("curse.maven:mekanism-268560:6258796")

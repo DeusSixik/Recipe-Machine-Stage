@@ -1,7 +1,7 @@
 package net.sdm.recipemachinestage.mixin.integration.create.the_factory_must_grow;
 
-import com.drmangotea.tfmg.blocks.electricity.polarizer.PolarizerBlockEntity;
-import com.drmangotea.tfmg.recipes.polarizing.PolarizingRecipe;
+import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlockEntity;
+import com.drmangotea.tfmg.recipes.PolarizingRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.spongepowered.asm.mixin.Mixin;
