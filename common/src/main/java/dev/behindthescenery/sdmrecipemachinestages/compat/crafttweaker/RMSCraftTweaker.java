@@ -4,6 +4,7 @@ import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -21,10 +22,10 @@ public class RMSCraftTweaker {
 
     /**
      * The method that blocks the recipe
-     * @param recipeType Recipe Type (In CraftTweaker <recipeType:minecraft:smelting> you need write without prefix <recipeType>. "minecraft:smelting")
+     * @param recipeType Recipe Type (In CraftTweaker <recipeTypeId:minecraft:smelting> you need write without prefix <recipeTypeId>. "minecraft:smelting")
      * @param recipeID Recipe ID ("minecraft:iron_ingot_from_blasting_iron_ore", "mekanism:processing/iron/enriched" etc.);
      * @param stage Stage who block the recipe ("one" etc.)
-     * @docParam recipeType "minecraft:smelting"
+     * @docParam recipeTypeId "minecraft:smelting"
      * @docParam recipeID "minecraft:stone"
      * @docParam stage "one"
      */
@@ -35,10 +36,10 @@ public class RMSCraftTweaker {
 
     /**
      * A method that blocks multiple recipes
-     * @param recipeType Recipe Type (In CraftTweaker <recipeType:minecraft:smelting> you need write without prefix <recipeType>. "minecraft:smelting")
+     * @param recipeType Recipe Type (In CraftTweaker <recipeTypeId:minecraft:smelting> you need write without prefix <recipeTypeId>. "minecraft:smelting")
      * @param recipeID Recipe IDs ("minecraft:iron_ingot_from_blasting_iron_ore", "mekanism:processing/iron/enriched" etc.);
      * @param stage Stage who block the recipe ("one" etc.)
-     * @docParam recipeType "minecraft:smelting"
+     * @docParam recipeTypeId "minecraft:smelting"
      * @docParam recipeID ["minecraft:stone", "minecraft:iron_ingot"]
      * @docParam stage "one"
      */
@@ -70,5 +71,25 @@ public class RMSCraftTweaker {
     @ZenCodeType.Method
     public static void printAllRecipes(IRecipeManager<Recipe<RecipeInput>> recipeType) {
         RMSApi.printAllRecipes(recipeType.getRecipeType(), s -> CraftTweakerAPI.getLogger("RMS").printf(Level.INFO, s));
+    }
+
+    @ZenCodeType.Method
+    public static String[] getSupportedByTypes() {
+        return RMSSupportedTypes.getSupportedByTypes();
+    }
+
+    @ZenCodeType.Method
+    public static String[] getSupportedByMods() {
+        return RMSSupportedTypes.getSupportedByMods();
+    }
+
+    @ZenCodeType.Method
+    public static String[] getSupportedBlockClasses() {
+        return RMSSupportedTypes.getSupportedBlockClasses();
+    }
+
+    @ZenCodeType.Method
+    public static String[] getAllRecipeTypes() {
+        return RMSApi.getAllRecipeTypes();
     }
 }

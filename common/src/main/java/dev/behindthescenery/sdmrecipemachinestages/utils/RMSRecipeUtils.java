@@ -65,7 +65,7 @@ public class RMSRecipeUtils {
 
         final RecipeHoldersKey holder = Recipes.get(recipe.getType());
         if (holder == null) {
-            RMSMain.LOGGER.error("Can't find recipeType {}. Registered recipes: {}", BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType()).toString(), Recipes.size());
+            RMSMain.LOGGER.error("Can't find recipeTypeId {}. Registered recipes: {}", BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType()).toString(), Recipes.size());
             return null;
         }
 

@@ -114,4 +114,16 @@ public class RMSSupportedTypes {
         if(Platform.isDevelopmentEnvironment() || SupportedBlockClasses.contains(classId)) return;
         throw new RecipeTypeNotSupported(classId, true);
     }
+
+    public static String[] getSupportedByTypes() {
+        return SupportedByTypes.toArray(new String[0]);
+    }
+
+    public static String[] getSupportedByMods() {
+        return SupportedByMods.toArray(new String[0]);
+    }
+
+    public static String[] getSupportedBlockClasses() {
+        return SupportedBlockClasses.toArray(new String[0]);
+    }
 }

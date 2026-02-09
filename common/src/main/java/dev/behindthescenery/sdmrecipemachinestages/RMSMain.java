@@ -3,6 +3,7 @@ package dev.behindthescenery.sdmrecipemachinestages;
 import com.mojang.logging.LogUtils;
 import dev.architectury.event.EventResult;
 import dev.behindthescenery.sdmrecipemachinestages.compat.IRecipeUpdateListener;
+import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSRecipeUtils;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
 import dev.behindthescenery.sdmstages.StageApi;
@@ -48,6 +49,7 @@ public class RMSMain {
         registryAccess = currentServer.registryAccess();
         recipeManager = currentServer.getRecipeManager();
         RMSRecipeUtils.reloadRecipeTypes(RMSMain.getRecipeManager());
+        RMSApi.syncRecipeContainerWithPlayers();
     }
 
     public static MinecraftServer getServer() {
@@ -104,4 +106,7 @@ public class RMSMain {
         return BlockOwner.get();
     }
 
+    public static void onPlayerJoin(ServerPlayer player) {
+        RMSContainer.Instance.sendTo(player);
+    }
 }

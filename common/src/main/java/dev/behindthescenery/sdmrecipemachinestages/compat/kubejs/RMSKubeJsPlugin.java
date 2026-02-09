@@ -1,6 +1,7 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.kubejs;
 
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +33,22 @@ public class RMSKubeJsPlugin implements KubeJSPlugin {
 
         static void addRecipeByMods(String recipeType, String[] modId, String stage) {
             RMSApi.addRecipeByMod(recipeType, modId, stage);
+        }
+
+        static String[] getSupportedByTypes() {
+            return RMSSupportedTypes.getSupportedByTypes();
+        }
+
+        static String[] getSupportedByMods() {
+            return RMSSupportedTypes.getSupportedByMods();
+        }
+
+        static String[] getSupportedBlockClasses() {
+            return RMSSupportedTypes.getSupportedBlockClasses();
+        }
+
+        static String[] getAllRecipeTypes() {
+            return RMSApi.getAllRecipeTypes();
         }
     }
 }

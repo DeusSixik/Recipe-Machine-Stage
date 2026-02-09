@@ -1,11 +1,14 @@
 package dev.behindthescenery.sdmrecipemachinestages.data;
 
+import dev.architectury.networking.NetworkManager;
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
+import dev.behindthescenery.sdmrecipemachinestages.network.SyncRMSContainerDataS2C;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -17,6 +20,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class RMSContainer extends SimplePreparableReloadListener<Void> {
+
+    public boolean isServer = false;
 
     public static final RMSContainer Instance = new RMSContainer();
 
@@ -68,12 +73,26 @@ public class RMSContainer extends SimplePreparableReloadListener<Void> {
 
     @Override
     protected Void prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+        clearData();
+        return null;
+    }
+
+    public void clearData() {
         RecipeStagesByTypeData.clear();
         RecipeStagesByBlockData.clear();
-        return null;
     }
 
     @Override
     protected void apply(Void object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+    }
+
+    // Not optimized.
+    // TODO: Make batching packets
+    public void sendTo(ServerPlayer player) {
+        for (List<RecipeBlockType> value : RecipeStagesByTypeData.values()) {
+            for (RecipeBlockType recipeBlockType : value) {
+                NetworkManager.sendToPlayer(player, new SyncRMSContainerDataS2C(recipeBlockType));
+            }
+        }
     }
 }

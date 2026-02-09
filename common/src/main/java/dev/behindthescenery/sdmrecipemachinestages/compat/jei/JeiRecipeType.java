@@ -9,7 +9,7 @@ public enum JeiRecipeType {
     Recipe;
 
     /**
-     * Since there can be different Recipe containers in the recipeType Jei in place of the Vanilla RecipeHolder.
+     * Since there can be different Recipe containers in the recipeTypeId Jei in place of the Vanilla RecipeHolder.
      * We will check with our hands what kind of type it is and apply logic from this
      * @param recipeType RecipeClass
      * @return The matched type

@@ -4,12 +4,12 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
+    "client.ClientPacketListenerMixin"
   ],
   "mixins": [
     "accessor.EnchantmentMenuAccessor",
     "custom_data.BlockEntity$AddCustomData",
     "init.MinecraftServerMixin",
-    "init.ReloadableServerResourcesMixin",
     "recipes.ice_and_fire.DragonForgeBlockEntityMixin",
     "recipes.minecraft.AbstractFurnaceBlockEntityMixin",
     "recipes.minecraft.CraftingMenuMixin",

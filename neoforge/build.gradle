@@ -29,6 +29,20 @@ repositories {
         name = 'NeoForged'
         url = 'https://maven.neoforged.net/releases'
     }
+    maven {
+        url "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+
+    maven {
+        url 'https://jitpack.io'
+        content {
+            includeGroup "com.github.rtyley"
+        }
+    }
 }
 
 dependencies {
@@ -41,6 +55,11 @@ dependencies {
 
     modImplementation "curse.maven:sdm-stages-1082036:7142645"
     modImplementation "curse.maven:crafttweaker-239197:6929483"
+
+//    api("dev.latvian.mods:kubejs-neoforge:2101.7.2-build.348")
+
+//    modImplementation "curse.maven:kubejs-238086:7278501"
+//    modImplementation "curse.maven:rhino-416294:7104526"
 
     modRuntimeOnly("mezz.jei:jei-1.21.1-neoforge:19.25.0.323")
 
