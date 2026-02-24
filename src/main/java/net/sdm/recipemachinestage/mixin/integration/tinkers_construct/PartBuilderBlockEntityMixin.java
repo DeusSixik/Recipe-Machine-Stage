@@ -54,10 +54,8 @@ public abstract class PartBuilderBlockEntityMixin {
                     newRecipes.put(entry.getKey(), entry.getValue());
                 }
             }
+            cir.setReturnValue(newRecipes);
         }
-
-        cir.setReturnValue(newRecipes);
-
     }
 
     @Inject(method = "getPartRecipe", at = @At("RETURN"), cancellable = true)
