@@ -115,9 +115,9 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:create-industry-693815:7046723"
 
     //Ender Io
-    deps.modCompileOnly files("./libs/com.enderio.enderio-machines-7.1.8-alpha.jar")
-    deps.modCompileOnly files("./libs/com.enderio.endercore-7.1.8-alpha.jar")
-    deps.modCompileOnly files("./libs/com.enderio.enderio-base-7.1.8-alpha.jar")
+    deps.modCompileOnly files("./libs/com.enderio.endercore-8.1.1-beta.jar")
+    deps.modCompileOnly files("./libs/com.enderio.enderio-modded-conduits-8.1.1-beta.jar")
+    deps.modCompileOnly files("./libs/GraphLib3-3.0.5.jar")
 
     //Immersive Engineering
     deps.modCompileOnly "blusunrize.immersiveengineering:ImmersiveEngineering:1.21.1-12.4.2-pre.16"
@@ -163,10 +163,13 @@ def implementsMods(DependencyHandler deps) {
 //    deps.modImplementation files("./libs/agritech-1.1.10.jar")
 //    deps.modImplementation files("./libs/agritechtrees-1.1.8.jar")
 
+    // Modern Industrialization
+    deps.modImplementation "curse.maven:modern-industrialization-405388:7309662"
+    deps.modImplementation "curse.maven:grandpower-980156:5900262"
+
     deps.modImplementation "curse.maven:curios-309927:6529130"
     deps.modImplementation "curse.maven:lodestone-616457:6630047"
     deps.modImplementation "curse.maven:patchouli-306770:6842247"
     deps.modImplementation "curse.maven:guideme-1173950:7127444"
-
 
 }

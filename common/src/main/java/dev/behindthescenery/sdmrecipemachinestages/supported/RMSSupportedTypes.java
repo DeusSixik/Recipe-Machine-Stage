@@ -22,7 +22,8 @@ public class RMSSupportedTypes {
                 "morered",
                 "naturesaura",
                 "oreberriesreplanted",
-                "roots"
+                "roots",
+                "modern_industrialization"
         });
 
         registerType(new String[] {
