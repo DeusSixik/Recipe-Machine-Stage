@@ -26,7 +26,7 @@ public class RepairPylonCoreBlockEntityMixin extends MultiBlockCoreEntity {
         super(type, structure, pos, state);
     }
 
-    @Redirect(method = "updateRecipe(Ljava/util/function/Predicate;)Lcom/sammy/malum/common/recipe/SpiritRepairRecipe;",
+    @Redirect(method = "updateRecipe(Ljava/util/function/Predicate;)Lcom/sammy/malum/common/recipe/spirit_repair/SpiritRepairRecipe;",
             at = @At(value = "INVOKE", target = "Lteam/lodestar/lodestone/systems/recipe/LodestoneRecipeType;findRecipe(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/crafting/RecipeType;Ljava/util/function/Predicate;)Lnet/minecraft/world/item/crafting/Recipe;"))
     public <T extends RecipeInput, K extends Recipe<T>> K sdm$tryRepair(Level value, RecipeType<K> recipe, Predicate<K> level){
         return RMSLodeStoneUtils.findRecipe(value, recipe, level, RMSUtils.getBlockOwner(this));

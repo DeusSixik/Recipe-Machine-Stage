@@ -24,7 +24,7 @@ public abstract class SpiritAltarBlockEntityMixin extends LodestoneBlockEntity {
         super(type, pos, state);
     }
 
-    @Redirect(method = "recalculateRecipes",
+    @Redirect(method = "recalculateRecipes(Lnet/minecraft/world/level/Level;)V",
             at = @At(value = "INVOKE", target = "Lteam/lodestar/lodestone/systems/recipe/LodestoneRecipeType;getRecipes(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/crafting/RecipeType;)Ljava/util/List;"))
     public <T extends RecipeInput, K extends Recipe<T>> List<K> sdm$tryRepair(Level level, RecipeType<K> recipeType){
         return RMSLodeStoneUtils.getRecipes(level, recipeType, RMSUtils.getBlockOwner(this));

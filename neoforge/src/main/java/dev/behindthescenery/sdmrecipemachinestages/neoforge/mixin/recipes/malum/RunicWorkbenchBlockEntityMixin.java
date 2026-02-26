@@ -22,9 +22,9 @@ public abstract class RunicWorkbenchBlockEntityMixin extends MalumItemHolderBloc
         super(type, pos, state);
     }
 
-    @Redirect(method = "onUseWithItem",
+    @Redirect(method = "tryCraft",
             at = @At(value = "INVOKE", target = "Lteam/lodestar/lodestone/systems/recipe/LodestoneRecipeType;getRecipe(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/crafting/RecipeType;Lnet/minecraft/world/item/crafting/RecipeInput;)Lnet/minecraft/world/item/crafting/Recipe;"))
-    public <T extends RecipeInput, K extends Recipe<T>> K sdm$tryRepair(Level level, RecipeType<K> recipeType, T recipeInput){
+    public <T extends RecipeInput, K extends Recipe<T>> K sdm$tryCraft(Level level, RecipeType<K> recipeType, T recipeInput){
         return RMSLodeStoneUtils.getRecipe(level, recipeType, recipeInput, RMSUtils.getBlockOwner(this));
     }
 }
