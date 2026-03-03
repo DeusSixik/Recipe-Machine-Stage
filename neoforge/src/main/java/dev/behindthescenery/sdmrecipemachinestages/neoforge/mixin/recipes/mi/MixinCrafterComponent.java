@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
 
-@Mixin(value = CrafterComponent.class, remap = false)
+@Mixin(value = CrafterComponent.class)
 public class MixinCrafterComponent {
 
     @Shadow
