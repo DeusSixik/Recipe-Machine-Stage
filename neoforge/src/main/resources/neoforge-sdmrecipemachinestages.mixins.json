@@ -52,6 +52,7 @@
     "recipes.mekanism.MekanismRecipeTypeMixin",
     "recipes.mekanism.RecipeCacheLookupMonitorMixin",
     "recipes.mi.MixinCrafterComponent",
+    "recipes.mi.TestReiMachineRecipesMixin",
     "recipes.more_red.SolderingMenuMixin",
     "recipes.natures_aura.BlockEntityAnimalSpawnerMixin",
     "recipes.natures_aura.BlockEntityNatureAltarMixin",

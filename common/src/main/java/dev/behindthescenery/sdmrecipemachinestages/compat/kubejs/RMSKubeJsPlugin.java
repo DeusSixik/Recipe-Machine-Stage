@@ -1,7 +1,10 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.kubejs;
 
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events.RMSJSEvents;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
+import dev.latvian.mods.kubejs.event.EventGroup;
+import dev.latvian.mods.kubejs.event.EventGroupRegistry;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +18,13 @@ public class RMSKubeJsPlugin implements KubeJSPlugin {
         if(bindings.type().isServer()) {
             bindings.add("RMS", Methods.class);
         }
+    }
+
+
+
+    @Override
+    public void registerEvents(EventGroupRegistry registry) {
+        registry.register(RMSJSEvents.GROUP);
     }
 
     public interface Methods {

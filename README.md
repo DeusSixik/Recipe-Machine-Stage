@@ -24,17 +24,21 @@ The mod supports both KubeJS and CraftTweaker
 
 ### KubeJs
 ```js
-//RMS.addRecipe(String recipeType, String recipe_id, String stage)
-RMS.addRecipe('create:milling', 'create:milling/fern', 'two')
 
-//RMS.addRecipes(String recipeType, String[] recipe_id, String stage)
-RMS.addRecipes("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one")
+RMSEvents.register(event => {
 
-//RMS.addRecipeByMod(String recipeType, String modId, String stage)
-RMS.addRecipeByMod("minecraft:smelting", "create", "create")
-
-//RMS.addRecipeByMods(String recipeType, String[] modId, String stage)
-RMS.addRecipeByMods("minecraft:smelting", ["create", "minecraft"], "one")
+    //event.addRecipe(String recipeType, String recipe_id, String stage)
+    event.addRecipe('create:milling', 'create:milling/fern', 'two')
+    
+    //event.addRecipes(String recipeType, String[] recipe_id, String stage)
+    event.addRecipes("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one")
+    
+    //event.addRecipeByMod(String recipeType, String modId, String stage)
+    event.addRecipeByMod("minecraft:smelting", "create", "create")
+    
+    //event.addRecipeByMods(String recipeType, String[] modId, String stage)
+    event.addRecipeByMods("minecraft:smelting", ["create", "minecraft"], "one")
+}
 ```
 
 ### CraftTweaker

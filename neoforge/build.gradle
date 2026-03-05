@@ -59,7 +59,9 @@ dependencies {
 //    api("dev.latvian.mods:kubejs-neoforge:2101.7.2-build.348")
 
 //    modImplementation "curse.maven:kubejs-238086:7278501"
-//    modImplementation "curse.maven:rhino-416294:7104526"
+
+    modImplementation("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+    minecraftClientRuntimeLibraries("dev.latvian.apps:tiny-java-server:1.0.0-build.34")
 
     modRuntimeOnly("mezz.jei:jei-1.21.1-neoforge:19.25.0.323")
 
@@ -164,8 +166,13 @@ def implementsMods(DependencyHandler deps) {
 //    deps.modImplementation files("./libs/agritechtrees-1.1.8.jar")
 
     // Modern Industrialization
-    deps.modCompileOnly "curse.maven:modern-industrialization-405388:7309662"
-    deps.modCompileOnly "curse.maven:grandpower-980156:5900262"
+
+    // 2.4+
+//    deps.modCompileOnly "curse.maven:modern-industrialization-405388:7309662"
+
+    // 2.3.16
+    deps.modImplementation "curse.maven:modern-industrialization-405388:7146298"
+    deps.modImplementation "curse.maven:grandpower-980156:5432440"
 
     deps.modImplementation "curse.maven:curios-309927:6529130"
     deps.modImplementation "curse.maven:lodestone-616457:7264731"

@@ -13,11 +13,14 @@ dependencies {
     modCompileOnly "curse.maven:sdm-stages-1082036:7142644"
     compileOnly "curse.maven:crafttweaker-239197:6929483"
     compileOnly "curse.maven:kubejs-238086:7136630"
+    compileOnly "curse.maven:rhino-416294:7104526"
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:16.0.799"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:16.0.799"
 
-    modCompileOnlyApi("mezz.jei:jei-1.21.1-common-api:19.25.0.323")
+//    modCompileOnlyApi("mezz.jei:jei-1.21.1-common-api:19.25.0.324")
+    modCompileOnly("mezz.jei:jei-1.21.1-neoforge:19.25.0.323")
+
 
     //Ice and Fire
     modCompileOnly "curse.maven:iceandfire-ce-1040076:7037559"

@@ -46,7 +46,11 @@ public class MixinCrafterComponent {
     @Unique
     private boolean bts$wasAllowed = false;
 
-    @Inject(method = "getRecipes()Ljava/lang/Iterable;", at = @At(value = "INVOKE", target = "Laztech/modern_industrialization/machines/components/CrafterComponent;getRecipes(Lnet/minecraft/server/level/ServerLevel;Laztech/modern_industrialization/machines/recipe/MachineRecipeType;Ljava/util/List;)Ljava/util/List;"), cancellable = true)
+    // 2.4+
+//    @Inject(method = "getRecipes()Ljava/lang/Iterable;", at = @At(value = "INVOKE", target = "Laztech/modern_industrialization/machines/components/CrafterComponent;getRecipes(Lnet/minecraft/server/level/ServerLevel;Laztech/modern_industrialization/machines/recipe/MachineRecipeType;Ljava/util/List;)Ljava/util/List;"), cancellable = true)
+
+    // 2.3
+    @Inject(method = "getRecipes()Ljava/lang/Iterable;", at = @At(value = "INVOKE", target = "Laztech/modern_industrialization/machines/components/CrafterComponent$Behavior;getCrafterWorld()Lnet/minecraft/server/level/ServerLevel;"), cancellable = true)
     private void bts$getRecipes(CallbackInfoReturnable<Iterable<RecipeHolder<MachineRecipe>>> cir) {
         cir.setReturnValue(bts$customGetRecipes(this.behavior.getCrafterWorld(), this.behavior.recipeType(), this.inventory.getItemInputs()));
     }

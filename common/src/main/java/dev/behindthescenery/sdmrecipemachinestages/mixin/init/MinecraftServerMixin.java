@@ -14,16 +14,19 @@ import java.util.concurrent.CompletableFuture;
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
 
-
     @Inject(method = "reloadResources", at = @At("HEAD"))
     public void bts$reloadResources$before(Collection<String> collection, CallbackInfoReturnable<CompletableFuture<Void>> cir) {
-        RMSContainer.Instance.isServer = true;
-        RMSContainer.Instance.clearData();
+        RMSContainer.Instance.startReloading((MinecraftServer)(Object) this);
     }
 
     @Inject(method = "reloadResources", at = @At("RETURN"))
     public void bts$reloadResources$after(Collection<String> collection, CallbackInfoReturnable<CompletableFuture<Void>> cir) {
         final MinecraftServer server = (MinecraftServer)(Object)this;
-        cir.getReturnValue().thenAccept(s -> RMSMain.onServerReloadResources(server));
+
+        cir.getReturnValue().thenAccept(s -> {
+            RMSMain.onServerReloadResources(server);
+            RMSContainer.Instance.endReloading(server);
+            RMSMain.syncDataWithPlayers();
+        });
     }
 }

@@ -23,9 +23,9 @@ public record SyncRMSContainerDataS2C(RecipeBlockType recipeBlockType) implement
         context.queue(() -> {
             if(!RMSContainer.Instance.isServer) {
                 RMSContainer.Instance.register(packet.recipeBlockType);
-            }
 
-            RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
+                RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
+            }
         });
     }
 

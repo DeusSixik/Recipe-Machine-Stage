@@ -12,8 +12,15 @@ import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public record RecipeBlockType(String stageId, RecipeType<?> recipeType, List<ResourceLocation> recipes_id) implements BaseRecipeStage {
+
+    public RecipeBlockType {
+        Objects.requireNonNull(stageId, "stageId cannot be null");
+        Objects.requireNonNull(recipeType, "recipeType cannot be null");
+        Objects.requireNonNull(recipes_id, "recipes_id cannot be null");
+    }
 
     public static final Codec<RecipeBlockType> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(

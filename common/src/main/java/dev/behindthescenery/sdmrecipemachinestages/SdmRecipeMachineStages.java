@@ -14,7 +14,7 @@ public final class SdmRecipeMachineStages {
 
     public static void init() {
         RMSSupportedTypes.init();
-        LifecycleEvent.SERVER_STARTED.register(RMSMain::onServerStarted);
+        LifecycleEvent.SERVER_BEFORE_START.register(RMSMain::onServerStarted);
         StagesEvents.ON_STAGE_SYNC.register(RMSMain::onStageSync);
         BlockEvent.PLACE.register(RMSMain::onPlaceBlock);
         PlayerEvent.PLAYER_JOIN.register(RMSMain::onPlayerJoin);

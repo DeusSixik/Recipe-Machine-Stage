@@ -42,13 +42,20 @@ public class RMSMain {
         onServerReloadResources(server);
         ServerContainer = StageApi.getServerStage();
         isGlobal = ServerContainer.getContainerType() == StageContainerType.GLOBAL;
+        syncDataWithPlayers();
+
+        RMSContainer.Instance.startReloading(server);
+        RMSContainer.Instance.endReloading(server);
     }
 
     public static void onServerReloadResources(MinecraftServer server) {
         currentServer = server;
         registryAccess = currentServer.registryAccess();
         recipeManager = currentServer.getRecipeManager();
-        RMSRecipeUtils.reloadRecipeTypes(RMSMain.getRecipeManager());
+        RMSRecipeUtils.reloadRecipeTypes(recipeManager);
+    }
+
+    public static void syncDataWithPlayers() {
         RMSApi.syncRecipeContainerWithPlayers();
     }
 

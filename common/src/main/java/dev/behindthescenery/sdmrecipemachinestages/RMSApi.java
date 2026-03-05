@@ -1,6 +1,7 @@
 package dev.behindthescenery.sdmrecipemachinestages;
 
 import dev.architectury.networking.NetworkManager;
+import dev.behindthescenery.sdmrecipemachinestages.compat.IRecipeUpdateListener;
 import dev.behindthescenery.sdmrecipemachinestages.data.*;
 import dev.behindthescenery.sdmrecipemachinestages.network.SyncRecipesAndStagesS2C;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
@@ -17,29 +18,48 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 public class RMSApi {
 
     public static void addRecipe(String recipeType, ResourceLocation recipeID, String stage) {
-        RMSApi.register(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), new ArrayList<>(List.of(recipeID)), stage);
+
+        final RecipeType<?> _recipeType = BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType));
+
+        if(_recipeType == null)
+            throw new NullPointerException("Can't find recipeType by id: " + recipeType);
+
+        RMSApi.registerImpl(_recipeType, new ArrayList<>(List.of(recipeID)), stage);
     }
 
     public static void addRecipe(String recipeType, ResourceLocation[] recipeID, String stage) {
-        RMSApi.register(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), new ArrayList<>(List.of(recipeID)), stage);
+
+        final var _recipeType = BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType));
+
+        if(_recipeType == null)
+            throw new NullPointerException("Can't find recipeType by id: " + recipeType);
+
+        RMSApi.registerImpl(_recipeType, new ArrayList<>(List.of(recipeID)), stage);
     }
 
     public static void addRecipe(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, ResourceLocation recipeID, String stage) {
-        RMSApi.register(recipeType, new ArrayList<>(List.of(recipeID)), stage);
+        RMSApi.registerImpl(recipeType, new ArrayList<>(List.of(recipeID)), stage);
     }
 
     public static void addRecipe(RecipeType<? extends Recipe<? extends RecipeInput>> recipeType, ResourceLocation[] recipeID, String stage) {
-        RMSApi.register(recipeType, new ArrayList<>(List.of(recipeID)), stage);
+        RMSApi.registerImpl(recipeType, new ArrayList<>(List.of(recipeID)), stage);
     }
 
     public static void addRecipeByMod(String recipeType, String modId, String stage) {
-        addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
+
+        final var _recipeType = BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType));
+
+        if(_recipeType == null)
+            throw new NullPointerException("Can't find recipeType by id: " + recipeType);
+
+        addRecipeByMod(_recipeType, modId, stage);
     }
 
     public static void addRecipeByMod(RecipeType<?> recipeType, String modId, String stage) {
@@ -49,11 +69,17 @@ public class RMSApi {
                 .filter(id -> id.getNamespace().equals(modId))
                 .toList();
 
-        RMSApi.register(recipeType, new ArrayList<>(recipeIds), stage);
+        RMSApi.registerImpl(recipeType, new ArrayList<>(recipeIds), stage);
     }
 
     public static void addRecipeByMod(String recipeType, String[] modId, String stage) {
-        addRecipeByMod(BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType)), modId, stage);
+
+        final var _recipeType = BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.tryParse(recipeType));
+
+        if(_recipeType == null)
+            throw new NullPointerException("Can't find recipeType by id: " + recipeType);
+
+        addRecipeByMod(_recipeType, modId, stage);
     }
 
     public static void addRecipeByMod(RecipeType<?> recipeType, String[] modIds, String stage) {
@@ -68,14 +94,18 @@ public class RMSApi {
                 })
                 .toList();
 
-        RMSApi.register(recipeType, new ArrayList<>(recipeIds), stage);
+        RMSApi.registerImpl(recipeType, new ArrayList<>(recipeIds), stage);
     }
 
     public static void register(RecipeType<?> recipeType, List<ResourceLocation> recipeName, String stage) {
+        registerImpl(recipeType, recipeName, stage);
+    }
+
+    private static void registerImpl(RecipeType<?> recipeType, List<ResourceLocation> recipeName, String stage) {
         RMSContainer.Instance.register(new RecipeBlockType(stage, recipeType, recipeName));
         syncRecipesWithPlayers(recipeType, recipeName, stage);
     }
-
+    
     public static void register(Class<?> blockClass, List<ItemStack> inputs, String stage, RecipeBlockClass type) {
         switch (type) {
             case Input -> RMSContainer.Instance.register(new RecipeBlockInput(blockClass, stage, inputs));
@@ -98,7 +128,7 @@ public class RMSApi {
 
     public static void syncRecipesWithPlayers(RecipeType<?> recipeType, List<ResourceLocation> recipeName, String stage) {
         final MinecraftServer server = RMSMain.getServer();
-        if(server == null) return;
+        if (server == null) return;
 
         final ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(recipeType);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
@@ -108,7 +138,7 @@ public class RMSApi {
 
     public static void syncRecipeContainerWithPlayers() {
         final MinecraftServer server = RMSMain.getServer();
-        if(server == null) return;
+        if (server == null) return;
 
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             RMSContainer.Instance.sendTo(player);
