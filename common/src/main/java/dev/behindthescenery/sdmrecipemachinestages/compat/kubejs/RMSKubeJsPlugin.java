@@ -27,8 +27,6 @@ public class RMSKubeJsPlugin implements KubeJSPlugin {
         }
     }
 
-
-
     @Override
     public void registerEvents(EventGroupRegistry registry) {
         registry.register(RMSJSEvents.GROUP);

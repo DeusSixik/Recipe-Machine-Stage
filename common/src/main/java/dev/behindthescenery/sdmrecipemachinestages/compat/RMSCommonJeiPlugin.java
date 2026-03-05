@@ -54,6 +54,8 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void updateRecipe() {
+        if(Minecraft.getInstance().level == null) return;
+
         final boolean isDebus = Platform.isDevelopmentEnvironment();
         final IRecipeManager recipeManager = runtime.getRecipeManager();
 
