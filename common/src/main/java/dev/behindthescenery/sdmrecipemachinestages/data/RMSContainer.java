@@ -5,6 +5,7 @@ import dev.architectury.platform.Platform;
 import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
 import dev.behindthescenery.sdmrecipemachinestages.RMSMain;
 import dev.behindthescenery.sdmrecipemachinestages.compat.IRecipeUpdateListener;
+import dev.behindthescenery.sdmrecipemachinestages.compat.RMSIntegrations;
 import dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events.RMSJSEvents;
 import dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events.RMSStageKubeEvent;
 import dev.behindthescenery.sdmrecipemachinestages.network.SyncRMSContainerDataS2C;
@@ -101,11 +102,7 @@ public class RMSContainer extends SimplePreparableReloadListener<Void> {
 
         clearData();
 
-        if(Platform.isModLoaded("kubejs")) {
-            RMSJSEvents.REGISTER.post(new RMSStageKubeEvent());
-        }
-
-
+        RMSIntegrations.kubeJSAddRecipes.run();
     }
 
     public void endReloading(MinecraftServer server) {
