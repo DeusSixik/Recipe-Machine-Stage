@@ -52,11 +52,11 @@ RMSEvents.register(event => {
     // PRIORITY EXAMPLE (Creating Exceptions)
     // ==========================================
     
-    // 1. First, tie a specific battery recipe to the 'test' stage.
+    // 1. First, tie a specific battery recipe to the 'battery_stage' stage.
     event.addRecipe("modern_industrialization:assembler", "modern_industrialization:assembler_generated/electric_age/battery/cadmium_battery", "battery_stage");
     
-    // 2. Then, lock the ENTIRE assembler behind the 'modern_steam' stage.
-    // Result: The assembler requires 'modern_steam', but the cadmium battery recipe remains accessible at the 'test' stage.
+    // 2. Then, lock the ENTIRE assembler behind the 'assembler_recipes_stage' stage.
+    // Result: The assembler requires 'assembler_recipes_stage', but the cadmium battery recipe remains accessible at the 'test' stage.
     event.addRecipeByMachine("modern_industrialization:assembler", "assembler_recipes_stage");
 })
 ```
