@@ -123,6 +123,8 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
                 });
             }
         }
+
+        RMSContainer.send("Invoke 1.1");
     }
 
     protected record RecipeHolderElement(RecipeHolder<?> value) implements Element<RecipeHolder<?>> { }

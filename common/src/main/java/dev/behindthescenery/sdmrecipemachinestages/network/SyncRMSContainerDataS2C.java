@@ -20,13 +20,11 @@ public record SyncRMSContainerDataS2C(RecipeBlockType recipeBlockType) implement
     );
 
     public static void handle(SyncRMSContainerDataS2C packet, NetworkManager.PacketContext context) {
-        context.queue(() -> {
-            if(!RMSContainer.Instance.isServer) {
-                RMSContainer.Instance.register(packet.recipeBlockType);
+        if(!RMSContainer.Instance.isServer) {
+            RMSContainer.Instance.register(packet.recipeBlockType);
+        }
 
-                RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
-            }
-        });
+        RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
     }
 
     @Override

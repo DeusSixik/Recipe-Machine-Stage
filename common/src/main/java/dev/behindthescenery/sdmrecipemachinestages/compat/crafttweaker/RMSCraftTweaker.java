@@ -3,7 +3,7 @@ package dev.behindthescenery.sdmrecipemachinestages.compat.crafttweaker;
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
-import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.api.RMSApi;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -66,6 +66,11 @@ public class RMSCraftTweaker {
     @ZenCodeType.Method
     public static void addRecipeByMod(IRecipeManager<Recipe<RecipeInput>> recipeType, String[] modIds, String stage) {
         RMSApi.addRecipeByMod(recipeType.getRecipeType(), modIds, stage);
+    }
+
+    @ZenCodeType.Method
+    public static void addRecipeByMachine(IRecipeManager<Recipe<RecipeInput>> recipeType, String stage) {
+        RMSApi.addRecipeByMachine(recipeType.getRecipeType(), stage);
     }
 
     @ZenCodeType.Method

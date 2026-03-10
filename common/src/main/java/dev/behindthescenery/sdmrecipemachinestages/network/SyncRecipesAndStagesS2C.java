@@ -28,17 +28,16 @@ public record SyncRecipesAndStagesS2C(ResourceLocation recipeTypeId, List<Resour
             );
 
     public static void handle(SyncRecipesAndStagesS2C packet, NetworkManager.PacketContext context) {
-        context.queue(() -> {
-            if(RMSContainer.Instance.isServer) return;
+        if(RMSContainer.Instance.isServer) {
 
             final RecipeType<?> recipeType = BuiltInRegistries.RECIPE_TYPE.get(packet.recipeTypeId);
-            if(recipeType == null)
+            if (recipeType == null)
                 throw new RuntimeException("Recipe type with id '" + packet.recipeTypeId + "' not found!");
 
             RMSContainer.Instance.register(new RecipeBlockType(packet.stage, recipeType, packet.recipe));
+        }
 
-            RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
-        });
+        RMSMain.getListeners().forEach(IRecipeUpdateListener::updateRecipe);
     }
 
     @Override

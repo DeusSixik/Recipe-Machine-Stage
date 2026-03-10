@@ -1,11 +1,10 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.kubejs;
 
-import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.api.RMSApi;
 import dev.behindthescenery.sdmrecipemachinestages.compat.RMSIntegrations;
 import dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events.RMSJSEvents;
 import dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events.RMSStageKubeEvent;
 import dev.behindthescenery.sdmrecipemachinestages.supported.RMSSupportedTypes;
-import dev.latvian.mods.kubejs.event.EventGroup;
 import dev.latvian.mods.kubejs.event.EventGroupRegistry;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
@@ -48,6 +47,10 @@ public class RMSKubeJsPlugin implements KubeJSPlugin {
 
         static void addRecipeByMods(String recipeType, String[] modId, String stage) {
             RMSApi.addRecipeByMod(recipeType, modId, stage);
+        }
+
+        static void addRecipeByMachine(String recipeType, String stage) {
+            RMSApi.addRecipeByMachine(recipeType, stage);
         }
 
         static String[] getSupportedByTypes() {

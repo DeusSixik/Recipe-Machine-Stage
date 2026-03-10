@@ -2,6 +2,7 @@ package dev.behindthescenery.sdmrecipemachinestages;
 
 import com.mojang.logging.LogUtils;
 import dev.architectury.event.EventResult;
+import dev.behindthescenery.sdmrecipemachinestages.api.RMSApi;
 import dev.behindthescenery.sdmrecipemachinestages.compat.IRecipeUpdateListener;
 import dev.behindthescenery.sdmrecipemachinestages.data.RMSContainer;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSRecipeUtils;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,9 +56,9 @@ public class RMSMain {
         RMSContainer.Instance.startReloading(server);
         RMSContainer.Instance.endReloading(server);
 
-        if(isSync) {
-            syncDataWithPlayers();
-        }
+//        if(isSync) {
+//            syncDataWithPlayers();
+//        }
     }
 
     public static void syncDataWithPlayers() {
@@ -84,7 +86,7 @@ public class RMSMain {
     }
 
     public static List<IRecipeUpdateListener> getListeners() {
-        return listeners.stream().toList();
+        return Collections.unmodifiableList(listeners);
     }
 
     public static void addListener(IRecipeUpdateListener listener) {

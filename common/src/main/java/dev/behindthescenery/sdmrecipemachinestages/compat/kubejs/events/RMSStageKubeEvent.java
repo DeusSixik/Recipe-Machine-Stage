@@ -1,6 +1,6 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.kubejs.events;
 
-import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.api.RMSApi;
 import dev.latvian.mods.kubejs.event.KubeEvent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -24,5 +24,9 @@ public class RMSStageKubeEvent implements KubeEvent {
 
     public void addRecipeByMods(String recipeType, String[] modId, String stage) {
         RMSApi.addRecipeByMod(recipeType, modId, stage);
+    }
+
+    public void addRecipeByMachine(String recipeType, String stage) {
+        RMSApi.addRecipeByMachine(recipeType, stage);
     }
 }

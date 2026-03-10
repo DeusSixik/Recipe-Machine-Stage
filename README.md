@@ -22,37 +22,65 @@ This mod provides the ability to block recipes for mechanisms, similar to how it
 ## How to use it ?
 The mod supports both KubeJS and CraftTweaker
 
-### KubeJs
-```js
+> **⚠️ Important: Registration order matters!**
+> If a recipe is already restricted individually (via `addRecipe` or `addRecipes`), subsequent bulk restrictions (`addRecipeByMod`, `addRecipeByMachine`) **will ignore it**.
+> This allows you to create exceptions: for instance, tying a specific recipe to an early stage, while locking the rest of the machine behind a later stage.
 
+### KubeJS
+```javascript
 RMSEvents.register(event => {
-
-    //event.addRecipe(String recipeType, String recipe_id, String stage)
+    // --- Individual Restrictions ---
+    // event.addRecipe(recipeType: string, recipe_id: string, stage: string)
     event.addRecipe('create:milling', 'create:milling/fern', 'two')
     
-    //event.addRecipes(String recipeType, String[] recipe_id, String stage)
-    event.addRecipes("minecraft:smelting", ["minecraft:stone", "minecraft:iron_ingot"], "one")
+    // event.addRecipes(recipeType: string, recipe_ids: string[], stage: string)
+    event.addRecipes('minecraft:smelting', ['minecraft:stone', 'minecraft:iron_ingot'], 'one')
     
-    //event.addRecipeByMod(String recipeType, String modId, String stage)
-    event.addRecipeByMod("minecraft:smelting", "create", "create")
+    // --- Bulk Restrictions ---
+    // event.addRecipeByMod(recipeType: string, modId: string, stage: string)
+    event.addRecipeByMod('minecraft:smelting', 'create', 'create')
     
-    //event.addRecipeByMods(String recipeType, String[] modId, String stage)
-    event.addRecipeByMods("minecraft:smelting", ["create", "minecraft"], "one")
-}
+    // event.addRecipeByMods(recipeType: string, modIds: string[], stage: string)
+    event.addRecipeByMods('minecraft:smelting', ['create', 'minecraft'], 'one')
+    
+    // event.addRecipeByMachine(recipeType: string, stage: string)
+    event.addRecipeByMachine('minecraft:smelting', 'one')
+
+
+    // ==========================================
+    // PRIORITY EXAMPLE (Creating Exceptions)
+    // ==========================================
+    
+    // 1. First, tie a specific battery recipe to the 'test' stage.
+    event.addRecipe("modern_industrialization:assembler", "modern_industrialization:assembler_generated/electric_age/battery/cadmium_battery", "battery_stage");
+    
+    // 2. Then, lock the ENTIRE assembler behind the 'modern_steam' stage.
+    // Result: The assembler requires 'modern_steam', but the cadmium battery recipe remains accessible at the 'test' stage.
+    event.addRecipeByMachine("modern_industrialization:assembler", "assembler_recipes_stage");
+})
 ```
 
 ### CraftTweaker
-`import mods.rms.RMS;`
+In `CraftTweaker`, the queue processing logic is identical: specific recipes must be declared before bulk ones to create exceptions.
+
 ```ts
 import mods.rms.RMS;
 
+// --- Method Signatures ---
+// Individual:
 RMS.addRecipe(recipeType as string, recipeID as string, stage as string)
-RMS.addRecipe(recipeType as string, recipeID as string[], stage as string)
-RMS.addRecipeByMod(recipeType as string, modId as string, stage as string)
-RMS.addRecipeByMod(recipeType as string, modId as string[], stage as string)
-
+RMS.addRecipe(recipeType as string, recipeIDs as string[], stage as string)
 RMS.addRecipe(recipeType as RecypeType, recipeID as string, stage as string)
-RMS.addRecipe(recipeType as RecypeType, recipeID as string[], stage as string)
+RMS.addRecipe(recipeType as RecypeType, recipeIDs as string[], stage as string)
+
+// Bulk:
+RMS.addRecipeByMod(recipeType as string, modId as string, stage as string)
+RMS.addRecipeByMod(recipeType as string, modIds as string[], stage as string)
 RMS.addRecipeByMod(recipeType as RecypeType, modId as string, stage as string)
-RMS.addRecipeByMod(recipeType as RecypeType, modId as string[], stage as string)
+RMS.addRecipeByMod(recipeType as RecypeType, modIds as string[], stage as string)
+RMS.addRecipeByMachine(recipeType as RecypeType, stage as string)
+
+// --- Priority Example ---
+RMS.addRecipe("modern_industrialization:assembler", "modern_industrialization:assembler_generated/electric_age/battery/cadmium_battery", "battery_stage");
+RMS.addRecipeByMachine("modern_industrialization:assembler", "assembler_recipes_stage");
 ```

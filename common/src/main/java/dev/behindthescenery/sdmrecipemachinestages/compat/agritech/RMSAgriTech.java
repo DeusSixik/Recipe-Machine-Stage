@@ -1,7 +1,7 @@
 package dev.behindthescenery.sdmrecipemachinestages.compat.agritech;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-import dev.behindthescenery.sdmrecipemachinestages.RMSApi;
+import dev.behindthescenery.sdmrecipemachinestages.api.RMSApi;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.openzen.zencode.java.ZenCodeType;
