@@ -42,6 +42,7 @@ public class RMSMain {
 
     public static void onServerStarted(MinecraftServer server) {
         onServerReloadResources(server, false);
+        StageApi.reloadServerStage(server);
         ServerContainer = StageApi.getServerStage();
         isGlobal = ServerContainer.getContainerType() == StageContainerType.GLOBAL;
         syncDataWithPlayers();
