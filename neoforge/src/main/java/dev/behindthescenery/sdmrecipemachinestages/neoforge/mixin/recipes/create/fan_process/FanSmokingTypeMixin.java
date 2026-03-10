@@ -29,7 +29,7 @@ public abstract class FanSmokingTypeMixin implements FanProcessingTypePatch {
 
         if (smokingRecipe.isPresent()) {
            final RecipeHolder<SmokingRecipe> getting = smokingRecipe.get();
-           return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, smokingRecipe.get()) : null;
+           return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, getting.value(), false) : null;
         }
 
 
