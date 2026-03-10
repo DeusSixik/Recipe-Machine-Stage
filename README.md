@@ -22,8 +22,9 @@ This mod provides the ability to block recipes for mechanisms, similar to how it
 ## How to use it ?
 The mod supports both KubeJS and CraftTweaker
 
-> **⚠️ Important: Registration order matters!**
-> If a recipe is already restricted individually (via `addRecipe` or `addRecipes`), subsequent bulk restrictions (`addRecipeByMod`, `addRecipeByMachine`) **will ignore it**.
+> [!WARN] 
+> **Important: Registration order matters!** <br>
+> If a recipe is already restricted individually (via `addRecipe` or `addRecipes`), subsequent bulk restrictions (`addRecipeByMod`, `addRecipeByMachine`) **will ignore it**. <br>
 > This allows you to create exceptions: for instance, tying a specific recipe to an early stage, while locking the rest of the machine behind a later stage.
 
 ### KubeJS

@@ -33,3 +33,4 @@ replay_pid*
 /neoforge/.gradle
 /neoforge/run
 /.idea
+build/reports/problems/problems-report.html
