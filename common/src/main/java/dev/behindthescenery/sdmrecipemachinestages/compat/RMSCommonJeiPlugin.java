@@ -59,13 +59,18 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
         final boolean isDebus = Platform.isDevelopmentEnvironment();
         final IRecipeManager recipeManager = runtime.getRecipeManager();
 
-//        RecipeManagerInternal internal = ((RecipeManagerAccessor) recipeManager).getInternal();
-//        RecipeTypeDataMap recipeTypeDataMap = ((RecipeManagerInternalAccessor)internal).getRecipeTypeDataMap();
-//        Map<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> recipeTypeMap = ((RecipeTypeDataMapAccessor)recipeTypeDataMap).getUidMap();
-//
-//        for (Map.Entry<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> entry : recipeTypeMap.entrySet()) {
-//            System.out.println(entry.getKey().getUid());
-//        }
+
+        if(Platform.isDevelopmentEnvironment()) {
+            System.out.println("-------------------------");
+            RecipeManagerInternal internal = ((RecipeManagerAccessor) recipeManager).getInternal();
+            RecipeTypeDataMap recipeTypeDataMap = ((RecipeManagerInternalAccessor) internal).getRecipeTypeDataMap();
+            Map<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> recipeTypeMap = ((RecipeTypeDataMapAccessor) recipeTypeDataMap).getUidMap();
+
+            for (Map.Entry<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> entry : recipeTypeMap.entrySet()) {
+                System.out.println(entry.getKey().getUid());
+            }
+            System.out.println("-------------------------");
+        }
 
         for (final Map.Entry<RecipeType<? extends Recipe<?>>, List<RecipeBlockType>> entry :
                 RMSContainer.Instance.getRecipesByTypeData().entrySet()) {

@@ -23,16 +23,11 @@ public class RMSSupportedTypes {
                 "naturesaura",
                 "oreberriesreplanted",
                 "roots",
-                "modern_industrialization"
+                "modern_industrialization",
+                "minecraft"
         });
 
         registerType(new String[] {
-                "minecraft:smelting",
-                "minecraft:stonecutting",
-                "minecraft:crafting",
-                "minecraft:smoking",
-                "minecraft:blasting",
-                "minecraft:smithing",
                 "ae2:inscriber",
                 "ae2:charger",
                 "ae2:entropy",

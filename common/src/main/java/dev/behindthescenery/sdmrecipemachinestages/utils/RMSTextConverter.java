@@ -47,6 +47,9 @@ public class RMSTextConverter {
             case "mixer" -> modernIndustrializationNewId("mixer");
             case "compressor" -> modernIndustrializationNewId("compressor");
             case "furnace" -> modernIndustrializationNewId("furnace");
+            case "packer" -> modernIndustrializationNewId("packer");
+            case "wiremill" -> modernIndustrializationNewId("wiremill");
+            case "blast_furnace" -> modernIndustrializationNewBlastFurnace();
             default -> new ResourceLocation[] { recipeType };
         };
     }
@@ -56,6 +59,14 @@ public class RMSTextConverter {
                 ResourceLocation.tryBuild("modern_industrialization", "steel_" + name),
                 ResourceLocation.tryBuild("modern_industrialization", "electric_" + name),
                 ResourceLocation.tryBuild("modern_industrialization", "bronze_" + name)
+        };
+    }
+
+    private static ResourceLocation[] modernIndustrializationNewBlastFurnace() {
+        return new ResourceLocation[] {
+                ResourceLocation.tryBuild("modern_industrialization", "electric_blast_furnace_cupronickel_coil"),
+                ResourceLocation.tryBuild("modern_industrialization", "electric_blast_furnace_kanthal_coil"),
+                ResourceLocation.tryBuild("modern_industrialization", "steam_blast_furnace"),
         };
     }
 }

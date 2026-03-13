@@ -15,6 +15,7 @@
     "jei.RecipeTypeDataMapAccessor",
     "recipes.ice_and_fire.DragonForgeBlockEntityMixin",
     "recipes.minecraft.AbstractFurnaceBlockEntityMixin",
+    "recipes.minecraft.CampfireBlockEntityMixin",
     "recipes.minecraft.CraftingMenuMixin",
     "recipes.minecraft.StonecutterMenuMixin"
   ],
