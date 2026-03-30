@@ -49,6 +49,7 @@ public class RMSTextConverter {
             case "furnace" -> modernIndustrializationNewId("furnace");
             case "packer" -> modernIndustrializationNewId("packer");
             case "wiremill" -> modernIndustrializationNewId("wiremill");
+            case "quarry" -> modernIndustrializationNewId("quarry");
             case "blast_furnace" -> modernIndustrializationNewBlastFurnace();
             default -> new ResourceLocation[] { recipeType };
         };
