@@ -43,7 +43,7 @@ public abstract class FanBlastingTypeMixin implements FanProcessingTypePatch {
                             .getResultItem(registryAccess))) {
 
                 final RecipeHolder<? extends AbstractCookingRecipe> getting = smeltingRecipe.get();
-                return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, getting) : Collections.emptyList();
+                return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, getting.value(), false) : Collections.emptyList();
             }
         }
 

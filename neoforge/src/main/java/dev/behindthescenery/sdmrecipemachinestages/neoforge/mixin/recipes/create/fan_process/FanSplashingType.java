@@ -25,7 +25,7 @@ public abstract class FanSplashingType implements FanProcessingTypePatch {
         final Optional<RecipeHolder<Recipe<SingleRecipeInput>>> recipe = AllRecipeTypes.SPLASHING.find(new SingleRecipeInput(stack), level);
         if (recipe.isPresent()) {
             final RecipeHolder<Recipe<SingleRecipeInput>> getting = recipe.get();
-            return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, recipe.get()) : null;
+            return RMSUtils.canProcess(ownerId, getting) ? RecipeApplier.applyRecipeOn(level, stack, getting.value(), false) : null;
         }
         return null;
     }
