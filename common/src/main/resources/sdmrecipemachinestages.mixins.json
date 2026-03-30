@@ -10,6 +10,7 @@
     "accessor.EnchantmentMenuAccessor",
     "custom_data.BlockEntity$AddCustomData",
     "init.MinecraftServerMixin",
+    "init.ReloadableServerResourcesMixin",
     "jei.RecipeManagerAccessor",
     "jei.RecipeManagerInternalAccessor",
     "jei.RecipeTypeDataMapAccessor",

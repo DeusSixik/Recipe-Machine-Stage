@@ -10,9 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.*;
@@ -117,8 +115,11 @@ public class RMSApi {
         final MinecraftServer server = RMSMain.getServer();
         if (server == null) return;
 
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            RMSContainer.Instance.sendTo(player);
+        final var players = server.getPlayerList().getPlayers();
+        if(players.isEmpty()) return;
+
+        for (int i = 0; i < players.size(); i++) {
+            RMSContainer.Instance.sendTo(players.get(i));
         }
     }
 

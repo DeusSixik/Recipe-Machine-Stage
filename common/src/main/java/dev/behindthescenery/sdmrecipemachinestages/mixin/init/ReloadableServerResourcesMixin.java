@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated
 @Mixin(ReloadableServerResources.class)
 public class ReloadableServerResourcesMixin {
 

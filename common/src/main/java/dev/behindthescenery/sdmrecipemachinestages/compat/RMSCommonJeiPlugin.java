@@ -52,89 +52,96 @@ public class RMSCommonJeiPlugin implements IModPlugin, IRecipeUpdateListener {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void updateRecipe() {
-        if(Minecraft.getInstance().level == null) return;
+        if (Minecraft.getInstance().level == null) return;
 
-        final boolean isDebus = Platform.isDevelopmentEnvironment();
-        final IRecipeManager recipeManager = runtime.getRecipeManager();
+        Minecraft.getInstance().executeBlocking(() -> {
+
+            final boolean isDebus = Platform.isDevelopmentEnvironment();
+            final IRecipeManager recipeManager = runtime.getRecipeManager();
 
 
-        if(Platform.isDevelopmentEnvironment()) {
-            System.out.println("-------------------------");
-            RecipeManagerInternal internal = ((RecipeManagerAccessor) recipeManager).getInternal();
-            RecipeTypeDataMap recipeTypeDataMap = ((RecipeManagerInternalAccessor) internal).getRecipeTypeDataMap();
-            Map<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> recipeTypeMap = ((RecipeTypeDataMapAccessor) recipeTypeDataMap).getUidMap();
+            if (Platform.isDevelopmentEnvironment()) {
+                System.out.println("-------------------------");
+                RecipeManagerInternal internal = ((RecipeManagerAccessor) recipeManager).getInternal();
+                RecipeTypeDataMap recipeTypeDataMap = ((RecipeManagerInternalAccessor) internal).getRecipeTypeDataMap();
+                Map<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> recipeTypeMap = ((RecipeTypeDataMapAccessor) recipeTypeDataMap).getUidMap();
 
-            for (Map.Entry<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> entry : recipeTypeMap.entrySet()) {
-                System.out.println(entry.getKey().getUid());
+                for (Map.Entry<mezz.jei.api.recipe.RecipeType<?>, RecipeTypeData<?>> entry : recipeTypeMap.entrySet()) {
+                    System.out.println(entry.getKey().getUid());
+                }
+                System.out.println("-------------------------");
             }
-            System.out.println("-------------------------");
-        }
 
-        for (final Map.Entry<RecipeType<? extends Recipe<?>>, List<RecipeBlockType>> entry :
-                RMSContainer.Instance.getRecipesByTypeData().entrySet()) {
+            for (final Map.Entry<RecipeType<? extends Recipe<?>>, List<RecipeBlockType>> entry :
+                    RMSContainer.Instance.getRecipesByTypeData().entrySet()) {
 
-            final RecipeType recipeType = entry.getKey();
-            final List<RecipeBlockType> recipeBlockTypes = entry.getValue();
-            final ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(recipeType);
+                final RecipeType recipeType = entry.getKey();
+                final List<RecipeBlockType> recipeBlockTypes = entry.getValue();
+                final ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(recipeType);
 
-            final ResourceLocation[] converted = RMSTextConverter.tryConvert(recipeTypeId);
+                final ResourceLocation[] converted = RMSTextConverter.tryConvert(recipeTypeId);
 
-            for (int i = 0; i < converted.length; i++) {
-                recipeManager.getRecipeType(converted[i]).ifPresent(jeiRecipeType -> {
-                    final JeiRecipeType recipeType_enum = JeiRecipeType.getRecipeTypeEnum(jeiRecipeType.getRecipeClass());
+                for (int i = 0; i < converted.length; i++) {
+                    recipeManager.getRecipeType(converted[i]).ifPresent(jeiRecipeType -> {
+                        final JeiRecipeType recipeType_enum = JeiRecipeType.getRecipeTypeEnum(jeiRecipeType.getRecipeClass());
 
-                    final Collection<Element<?>> lockedRecipes = new ArrayList<>();
-                    final Collection<Element<?>> unlockedRecipes = new ArrayList<>();
+                        final Collection<Element<?>> lockedRecipes = new ArrayList<>();
+                        final Collection<Element<?>> unlockedRecipes = new ArrayList<>();
 
-                    assert Minecraft.getInstance().level != null;
+                        assert Minecraft.getInstance().level != null;
 
-                    final List<RecipeHolder<?>> recipes =
-                            (List<RecipeHolder<?>>) (List<?>) Minecraft.getInstance().level
-                                    .getRecipeManager()
-                                    .getAllRecipesFor(recipeType);
+                        final List<RecipeHolder<?>> recipes =
+                                (List<RecipeHolder<?>>) (List<?>) Minecraft.getInstance().level
+                                        .getRecipeManager()
+                                        .getAllRecipesFor(recipeType);
 
-                    for (final RecipeHolder<?> recipeHolder : recipes) {
-                        final ResourceLocation recipeId = recipeHolder.id();
+                        for (final RecipeHolder<?> recipeHolder : recipes) {
+                            final ResourceLocation recipeId = recipeHolder.id();
 
-                        for (final RecipeBlockType recipeBlockType : recipeBlockTypes) {
-                            if (!recipeBlockType.contains(recipeId)) continue;
+                            for (final RecipeBlockType recipeBlockType : recipeBlockTypes) {
+                                if (!recipeBlockType.contains(recipeId)) continue;
 
-                            if (RMSStageUtilsClient.isUnlocked(recipeBlockType)) {
-                                switch (recipeType_enum) {
-                                    case Holder -> unlockedRecipes.add(new RecipeHolderElement(recipeHolder));
-                                    case Recipe -> unlockedRecipes.add(new RecipeElement(recipeHolder.value()));
-                                }
-                            } else {
-                                switch (recipeType_enum) {
-                                    case Holder -> lockedRecipes.add(new RecipeHolderElement(recipeHolder));
-                                    case Recipe -> lockedRecipes.add(new RecipeElement(recipeHolder.value()));
+                                if (RMSStageUtilsClient.isUnlocked(recipeBlockType)) {
+                                    switch (recipeType_enum) {
+                                        case Holder -> unlockedRecipes.add(new RecipeHolderElement(recipeHolder));
+                                        case Recipe -> unlockedRecipes.add(new RecipeElement(recipeHolder.value()));
+                                    }
+                                } else {
+                                    switch (recipeType_enum) {
+                                        case Holder -> lockedRecipes.add(new RecipeHolderElement(recipeHolder));
+                                        case Recipe -> lockedRecipes.add(new RecipeElement(recipeHolder.value()));
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    if (!lockedRecipes.isEmpty()) {
-                        recipeManager.hideRecipes(jeiRecipeType, RMSUtils.cast(lockedRecipes.stream().map(Element::value).toList()));
-                        if(isDebus)
-                            LOGGER.info("{} Hide:{}", recipeTypeId, lockedRecipes.size());
-                    }
-                    if (!unlockedRecipes.isEmpty()) {
-                        recipeManager.unhideRecipes(jeiRecipeType, RMSUtils.cast(unlockedRecipes.stream().map(Element::value).toList()));
-                        if(isDebus)
-                            LOGGER.info("{} UnHide:{}", recipeTypeId, lockedRecipes.size());
-                    }
-                });
+                        if (!lockedRecipes.isEmpty()) {
+                            Minecraft.getInstance().submit(() -> {
+                                recipeManager.hideRecipes(jeiRecipeType, RMSUtils.cast(lockedRecipes.stream().map(Element::value).toList()));
+                                if (isDebus)
+                                    LOGGER.info("{} Hide:{}", recipeTypeId, lockedRecipes.size());
+                            });
+                        }
+                        if (!unlockedRecipes.isEmpty()) {
+                            Minecraft.getInstance().submit(() -> {
+                                recipeManager.unhideRecipes(jeiRecipeType, RMSUtils.cast(unlockedRecipes.stream().map(Element::value).toList()));
+                                if (isDebus)
+                                    LOGGER.info("{} UnHide:{}", recipeTypeId, lockedRecipes.size());
+                            });
+                        }
+                    });
+                }
             }
-        }
-
-        RMSContainer.send("Invoke 1.1");
+        });
     }
 
-    protected record RecipeHolderElement(RecipeHolder<?> value) implements Element<RecipeHolder<?>> { }
+    protected record RecipeHolderElement(RecipeHolder<?> value) implements Element<RecipeHolder<?>> {
+    }
 
-    protected record RecipeElement(Recipe<?> value) implements Element<Recipe<?>> { }
+    protected record RecipeElement(Recipe<?> value) implements Element<Recipe<?>> {
+    }
 
     protected interface Element<T> {
 

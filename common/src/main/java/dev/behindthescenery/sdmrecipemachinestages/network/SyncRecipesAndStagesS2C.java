@@ -28,7 +28,7 @@ public record SyncRecipesAndStagesS2C(ResourceLocation recipeTypeId, List<Resour
             );
 
     public static void handle(SyncRecipesAndStagesS2C packet, NetworkManager.PacketContext context) {
-        if(RMSContainer.Instance.isServer) {
+        if(!RMSContainer.Instance.isServer) {
 
             final RecipeType<?> recipeType = BuiltInRegistries.RECIPE_TYPE.get(packet.recipeTypeId);
             if (recipeType == null)

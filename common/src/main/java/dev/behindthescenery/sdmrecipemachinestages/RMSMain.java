@@ -37,8 +37,6 @@ public class RMSMain {
     private static MinecraftServer currentServer;
     private static boolean isGlobal;
     private static StageContainer ServerContainer;
-    private static RegistryAccess.Frozen registryAccess;
-    private static RecipeManager recipeManager;
 
     public static void onServerStarted(MinecraftServer server) {
         onServerReloadResources(server, false);
@@ -49,13 +47,14 @@ public class RMSMain {
     }
 
     public static void onServerReloadResources(MinecraftServer server, boolean isSync) {
+        MinecraftServer old = currentServer;
         currentServer = server;
-        registryAccess = currentServer.registryAccess();
-        recipeManager = currentServer.getRecipeManager();
+        LOGGER.info("Set new 'currentServer' old hash: {} | new hash: {}", (old != null ? old.hashCode() : "NULL"), currentServer.hashCode());
+        RMSContainer.Instance.invokeReload(server);
 
-        RMSRecipeUtils.reloadRecipeTypes(recipeManager);
-        RMSContainer.Instance.startReloading(server);
-        RMSContainer.Instance.endReloading(server);
+//        RMSRecipeUtils.reloadRecipeTypes(currentServer.getRecipeManager());
+//        RMSContainer.Instance.startReloading(server);
+//        RMSContainer.Instance.endReloading(server);
 
 //        if(isSync) {
 //            syncDataWithPlayers();
@@ -79,11 +78,11 @@ public class RMSMain {
     }
 
     public static RegistryAccess.Frozen getRegistryAccess() {
-        return registryAccess;
+        return currentServer.registryAccess();
     }
 
     public static RecipeManager getRecipeManager() {
-        return recipeManager;
+        return currentServer.getRecipeManager();
     }
 
     public static List<IRecipeUpdateListener> getListeners() {
