@@ -25,6 +25,7 @@ configurations {
 }
 
 repositories {
+    mavenCentral()
     maven {
         name = 'NeoForged'
         url = 'https://maven.neoforged.net/releases'
@@ -70,6 +71,9 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.799"
 
     implementsMods(delegate)
+
+
+    minecraftRuntimeLibraries files("./libs/gson-0.3.0.jar")
 }
 
 processResources {
@@ -178,5 +182,9 @@ def implementsMods(DependencyHandler deps) {
     deps.modImplementation "curse.maven:lodestone-616457:7264731"
     deps.modImplementation "curse.maven:patchouli-306770:6842247"
     deps.modImplementation "curse.maven:guideme-1173950:7127444"
+
+
+    deps.modImplementation "curse.maven:enhanced-workbenches-857513:7270252"
+    deps.modImplementation "curse.maven:yacl-667299:7437845"
 
 }

@@ -40,6 +40,7 @@
     "recipes.create.fan_process.FanHauntingTypeMixin",
     "recipes.create.fan_process.FanSmokingTypeMixin",
     "recipes.create.fan_process.FanSplashingType",
+    "recipes.enhancedworkbenches.CraftingBlockMenuMixin",
     "recipes.irons_spell_books.AlchemistCauldronTileMixin",
     "recipes.irons_spell_books.ArcaneAnvilMenuMixin",
     "recipes.jumbo_furnace.JumboFurnaceCoreBlockEntityMixin",

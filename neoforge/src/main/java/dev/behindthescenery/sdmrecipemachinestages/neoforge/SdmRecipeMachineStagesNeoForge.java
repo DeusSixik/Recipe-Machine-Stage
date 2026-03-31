@@ -8,5 +8,7 @@ public final class SdmRecipeMachineStagesNeoForge {
     public SdmRecipeMachineStagesNeoForge() {
         // Run our common setup.
         SdmRecipeMachineStages.init();
+
+
     }
 }
