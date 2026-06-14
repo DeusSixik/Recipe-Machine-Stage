@@ -23,7 +23,7 @@ public class TileFusionCraftingCoreMixin {
 
     @Inject(method = "setActiveRecipe", at = @At("HEAD"), cancellable = true)
     private void sdm$setActiveRecipe(IFusionRecipe recipe, CallbackInfo ci) {
-        if(!StageContainer.hasRecipes(recipe.getType())) return;
+        if(recipe == null || !StageContainer.hasRecipes(recipe.getType())) return;
 
         Optional<IOwnerBlock> d1 = thisEntity.getCapability(RMSCapability.BLOCK_OWNER).resolve();
         if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
