@@ -1,7 +1,7 @@
 package net.sdm.recipemachinestage.utils;
 
-import com.alessandro.astages.capability.PlayerStageProvider;
-import com.alessandro.astages.util.AStagesUtil;
+import com.alessandro.astages.api.holder.AHolder;
+import com.alessandro.astages.api.util.AStagesUtils;
 import dev.latvian.mods.kubejs.integration.forge.gamestages.GameStagesWrapper;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.nbt.*;
@@ -31,7 +31,16 @@ public class PlayerHelper {
     @Nullable
     public static RMSStagePlayerData getPlayerByGameProfile(MinecraftServer server, UUID id){
         var player = server.getPlayerList().getPlayer(id);
-        if(player == null) return PLAYER_DATA.getOrDefault(id, null);
+        if(player == null) {
+            RMSStagePlayerData stagePlayerData = PLAYER_DATA.getOrDefault(id, null);
+
+            if(ModList.get().isLoaded("astages") && stagePlayerData != null) {
+                stagePlayerData.addStage(AStagesUtils.getStages(AHolder.player(id)));
+                stagePlayerData.addStage(AStagesUtils.getStages(AHolder.server()));
+            }
+
+            return stagePlayerData;
+        }
 
         RMSStagePlayerData stagePlayerData = new RMSStagePlayerData();
 
@@ -42,9 +51,7 @@ public class PlayerHelper {
             stagePlayerData.addStage(GameStagesWrapper.get(player).getAll());
         }
         if(ModList.get().isLoaded("astages")) {
-            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(s -> {
-                stagePlayerData.addStage(s.getStages());
-            });
+            stagePlayerData.addStage(AStagesUtils.getStages(AHolder.serverAndPlayer(player)));
         }
         PLAYER_DATA.put(id, stagePlayerData);
 
@@ -61,7 +68,7 @@ public class PlayerHelper {
             flag = GameStagesWrapper.get(player).has(stage);
         }
         if(ModList.get().isLoaded("astages") && !flag) {
-            flag = AStagesUtil.hasStage(player, stage);
+            flag = AStagesUtils.hasStage(AHolder.serverAndPlayer(player), stage);
         }
 
         return flag;
@@ -73,7 +80,11 @@ public class PlayerHelper {
         public List<String> stages = new ArrayList<>();
 
         public void addStage(Collection<String> stages) {
-            this.stages.addAll(stages);
+            for (String stage : stages) {
+                if (!this.stages.contains(stage)) {
+                    this.stages.add(stage);
+                }
+            }
         }
 
         public List<String> getStages() {
@@ -117,9 +128,7 @@ public class PlayerHelper {
             data.addStage(GameStagesWrapper.get(player).getAll());
         }
         if(ModList.get().isLoaded("astages")) {
-            player.getCapability(PlayerStageProvider.PLAYER_STAGE).ifPresent(playerStage -> {
-                data.addStage(playerStage.getStages());
-            });
+            data.addStage(AStagesUtils.getStages(AHolder.serverAndPlayer(player)));
         }
         PLAYER_DATA.put(player.getGameProfile().getId(), data);
         savePlayer(player.getGameProfile().getId(), player.server);
