@@ -118,7 +118,7 @@ def implementsMods(DependencyHandler deps) {
     deps.modCompileOnly "curse.maven:malum-484064:6655805"
 
     //Mekanism
-    deps.modCompileOnly "mekanism:Mekanism:1.21.1-10.7.17.83"
+    deps.modCompileOnly "mekanism:Mekanism:1.21.1-10.7.19.85"
 
     //More Red
     deps.modCompileOnly "curse.maven:more-red-387638:5763286"

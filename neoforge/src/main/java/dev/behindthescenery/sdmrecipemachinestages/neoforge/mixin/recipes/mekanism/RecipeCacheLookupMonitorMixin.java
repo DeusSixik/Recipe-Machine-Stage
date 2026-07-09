@@ -46,9 +46,11 @@ public abstract class RecipeCacheLookupMonitorMixin<RECIPE extends MekanismRecip
                 sdm$cached_recipe = RMSMekanismUtils.createCache(cacheRecipe);
             }
 
-            final RMSRecipeUtils.RecipeValue<?> recipe = sdm$cached_recipe.recipeValue();
-            if(recipe != null && !RMSUtils.canProcess(RMSUtils.getBlockOwner(entity), recipe.recipeHolder())) {
-                return false;
+            if(sdm$cached_recipe != null) {
+                final RMSRecipeUtils.RecipeValue<?> recipe = sdm$cached_recipe.recipeValue();
+                if (recipe != null && !RMSUtils.canProcess(RMSUtils.getBlockOwner(entity), recipe.recipeHolder())) {
+                    return false;
+                }
             }
         }
         //RMS Fragment END
