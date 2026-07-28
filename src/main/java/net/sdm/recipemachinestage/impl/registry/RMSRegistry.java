@@ -38,11 +38,10 @@ public final class RMSRegistry {
 
     public static final RMSRegistry REGISTRY = new RMSRegistry();
 
-    private final Long2ObjectMap<RecipeRestrictionData> restrictions = new Long2ObjectLinkedOpenHashMap<>();
-    private final ObjectOpenHashSet<RecipeRestrictionRawData> pendingData = new ObjectOpenHashSet<>();
-
     private short[] knowStages;
     private Int2ShortOpenHashMap recipeByStage = new Int2ShortOpenHashMap();
+    private final Long2ObjectMap<RecipeRestrictionData> restrictions = new Long2ObjectLinkedOpenHashMap<>();
+    private final ObjectOpenHashSet<RecipeRestrictionRawData> pendingData = new ObjectOpenHashSet<>();
 
     public short[] getKnowStages() {
         return knowStages;
@@ -52,7 +51,8 @@ public final class RMSRegistry {
         return recipeByStage.get(recipe);
     }
 
-    public short[] getRequiredStages(int recipeIndex, @Nullable BlockEntityType<?> blockType, @Nullable RecipeType<?> recipeType) {
+    public short[] getRequiredStages(int recipeIndex, @Nullable BlockEntityType<?> blockType,
+                                     @Nullable RecipeType<?> recipeType) {
         if (recipeIndex < 0 || knowStages == null || knowStages.length == 0) {
             return ShortArrays.EMPTY_ARRAY;
         }
@@ -195,7 +195,7 @@ public final class RMSRegistry {
 
     private void applyRecipeTypesSupports(IntOpenHashSet restrictedTypeIndices) {
         for (RecipeType<?> recipeType : BuiltInRegistries.RECIPE_TYPE) {
-            if(recipeType instanceof RecipeTypeSupport support) {
+            if (recipeType instanceof RecipeTypeSupport support) {
                 support.gpr$setHasRestrictions(
                         restrictedTypeIndices.contains(RecipeTypeIndex.get(recipeType).gpr$getIndex())
                 );
