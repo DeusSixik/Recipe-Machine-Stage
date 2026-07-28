@@ -34,13 +34,14 @@ public class RecipeStagesUtil {
     }
 
     public static <T extends Recipe<?>> void checkRecipe(T recipe, BlockEntity entity, CallbackInfo ci) {
-        if(checkRecipe(recipe, entity) == null) ci.cancel();
+        if (checkRecipe(recipe, entity) == null) ci.cancel();
     }
 
     public static @Nullable <T extends Recipe<?>> T checkRecipe(T recipe, BlockEntity entity) {
-        if(recipe == null) return null;
+        if (recipe == null) return null;
 
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return recipe;
+        if (StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType()))
+            return recipe;
 
         if (entity == null) {
             return recipe;
@@ -51,10 +52,10 @@ public class RecipeStagesUtil {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 
             PlayerHelper.RMSStagePlayerData playerData = PlayerHelper.getPlayerByGameProfile(entity.getLevel().getServer(), ownerBlock.getOwner());
-            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
+            RecipeBlockType recipeBlockType = StageContainer.getRecipeData(recipe.getType(), recipe.getId());
 
-            if(recipeBlockType == null) return recipe;
-            if(playerData == null) return recipe;
+            if (recipeBlockType == null) return recipe;
+            if (playerData == null) return recipe;
 
             if (!playerData.hasStage(recipeBlockType.stage)) {
                 return null;
@@ -72,7 +73,7 @@ public class RecipeStagesUtil {
     }
 
     public static boolean canRecipeOnBlockEntity(BlockEntity block, Recipe<?> recipe) {
-        if(recipe == null) return true;
+        if (recipe == null) return true;
 
 
         Optional<IOwnerBlock> optionalOwnerBlock = block.getCapability(RMSCapability.BLOCK_OWNER).resolve();
@@ -80,10 +81,10 @@ public class RecipeStagesUtil {
             IOwnerBlock ownerBlock = optionalOwnerBlock.get();
 
             PlayerHelper.RMSStagePlayerData playerData = PlayerHelper.getPlayerByGameProfile(block.getLevel().getServer(), ownerBlock.getOwner());
-            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
+            RecipeBlockType recipeBlockType = StageContainer.getRecipeData(recipe.getType(), recipe.getId());
 
-            if(recipeBlockType == null) return true;
-            if(playerData == null) return true;
+            if (recipeBlockType == null) return true;
+            if (playerData == null) return true;
 
             if (!playerData.hasStage(recipeBlockType.stage)) {
                 return false;
@@ -95,8 +96,8 @@ public class RecipeStagesUtil {
     }
 
 
-    public static<T> RecipeType<T> getRecipeType(Object recipeType, IRecipeCategory<?> category) {
-        if(ModList.get().isLoaded("gtceu")) {
+    public static <T> RecipeType<T> getRecipeType(Object recipeType, IRecipeCategory<?> category) {
+        if (ModList.get().isLoaded("gtceu")) {
             if (recipeType instanceof GTRecipe recipe) {
                 return (RecipeType<T>) GTRecipeTypeCategory.TYPES.apply(recipe.recipeType);
             }
@@ -105,13 +106,13 @@ public class RecipeStagesUtil {
     }
 
     public static Object getRecipe(Object recipe) {
-        if(ModList.get().isLoaded("gtceu")) {
-            if(recipe instanceof GTRecipe gtRecipe) {
+        if (ModList.get().isLoaded("gtceu")) {
+            if (recipe instanceof GTRecipe gtRecipe) {
                 return new GTRecipeWrapper(gtRecipe);
             }
         }
 
-        return  (Recipe<?>)cast(recipe);
+        return (Recipe<?>) cast(recipe);
     }
 
     public static boolean recipeFromMode(Recipe<?> recipe) {
@@ -126,7 +127,7 @@ public class RecipeStagesUtil {
 
 //        System.out.println(value + " : " + recipe.getId().toString() + " : " + category.getRecipeType().getUid().toString());
 
-        if(value) {
+        if (value) {
             if (ModList.get().isLoaded("gtceu")) {
                 if (recipe instanceof GTRecipe gtRecipe && category instanceof GTRecipeTypeCategory hCategory) {
                     GTRecipeWrapper wrapper = new GTRecipeWrapper(gtRecipe);
@@ -200,7 +201,7 @@ public class RecipeStagesUtil {
     public static <T extends Recipe<?>> List<T> checkRecipe(List<T> returnValue, BlockEntity blockEntity) {
         List<T> recipes = new ArrayList<>();
         for (T recipe : returnValue) {
-            if(canRecipeOnBlockEntity(blockEntity, recipe)) {
+            if (canRecipeOnBlockEntity(blockEntity, recipe)) {
                 recipes.add(recipe);
             }
         }

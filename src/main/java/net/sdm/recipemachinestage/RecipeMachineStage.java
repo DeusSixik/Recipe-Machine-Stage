@@ -36,8 +36,8 @@ import org.slf4j.Logger;
 @Mod(RecipeMachineStage.MODID)
 public class RecipeMachineStage {
 
-    public static final String MODID = "recipemachinestage";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final String MODID = RMSConstants.MODID;
+    public static final Logger LOGGER = RMSConstants.LOGGER;
 
     public RecipeMachineStage() {
         MinecraftForge.EVENT_BUS.register(this);
