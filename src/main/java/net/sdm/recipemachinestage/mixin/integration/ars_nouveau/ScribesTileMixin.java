@@ -3,9 +3,11 @@ package net.sdm.recipemachinestage.mixin.integration.ars_nouveau;
 import com.hollingsworth.arsnouveau.common.block.tile.ScribesTile;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
 import net.minecraft.world.entity.player.Player;
+import net.sdm.recipemachinestage.RecipeMachineStage;
 import net.sdm.recipemachinestage.api.stage.StageContainer;
 import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
+import net.sdm.recipemachinestage.utils.RMSUtils;
 import net.sdm.recipemachinestage.utils.RecipeStagesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,18 +23,7 @@ public class ScribesTileMixin {
     @Inject(method = "setRecipe", at = @At("HEAD"), cancellable = true)
     public void sdm$setRecipe(GlyphRecipe recipe, Player player, CallbackInfo ci){
 
-
-        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(recipe.getType())) return;
-
-        if (thisEntity.getLevel().getServer() != null) {
-            RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
-            if(recipeBlockType != null) {
-                PlayerHelper.@Nullable RMSStagePlayerData _player = PlayerHelper.getPlayerByGameProfile(player.getServer(), player.getGameProfile().getId());
-                if(_player != null) {
-                    if(!_player.hasStage(recipeBlockType.stage))
-                        ci.cancel();
-                }
-            }
-        }
+        if(!RMSUtils.canRecipe(recipe, player))
+            ci.cancel();
     }
 }

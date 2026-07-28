@@ -24,26 +24,6 @@ public class ChargerBlockEntityMixin {
     )
     public ChargerRecipe sdm$doWork(Level level, ItemStack myItem){
         ChargerRecipe recipe = ChargerRecipes.findRecipe(level, myItem);
-
-//        if(StageContainer.INSTANCE.RECIPES_STAGES.isEmpty() || !StageContainer.INSTANCE.RECIPES_STAGES.containsKey(ChargerRecipe.TYPE))
-//            return recipe;
-//
-//        if(recipe != null) {
-//            Optional<IOwnerBlock> d1 = thisEntity.getCapability(SupportBlockData.BLOCK_OWNER).resolve();
-//            if (d1.isPresent() && thisEntity.getLevel().getServer() != null) {
-//                IOwnerBlock ownerBlock = d1.get();
-//                RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
-//                if(recipeBlockType != null) {
-//                    PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(thisEntity.getLevel().getServer(), ownerBlock.getOwner());
-//                    if(player != null) {
-//                        if(!player.hasStage(recipeBlockType.stage)) {
-//                            return null;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
         return RecipeStagesUtil.checkRecipe(recipe, thisEntity);
     }
 }

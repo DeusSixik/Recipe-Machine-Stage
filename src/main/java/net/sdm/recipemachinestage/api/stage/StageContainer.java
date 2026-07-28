@@ -2,6 +2,7 @@ package net.sdm.recipemachinestage.api.stage;
 
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.darkhax.gamestages.data.IStageData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -20,8 +21,8 @@ public class StageContainer extends SimplePreparableReloadListener<Void> {
     public static StageContainer INSTANCE = new StageContainer();
     private static final List<IStage> REGISTER_STAGE_MODS = new ArrayList<>();
 
-    public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES = new HashMap<>();
-    public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES_KUBEJS = new HashMap<>();
+    public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES = new Reference2ObjectOpenHashMap<>();
+    public Map<RecipeType<?>, List<RecipeBlockType>> RECIPES_STAGES_KUBEJS = new Reference2ObjectOpenHashMap<>();
 
     public static List<IStage> getStageMods() {
         return REGISTER_STAGE_MODS.stream().toList();

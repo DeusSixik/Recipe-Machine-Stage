@@ -7,6 +7,7 @@ import net.sdm.recipemachinestage.api.capability.IOwnerBlock;
 import net.sdm.recipemachinestage.api.stage.StageContainer;
 import net.sdm.recipemachinestage.api.stage.type.RecipeBlockType;
 import net.sdm.recipemachinestage.utils.PlayerHelper;
+import net.sdm.recipemachinestage.utils.RMSUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,24 +27,7 @@ public class BloodAltarMixin {
 
     @Redirect(method = "startCycle", at = @At(value = "INVOKE", target = "Lwayoftime/bloodmagic/impl/BloodMagicRecipeRegistrar;getBloodAltar(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)Lwayoftime/bloodmagic/recipe/RecipeBloodAltar;"))
     private RecipeBloodAltar sdm$startCycle(BloodMagicRecipeRegistrar instance, Level level, ItemStack world) {
-        RecipeBloodAltar recipe = instance.getBloodAltar(level, world);
-
-        if(recipe != null && StageContainer.hasRecipes(recipe.getType())) {
-            Optional<IOwnerBlock> d1 = tileAltar.getCapability(RMSCapability.BLOCK_OWNER).resolve();
-            if (d1.isPresent() && tileAltar.getLevel().getServer()!= null) {
-                IOwnerBlock ownerBlock = d1.get();
-                RecipeBlockType recipeBlockType =  StageContainer.getRecipeData(recipe.getType(), recipe.getId());
-                if(recipeBlockType != null) {
-                    PlayerHelper.@Nullable RMSStagePlayerData player = PlayerHelper.getPlayerByGameProfile(tileAltar.getLevel().getServer(), ownerBlock.getOwner());
-                    if(player != null) {
-                        if(!player.hasStage(recipeBlockType.stage)) {
-                            return null;
-                        }
-                    }
-                }
-            }
-        }
-
-        return recipe;
+        final RecipeBloodAltar recipe = instance.getBloodAltar(level, world);
+        return RMSUtils.canRecipe(recipe, tileAltar) ? recipe : null;
     }
 }
