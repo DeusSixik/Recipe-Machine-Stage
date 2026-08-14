@@ -44,6 +44,13 @@ public class RMSMain {
         onServerReloadResources(server, false);
         StageApi.reloadServerStage(server);
         ServerContainer = StageApi.getServerStage();
+
+        if(ServerContainer == null) {
+            StageApi.reloadServerStage(server);
+
+            ServerContainer = StageApi.getServerStage();
+        }
+
         isGlobal = ServerContainer.getContainerType() == StageContainerType.GLOBAL;
         syncDataWithPlayers();
     }
