@@ -167,7 +167,8 @@ public class RecipeStagesUtil {
 //            }
         }
 
-        return ReflectionHelper.canCast(category.getRecipeType().getRecipeClass(), recipe.getClass());
+        // JEI only accepts recipes that are instances of the category's recipe class
+        return category.getRecipeType().getRecipeClass().isInstance(recipe);
     }
 
     public static void debugMessage(Player player, Object message) {
