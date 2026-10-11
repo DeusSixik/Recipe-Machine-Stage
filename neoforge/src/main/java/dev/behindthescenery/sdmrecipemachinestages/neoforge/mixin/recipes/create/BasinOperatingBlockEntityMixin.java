@@ -5,6 +5,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import dev.behindthescenery.sdmrecipemachinestages.utils.RMSUtils;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -12,8 +13,10 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +45,13 @@ public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity 
      * @author Sixik
      * @reason Change logic
      */
-    @Overwrite
-    protected List<Recipe<?>> getMatchingRecipes() {
+    @Inject(method = "getMatchingRecipes", at = @At("HEAD"), cancellable = true)
+    protected void getMatchingRecipes(CallbackInfoReturnable<List<Recipe<?>>> cir) {
         if (getBasin().map(BasinBlockEntity::isEmpty)
-                .orElse(true))
-            return new ArrayList<>();
+                .orElse(true)) {
+            cir.setReturnValue(new ArrayList<>());
+            return;
+        }
 
         final List<Recipe<?>> list = new ArrayList<>();
 
@@ -57,6 +62,6 @@ public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity 
 
         list.sort((r1, r2) -> r2.getIngredients().size() - r1.getIngredients().size());
 
-        return list;
+        cir.setReturnValue(list);
     }
 }
