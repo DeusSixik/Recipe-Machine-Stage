@@ -70,6 +70,13 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.799"
 
     implementsMods(delegate)
+
+    testImplementation platform("org.junit:junit-bom:5.11.4")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 processResources {
@@ -149,6 +156,9 @@ def implementsMods(DependencyHandler deps) {
 
     //Oreberries Replanted
     deps.modCompileOnly "curse.maven:oreberries-replanted-454062:6123417"
+
+    //Overgeared
+    deps.modCompileOnly "curse.maven:overgeared-1277786:9331561"
 
     //Roots 4
     deps.modCompileOnly "curse.maven:roots-246183:7135743"
