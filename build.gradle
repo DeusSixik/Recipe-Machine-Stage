@@ -324,6 +324,9 @@ dependencies {
     //Ice and Fire
     compileOnly fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
 
+    //Overgeared
+    compileOnly fg.deobf("curse.maven:overgeared-1277786:9331548")
+
     implementation fg.deobf("curse.maven:cucumber-272335:5714571")
     compileOnly fg.deobf("curse.maven:architectury-api-419699:5137938")
     compileOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
@@ -345,6 +348,9 @@ dependencies {
     implementation fg.deobf("curse.maven:astages-1120180:8292440")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    testImplementation platform("org.junit:junit-bom:5.11.4")
+    testImplementation "org.junit.jupiter:junit-jupiter"
 
 }
 
@@ -386,6 +392,10 @@ tasks.withType(JavaCompile).configureEach {
 //    options.errorprone.enabled = false
     options.compilerArgs << "-Xlint:-deprecation"
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
 }
 
 

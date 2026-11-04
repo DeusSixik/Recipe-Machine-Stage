@@ -54,6 +54,15 @@
 - Miner (Dimensional Mineshaft)
 - Rituals (Golden Sacrificial Bowl)
 
+## Overgeared
+- Smithing Anvils (Forging)
+- Rock Knapping
+- Fletching
+- Alloy Furnace (Shaped and Shapeless)
+- Nether Alloy Furnace (Shaped and Shapeless)
+- Casting Furnace
+- Grinding
+
 ## Eidolon
 - Brazier
 - Crucible
