@@ -1,6 +1,5 @@
 package net.sdm.recipemachinestage.mixin.impl;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.item.crafting.Recipe;
@@ -35,8 +34,13 @@ public class MixinRecipeManager implements RecipeManagerExtern {
     @Unique
     private volatile ResourceLocation[] recipeIdsCache;
 
-    @Inject(method = "<init>", at = @At("RETURN"))
-    public void gpr$init(HolderLookup.Provider registries, CallbackInfo ci) {
+    /**
+     * Registers the recipe manager after its no-argument Minecraft 1.20.1 constructor completes.
+     *
+     * @param ci callback information for the constructor injection
+     */
+    @Inject(method = "<init>()V", at = @At("RETURN"))
+    public void gpr$init(CallbackInfo ci) {
         RMSUtils.setRecipeManager(RMSUtils.cast(this));
     }
 
